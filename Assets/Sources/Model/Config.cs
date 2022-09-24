@@ -18,6 +18,19 @@ public class Config
 
             public static readonly DamagableCharacteristics DamagableCharacteristics = new(_maxHealth, _physicalArmor, _magicArmor);
         }
+
+        public class Enemies
+        {
+            public class Bat
+            {
+                private static readonly int _maxHealth = 20;
+                private static readonly int _physicalArmor = 5;
+                private static readonly int _magicArmor = 5;
+
+                public static readonly DamagableCharacteristics DamagableCharacteristics = new(_maxHealth, _physicalArmor, _magicArmor);
+
+            }
+        }
     }
 
     public class Attacks

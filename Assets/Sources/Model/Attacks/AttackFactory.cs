@@ -17,5 +17,10 @@ namespace Game.Model
         {
             _availableAttacks.Add(attack);
         }
+
+        public void Perform(IDamageTaker damageTaker)
+        {
+            _availableAttacks[0].Perform(damageTaker);
+        }
     }
 }

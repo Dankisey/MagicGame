@@ -4,21 +4,27 @@ namespace Game.Model
 {
     public sealed class Player : Character
     {
-        private readonly Player _instance = new Lazy<Player>().Value;
-        private readonly AttackFactory _attackFactory;
+        public static Player Instance => _instance.Value;
+
+        public readonly AttackFactory AttackFactory;
+        public readonly Stamina Stamina;
+        public readonly Mana Mana;
+
+        private static readonly Lazy<Player> _instance = new(() => new Player());
 
         private Player(): base (Config.Characters.Player.DamagableCharacteristics)
         {
             Stamina = new(Config.Characters.Player.MaxStamina);
             Mana = new(Config.Characters.Player.MaxMana);
-            _attackFactory = new();
-            _attackFactory.AddAttack<Slice>(new Slice());
+            AttackFactory = new();
+            InitiateAttackFactory();
         }
 
-        public Player Instance => _instance;
-
-        public Stamina Stamina { get; private set; }
-        public Mana Mana { get; private set; }
+        private void InitiateAttackFactory()
+        {
+            
+            AttackFactory.AddAttack<Slice>(new Slice());
+        }
     }
 
     public struct PlayerCharacteristics

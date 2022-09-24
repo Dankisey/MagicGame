@@ -17,10 +17,13 @@ namespace Game.Model
 
         public void Perform(IDamageTaker[] targets)
         {
-            foreach (var target in targets)
-            {
-                target.TakeDamage(Damage);
-            }
+            foreach (var target in targets)           
+                target.TakeDamage(Damage);        
+        }
+
+        public void Perform(IDamageTaker target)
+        {
+            target.TakeDamage(Damage);
         }
     }   
 }

@@ -48,7 +48,7 @@ namespace Game.Model
 
         protected void InvokeEvent()
         {
-            ValueChanged.Invoke();
+            ValueChanged?.Invoke();
         }
     }
 }

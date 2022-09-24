@@ -4,6 +4,10 @@ namespace Game.Model
 {
     public abstract class Character : IDamageTaker
     {
+        public readonly Health Health;
+        public readonly Armor PhysicalArmor;
+        public readonly Armor MagicArmor;
+
         public Character(DamagableCharacteristics characteristics)
         {
             Health = new(characteristics.MaxHealth);
@@ -14,9 +18,6 @@ namespace Game.Model
         public event Action<float> DamageTaken;
         public event Action Died;
 
-        public Health Health { get; private set; }
-        public Armor PhysicalArmor { get; private set; }
-        public Armor MagicArmor { get; private set; }
 
         void IDamageTaker.TakeDamage(PureDamage damage)
         {
