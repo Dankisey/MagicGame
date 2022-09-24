@@ -12,7 +12,7 @@ namespace Game.Model
             Stamina = new(Config.Characters.Player.MaxStamina);
             Mana = new(Config.Characters.Player.MaxMana);
             _attackFactory = new();
-            _attackFactory.AddAttack<Slice>(new Slice(null));
+            _attackFactory.AddAttack<Slice>(new Slice());
         }
 
         public Player Instance => _instance;

@@ -1,14 +1,9 @@
 ﻿namespace Game.Model
 {
-    public class Slice : Attack, IAttackPerformer
+    public class Slice : Attack
     {
-        public Slice(Character target) : 
+        public Slice() : 
             base (nameof(Slice), new PhysicalDamage(Config.Attacks.Slice.BaseDamage), 
-                Config.Attacks.Slice.ManaCost, Config.Attacks.Slice.StaminaCost) { }
-
-        public void Perform()
-        {
-
-        }
+                Config.Attacks.Slice.ManaCost, Config.Attacks.Slice.StaminaCost) { }       
     }
 }

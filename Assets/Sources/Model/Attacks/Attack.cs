@@ -14,10 +14,13 @@ namespace Game.Model
         public Damage Damage { get; private set; }
         public int ManaCost { get; private set; }
         public int StaminaCost { get; private set; }
-    }
 
-    public interface IAttackPerformer
-    {
-        public void Perform();
-    }
+        public void Perform(IDamageTaker[] targets)
+        {
+            foreach (var target in targets)
+            {
+                target.TakeDamage(Damage);
+            }
+        }
+    }   
 }

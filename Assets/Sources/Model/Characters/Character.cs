@@ -2,7 +2,7 @@
 
 namespace Game.Model
 {
-    public abstract class Character
+    public abstract class Character : IDamageTaker
     {
         public Character(DamagableCharacteristics characteristics)
         {
@@ -18,29 +18,29 @@ namespace Game.Model
         public Armor PhysicalArmor { get; private set; }
         public Armor MagicArmor { get; private set; }
 
-        public void TakeDamage(PureDamage damage)
+        void IDamageTaker.TakeDamage(PureDamage damage)
         {
             if (Health.IsAlive == false)
-                throw new NotImplementedException($"Trying {nameof(TakeDamage)} when {nameof(Health.IsAlive)} equals false");
+                throw new NotImplementedException($"Trying {nameof(IDamageTaker.TakeDamage)} when {nameof(Health.IsAlive)} equals false");
 
             float damageAmount = damage.GetDamage();
             ApplyDamage(damageAmount);
         }
 
-        public void TakeDamage(PhysicalDamage damage)
+        void IDamageTaker.TakeDamage(PhysicalDamage damage)
         {
             if (Health.IsAlive == false)
-                throw new NotImplementedException($"Trying {nameof(TakeDamage)} when {nameof(Health.IsAlive)} equals false");
+                throw new NotImplementedException($"Trying {nameof(IDamageTaker.TakeDamage)} when {nameof(Health.IsAlive)} equals false");
 
             float damageAmount = damage.GetDamage();
             float modifiedDamage = PhysicalArmor.GetModifiedDamage(damageAmount);
             ApplyDamage(modifiedDamage);
         }
 
-        public void TakeDamage(MagicDamage damage)
+        void IDamageTaker.TakeDamage(MagicDamage damage)
         {
             if (Health.IsAlive == false)
-                throw new NotImplementedException($"Trying {nameof(TakeDamage)} when {nameof(Health.IsAlive)} equals false");
+                throw new NotImplementedException($"Trying {nameof(IDamageTaker.TakeDamage)} when {nameof(Health.IsAlive)} equals false");
 
             float damageAmount = damage.GetDamage();
             float modifiedDamage = MagicArmor.GetModifiedDamage(damageAmount);
@@ -60,6 +60,20 @@ namespace Game.Model
         {
             Died?.Invoke();
             return true;
+        }
+    }
+
+    public interface IDamageTaker
+    {
+        protected void TakeDamage(PureDamage damage);
+
+        protected void TakeDamage(PhysicalDamage damage);
+
+        protected void TakeDamage(MagicDamage damage);
+
+        public void TakeDamage(Damage damage)
+        {
+            TakeDamage((dynamic)damage);
         }
     }
 
