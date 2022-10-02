@@ -1,4 +1,6 @@
-﻿namespace Game.Model
+﻿using UnityEngine;
+
+namespace Game.Model
 {
     public class World
     {
@@ -12,7 +14,16 @@
 
         public void InitiateBattle()
         {
-            CurrentBattle = new(_player, new Character[1] { new Bat()});
+            CurrentBattle = new(_player, new Character[2] { new Bat(), new Bat()});
+            CurrentBattle.Ended += OnBattleEnded;
+        }
+
+        private void OnBattleEnded()
+        {
+            CurrentBattle.Ended -= OnBattleEnded;
+            CurrentBattle = null;
+
+            Debug.Log("Battle ended");
         }
     }
 }

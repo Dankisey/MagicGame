@@ -1,9 +1,9 @@
 using UnityEngine;
 using Game.Model;
-using UnityEngine.UI;
 
 public class Test : MonoBehaviour
 {
+    private readonly Player _player = Player.Instance;
     private World _world;
 
     private void Start()
@@ -14,6 +14,6 @@ public class Test : MonoBehaviour
 
     public void OnAttackButtonPushed()
     {
-        Player.Instance.AttackFactory.Perform(_world.CurrentBattle.Target);
+        _player.AttackPerformer.Perform(1);
     }
 }

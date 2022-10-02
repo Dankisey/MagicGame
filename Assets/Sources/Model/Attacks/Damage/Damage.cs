@@ -1,6 +1,6 @@
 ﻿namespace Game.Model
 {
-    public abstract class Damage : IDamageGetter
+    public abstract class Damage : IDamageReturner
     {
         private readonly float _amount;
 
@@ -12,7 +12,7 @@
         }
     }
 
-    public interface IDamageGetter
+    public interface IDamageReturner
     {
         public float GetDamage();
     }

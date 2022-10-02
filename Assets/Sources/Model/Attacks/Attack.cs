@@ -1,29 +1,60 @@
+using System.Data;
+
 namespace Game.Model
 {
     public abstract class Attack 
     {
-        public Attack(string name, Damage damage, int manaCost, int staminaCost)
+        public Attack(AttackCharachteristics charachteristics)
+        {
+            Name = charachteristics.Name;
+            Damage = charachteristics.Damage;
+            ManaCost = charachteristics.ManaCost;
+            StaminaCost = charachteristics.StaminaCost;
+            ID = charachteristics.ID;
+        }
+
+        public readonly TargetType Type;
+        public readonly Damage Damage;
+        public readonly int StaminaCost;
+        public readonly int ManaCost;
+        public readonly int ID;
+        public readonly string Name;
+    }
+
+    public struct AttackCharachteristics
+    {
+        public readonly TargetType Type;
+        public readonly Damage Damage;
+        public readonly int StaminaCost;
+        public readonly int ManaCost;
+        public readonly string Name;
+        public readonly int ID;
+        
+        public AttackCharachteristics(string name, Damage damage, int manaCost, int staminaCost, int id, TargetType type)
         {
             Name = name;
             Damage = damage;
             ManaCost = manaCost;
             StaminaCost = staminaCost;
+            ID = id;
+            Type = type;
         }
+    }
 
-        public string Name { get; private set; }
-        public Damage Damage { get; private set; }
-        public int ManaCost { get; private set; }
-        public int StaminaCost { get; private set; }
+    public interface IAttackPerformer
+    {
+        void Perform(int attackID);
+    }
 
-        public void Perform(IDamageTaker[] targets)
-        {
-            foreach (var target in targets)           
-                target.TakeDamage(Damage);        
-        }
+    public enum TargetType
+    {
+        Solo,
+        Multi
+    }
 
-        public void Perform(IDamageTaker target)
-        {
-            target.TakeDamage(Damage);
-        }
-    }   
+    public enum AttackIDs
+    {
+        Slice = 1,
+        FireBall
+    }
 }

@@ -5,25 +5,37 @@ namespace Game.Model
     public sealed class Player : Character
     {
         public static Player Instance => _instance.Value;
+        private static readonly Lazy<Player> _instance = new(() => new Player());
 
-        public readonly AttackFactory AttackFactory;
+        public readonly AttackPerformer AttackPerformer;
         public readonly Stamina Stamina;
         public readonly Mana Mana;
 
-        private static readonly Lazy<Player> _instance = new(() => new Player());
+        private Battle _currentBattle;
 
         private Player(): base (Config.Characters.Player.DamagableCharacteristics)
         {
             Stamina = new(Config.Characters.Player.MaxStamina);
             Mana = new(Config.Characters.Player.MaxMana);
-            AttackFactory = new();
+            AttackPerformer = new();
             InitiateAttackFactory();
+        }
+
+        public void EnterBattleMod(Battle battle)
+        {
+            _currentBattle = battle;
+            AttackPerformer.InitBattle(battle);
+            _currentBattle.Ended += OnBattleEnded;
+        }
+
+        private void OnBattleEnded()
+        {
+            _currentBattle.Ended -= OnBattleEnded;
         }
 
         private void InitiateAttackFactory()
         {
-            
-            AttackFactory.AddAttack<Slice>(new Slice());
+            AttackPerformer.AddAttack<Slice>(new Slice());
         }
     }
 

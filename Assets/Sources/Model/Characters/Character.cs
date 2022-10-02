@@ -15,11 +15,17 @@ namespace Game.Model
             MagicArmor = new(characteristics.MagicArmor);
         }
 
+        public event Action<Character> Died;
         public event Action<float> DamageTaken;
-        public event Action Died;
 
+        public bool IsAlive => Health.IsAlive;
 
-        void IDamageTaker.TakeDamage(PureDamage damage)
+        public void TakeDamage(Damage damage)
+        {
+            TakeDamage((dynamic)damage);
+        }
+
+        private void TakeDamage(PureDamage damage)
         {
             if (Health.IsAlive == false)
                 throw new NotImplementedException($"Trying {nameof(IDamageTaker.TakeDamage)} when {nameof(Health.IsAlive)} equals false");
@@ -28,7 +34,7 @@ namespace Game.Model
             ApplyDamage(damageAmount);
         }
 
-        void IDamageTaker.TakeDamage(PhysicalDamage damage)
+        private void TakeDamage(PhysicalDamage damage)
         {
             if (Health.IsAlive == false)
                 throw new NotImplementedException($"Trying {nameof(IDamageTaker.TakeDamage)} when {nameof(Health.IsAlive)} equals false");
@@ -38,7 +44,7 @@ namespace Game.Model
             ApplyDamage(modifiedDamage);
         }
 
-        void IDamageTaker.TakeDamage(MagicDamage damage)
+        private void TakeDamage(MagicDamage damage)
         {
             if (Health.IsAlive == false)
                 throw new NotImplementedException($"Trying {nameof(IDamageTaker.TakeDamage)} when {nameof(Health.IsAlive)} equals false");
@@ -59,19 +65,13 @@ namespace Game.Model
 
         private bool TryDie()
         {
-            Died?.Invoke();
+            Died?.Invoke(this);
             return true;
         }
     }
 
     public interface IDamageTaker
     {
-        protected void TakeDamage(PureDamage damage);
-
-        protected void TakeDamage(PhysicalDamage damage);
-
-        protected void TakeDamage(MagicDamage damage);
-
         public void TakeDamage(Damage damage)
         {
             TakeDamage((dynamic)damage);
