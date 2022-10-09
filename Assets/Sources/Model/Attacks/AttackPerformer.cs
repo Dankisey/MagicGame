@@ -14,6 +14,8 @@ namespace Game.Model
             _availableAttacks = new();
         }
 
+        public event Action<int> AttackAdded;
+
         public void Perform(int attackID)
         {
             Attack attack = _availableAttacks.FirstOrDefault(attack => attack.ID == attackID);
@@ -32,6 +34,7 @@ namespace Game.Model
         public void AddAttack<T>(T attack) where T : Attack
         {
             _availableAttacks.Add(attack);
+            AttackAdded?.Invoke(attack.ID);
         }
     }
 }
