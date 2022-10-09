@@ -55,7 +55,20 @@ namespace Game.Model
 
         public class RestorePotions
         {
+            public class Large
+            {
+                public static readonly int RestoreAmount = 50;
+            }
 
+            public class Medium
+            {
+                public static readonly int RestoreAmount = 25;
+            }
+
+            public class Small
+            {
+                public static readonly int RestoreAmount = 10;
+            }
         }
     }
 }
