@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Game.Model.Config;
 
 namespace Game.Model
 {
@@ -20,6 +19,12 @@ namespace Game.Model
             _triggers = new();
             _stamina = stamina;
             _mana = mana;
+        }
+
+        ~AttackPerformer()
+        {
+            foreach (var trigger in _triggers)
+                trigger.Activated -= Perform;
         }
 
         public event Action<int> AttackAdded;
