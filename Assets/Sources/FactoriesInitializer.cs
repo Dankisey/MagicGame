@@ -5,7 +5,7 @@ namespace Game.Controller
 {
     public class FactoriesInitializer : MonoBehaviour
     {
-        [SerializeField] AttackViewFactory _attackViewFactory;
+        [SerializeField] private AttackViewFactory _attackViewFactory;
 
         private Player _player;
 

@@ -41,11 +41,6 @@ namespace Game.Model
         }
     }
 
-    public interface IAttackPerformer
-    {
-        void Perform(int attackID);
-    }
-
     public enum TargetType
     {
         Solo,

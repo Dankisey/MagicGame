@@ -32,7 +32,7 @@ namespace Game.Controller
         private void CreateView(int attackID)
         {
             AttackView view = Instantiate(_viewTemplate, _parent);
-            view.Init((AttackIDs)attackID);
+            view.Init((AttackIDs)attackID, _attackPerformer);
             _views.Add(attackID, view);
         }
     }

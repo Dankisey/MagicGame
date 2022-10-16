@@ -3,6 +3,7 @@ using UnityEngine;
 using Game.Model;
 using System;
 using TMPro;
+using Game.Controller;
 
 namespace Game.View
 {
@@ -11,20 +12,23 @@ namespace Game.View
         [SerializeField] private TMP_Text _text;
         [SerializeField] private Button _button;
 
+        private AttackTrigger _attackTrigger;
         private int _attackID;
 
-        public event Action<int> AttackRequestSent;
-
-        public void Init(AttackIDs id)
+        public void Init(AttackIDs id, AttackPerformer performer)
         {
             _text.text = id.ToString();
             _attackID = (int)id;
-            _button.onClick.AddListener(OnButtonClick);
+            CreateTrigger(performer);          
         }
 
-        private void OnButtonClick()
+        private void CreateTrigger(AttackPerformer performer)
         {
-            AttackRequestSent?.Invoke(_attackID);
+            if (_attackTrigger != null)           
+                _button.onClick.RemoveListener(_attackTrigger.Activate);
+            
+            _attackTrigger = new AttackTrigger(_attackID, performer);
+            _button.onClick.AddListener(_attackTrigger.Activate);
         }
     }
 }

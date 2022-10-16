@@ -64,6 +64,8 @@ namespace Game.Model
             foreach (var enemy in _enemies)          
                 enemy.Died -= OnEnemieDeath;
 
+            _player.Died -= OnPlayerDeath;
+
             Ended?.Invoke();
         }
 

@@ -18,9 +18,8 @@ namespace Game.Model
         {
             Stamina = new(Config.Characters.Player.MaxStamina);
             Mana = new(Config.Characters.Player.MaxMana);
-            AttackPerformer = new();
+            AttackPerformer = new(Mana, Stamina);
             Inventory = new();
-            InitiateAttackFactory();
         }
 
         public void EnterBattleMod(Battle battle)
@@ -35,9 +34,10 @@ namespace Game.Model
             _currentBattle.Ended -= OnBattleEnded;
         }
 
-        private void InitiateAttackFactory()
+        public void ResetAttackPerformer()
         {
             AttackPerformer.AddAttack<Slice>(new Slice());
+            AttackPerformer.AddAttack<FireBall>(new FireBall());
         }
     }
 

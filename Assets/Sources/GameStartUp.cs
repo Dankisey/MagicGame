@@ -12,6 +12,7 @@ public sealed class GameStartUp : MonoBehaviour
     private void Awake()
     {
         _initializer.Init(_player);
+        _player.ResetAttackPerformer();
         _world = new(Player.Instance); 
         _world.InitiateBattle();
     }

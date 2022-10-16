@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Game.Model
+﻿namespace Game.Model
 {
     public class World
     {
@@ -23,7 +21,7 @@ namespace Game.Model
             CurrentBattle.Ended -= OnBattleEnded;
             CurrentBattle = null;
 
-            Debug.Log("Battle ended");
+            UnityEngine.Debug.Log("Battle ended");
         }
     }
 }
