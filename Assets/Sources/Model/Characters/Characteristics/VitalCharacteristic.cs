@@ -1,34 +1,21 @@
 using System;
-using System.Collections.Generic;
 
 namespace Game.Model
 {
     public abstract class VitalCharacteristic
     {
-        private readonly List<Action> _listenersActions;
+        private float NormalizedValue => Value / MaxValue;
 
         public VitalCharacteristic(int maxValue)
         {
-            _listenersActions = new();
             MaxValue = maxValue;
             Value = maxValue;
         }
 
-        ~VitalCharacteristic()
-        {
-            foreach (var listenerAction in _listenersActions)
-            {
-                ValueChanged -= listenerAction;
-                _listenersActions.Remove(listenerAction);
-            }
-        }
+        public event Action<float> ValueChanged;
 
-        private event Action ValueChanged;
-
-        public float Value { get; protected set; }
         public int MaxValue { get; protected set; }
-
-        public float NormalizedValue => Value / MaxValue;
+        public float Value { get; protected set; }
 
         public void Regenerate(float amount)
         {
@@ -40,15 +27,15 @@ namespace Game.Model
             InvokeEvent();
         }
 
-        public void AddValueChangedListener(Action listenerAction)
+        public void Reset()
         {
-            ValueChanged += listenerAction;
-            _listenersActions.Add(listenerAction);
+            Value = MaxValue;
+            InvokeEvent();
         }
 
         protected void InvokeEvent()
         {
-            ValueChanged?.Invoke();
+            ValueChanged?.Invoke(NormalizedValue);
         }
     }
 }

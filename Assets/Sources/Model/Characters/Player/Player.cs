@@ -22,6 +22,12 @@ namespace Game.Model
             Inventory = new();
         }
 
+        public void Reset()
+        {
+            ResetAttackPerformer();
+            ResetCharacteristics();
+        }
+
         public void EnterBattleMod(Battle battle)
         {
             _currentBattle = battle;
@@ -29,15 +35,22 @@ namespace Game.Model
             _currentBattle.Ended += OnBattleEnded;
         }
 
-        private void OnBattleEnded()
-        {
-            _currentBattle.Ended -= OnBattleEnded;
-        }
-
-        public void ResetAttackPerformer()
+        private void ResetAttackPerformer()
         {
             AttackPerformer.AddAttack<Slice>(new Slice());
             AttackPerformer.AddAttack<FireBall>(new FireBall());
+        }
+
+        private void ResetCharacteristics()
+        {
+            Stamina.Reset();
+            Health.Reset();
+            Mana.Reset();
+        }
+
+        private void OnBattleEnded()
+        {
+            _currentBattle.Ended -= OnBattleEnded;
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class GameStartUp : MonoBehaviour
 {
-    [SerializeField] private FactoriesInitializer _initializer;
+    [SerializeField] private ViewInitializer _initializer;
 
     private readonly Player _player = Player.Instance;
     private World _world;
@@ -12,7 +12,7 @@ public sealed class GameStartUp : MonoBehaviour
     private void Awake()
     {
         _initializer.Init(_player);
-        _player.ResetAttackPerformer();
+        _player.Reset();
         _world = new(Player.Instance); 
         _world.InitiateBattle();
     }

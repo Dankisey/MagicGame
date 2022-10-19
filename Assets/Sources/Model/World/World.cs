@@ -3,25 +3,31 @@
     public class World
     {
         private readonly Player _player;
-        public Battle CurrentBattle;
+        private Battle _currentBattle;
 
         public World(Player player)
         {
-            _player = player;
+            _player = player;        
         }
 
         public void InitiateBattle()
         {
-            CurrentBattle = new(_player, new Character[2] { new Bat(), new Bat()});
-            CurrentBattle.Ended += OnBattleEnded;
+            _currentBattle = new(_player, new Character[2] { new Bat(), new Bat()});
+            _currentBattle.Ended += OnBattleEnded;
+            _currentBattle.Enter();
         }
 
         private void OnBattleEnded()
         {
-            CurrentBattle.Ended -= OnBattleEnded;
-            CurrentBattle = null;
+            _currentBattle.Ended -= OnBattleEnded;
+            _currentBattle = null;
 
             UnityEngine.Debug.Log("Battle ended");
         }
+    }
+
+    public interface IState
+    {
+        public void Enter();
     }
 }

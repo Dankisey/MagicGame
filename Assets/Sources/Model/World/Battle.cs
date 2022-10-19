@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Game.Model
 {
-    public class Battle
+    public sealed class Battle : IState
     {
         private readonly Player _player;
         private readonly Character[] _enemies;
@@ -13,17 +13,19 @@ namespace Game.Model
         public Battle(Player player, Character[] enemies)
         {
             _player = player;
-            _enemies = enemies;
-
-            PrepareForBattle();
-
-            Test();
+            _enemies = enemies;       
         }
 
         public event Action Ended;
 
         public IDamageTaker Target => _enemies[_targetID]; 
         public int EnemiesAmount => _enemies.Length;
+
+        public void Enter()
+        {
+            PrepareForBattle();
+            Test();
+        }
 
         public void SendPlayerAttack(Attack attack)
         {
