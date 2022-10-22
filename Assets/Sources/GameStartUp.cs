@@ -1,19 +1,21 @@
-using Game.Controller;
-using Game.Model;
 using UnityEngine;
+using Game.Model;
 
-public sealed class GameStartUp : MonoBehaviour
+namespace Game.Controller
 {
-    [SerializeField] private ViewInitializer _initializer;
-
-    private readonly Player _player = Player.Instance;
-    private World _world;
-
-    private void Awake()
+    public sealed class GameStartUp : MonoBehaviour
     {
-        _initializer.Init(_player);
-        _player.Reset();
-        _world = new(Player.Instance); 
-        _world.InitiateBattle();
+        [SerializeField] private ViewInitializer _initializer;
+
+        private readonly Player _player = Player.Instance;
+        private World _world;
+
+        private void Awake()
+        {
+            _world = new(Player.Instance);
+            _initializer.Init(_world, _player);
+            _player.Reset();
+            _world.InitiateBattle();
+        }
     }
 }

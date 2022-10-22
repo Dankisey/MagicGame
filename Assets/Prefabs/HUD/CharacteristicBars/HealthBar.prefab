@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8506405091685435437
+--- !u!1001 &1084261784043320003
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -77,11 +77,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2323523544796601479, guid: a7ff5c3c4ac827742a2407659238a60c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2323523544796601479, guid: a7ff5c3c4ac827742a2407659238a60c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 69.5
+      value: 68
       objectReference: {fileID: 0}
     - target: {fileID: 2323523544796601479, guid: a7ff5c3c4ac827742a2407659238a60c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -105,7 +105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5929075087932546840, guid: a7ff5c3c4ac827742a2407659238a60c, type: 3}
       propertyPath: _fillerColor.g
-      value: 0
+      value: 0.11588277
       objectReference: {fileID: 0}
     - target: {fileID: 5929075087932546840, guid: a7ff5c3c4ac827742a2407659238a60c, type: 3}
       propertyPath: _fillerColor.r

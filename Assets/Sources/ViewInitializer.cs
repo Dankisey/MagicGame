@@ -1,18 +1,22 @@
 using UnityEngine;
 using Game.Model;
+using Game.View;
 
 namespace Game.Controller
 {
     public class ViewInitializer : MonoBehaviour
     {
         [SerializeField] private AttackViewFactory _attackViewFactory;
+        [SerializeField] private EnemyViewFactory _enemyViewFactory;
         [SerializeField] private HudInitializer _hudInitializer;
 
         private Player _player;
+        private World _world;
 
-        public void Init(Player player)
+        public void Init(World world, Player player)
         {
             _player = player;
+            _world = world;
             InitViews();
         }
 
@@ -20,6 +24,7 @@ namespace Game.Controller
         {
             _attackViewFactory.Init(_player.AttackPerformer);
             _hudInitializer.Init(_player);
+            _enemyViewFactory.Init(_world);
         }
     }
 }

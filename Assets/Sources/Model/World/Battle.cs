@@ -6,11 +6,11 @@ namespace Game.Model
     public sealed class Battle : IState
     {
         private readonly Player _player;
-        private readonly Character[] _enemies;
+        private readonly Enemy[] _enemies;
         private int _defeatedEnemies = 0;
         private int _targetID = 0;
 
-        public Battle(Player player, Character[] enemies)
+        public Battle(Player player, Enemy[] enemies)
         {
             _player = player;
             _enemies = enemies;       
@@ -24,7 +24,6 @@ namespace Game.Model
         public void Enter()
         {
             PrepareForBattle();
-            Test();
         }
 
         public void SendPlayerAttack(Attack attack)
@@ -50,6 +49,11 @@ namespace Game.Model
                 _targetID = _enemies.Length - 1;
             else if (_targetID >= _enemies.Length)
                 _targetID = 0;
+        }
+
+        public Enemy[] GetEnemies()
+        {
+            return _enemies;
         }
 
         private void PrepareForBattle()
@@ -91,22 +95,6 @@ namespace Game.Model
         {
             Character newTarget = _enemies.FirstOrDefault(character => character.IsAlive);
             _targetID = Array.IndexOf(_enemies, newTarget);
-        }
-
-        /// <summary>
-        /// /////////////////////////////////////////////////////////////////             Test
-        /// </summary>
-
-        private void Test()
-        {
-            foreach (var enemy in _enemies)
-                enemy.DamageTaken += TestLog;
-        }
-
-        private void TestLog(float damageTaken)
-        {
-            foreach (var enemy in _enemies)          
-                UnityEngine.Debug.Log($"{enemy.Health.Value}/{enemy.Health.MaxValue}");                
         }
     }
 

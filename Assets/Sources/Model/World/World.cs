@@ -1,4 +1,6 @@
-﻿namespace Game.Model
+﻿using System;
+
+namespace Game.Model
 {
     public class World
     {
@@ -10,9 +12,13 @@
             _player = player;        
         }
 
+        public event Action<Battle> BattleInitiated;
+
         public void InitiateBattle()
         {
-            _currentBattle = new(_player, new Character[2] { new Bat(), new Bat()});
+            _currentBattle = new(_player, new Enemy[1] {new Bat()});
+            BattleInitiated?.Invoke(_currentBattle);
+
             _currentBattle.Ended += OnBattleEnded;
             _currentBattle.Enter();
         }
