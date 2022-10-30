@@ -6,7 +6,7 @@ using TMPro;
 
 public class EnemyView : MonoBehaviour
 {
-    [SerializeField] private BarView _healthView;
+    [SerializeField] private CharacteristicView _healthView;
     [SerializeField] private Image _illustration;
     [SerializeField] private TMP_Text _name;
 

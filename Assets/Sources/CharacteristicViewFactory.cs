@@ -4,11 +4,11 @@ using Game.View;
 
 namespace Game.Controller
 {
-    public class HudInitializer : MonoBehaviour
+    public class CharacteristicViewFactory : MonoBehaviour
     {
-        [SerializeField] private BarView _staminaBar;
-        [SerializeField] private BarView _healthBar;
-        [SerializeField] private BarView _manaBar;
+        [SerializeField] private CharacteristicView _staminaBar;
+        [SerializeField] private CharacteristicView _healthBar;
+        [SerializeField] private CharacteristicView _manaBar;
 
         public void Init(Player player)
         {

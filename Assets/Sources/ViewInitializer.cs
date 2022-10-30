@@ -6,9 +6,9 @@ namespace Game.Controller
 {
     public class ViewInitializer : MonoBehaviour
     {
+        [SerializeField] private CharacteristicViewFactory _characteristicViewFactory;
         [SerializeField] private AttackViewFactory _attackViewFactory;
         [SerializeField] private EnemyViewFactory _enemyViewFactory;
-        [SerializeField] private HudInitializer _hudInitializer;
 
         private Player _player;
         private World _world;
@@ -23,7 +23,7 @@ namespace Game.Controller
         public void InitViews()
         {
             _attackViewFactory.Init(_player.AttackPerformer);
-            _hudInitializer.Init(_player);
+            _characteristicViewFactory.Init(_player);
             _enemyViewFactory.Init(_world);
         }
     }

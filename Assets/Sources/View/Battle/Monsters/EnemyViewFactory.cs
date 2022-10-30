@@ -59,5 +59,10 @@ namespace Game.View
         {
             return _enemies[id];
         }
+
+        private void OnDisable()
+        {
+            _world.BattleInitiated -= OnBattleInitiated;
+        }
     }
 }

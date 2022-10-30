@@ -5,7 +5,7 @@ using Game.Model;
 
 namespace Game.View
 {
-    public class BarView : MonoBehaviour
+    public class CharacteristicView : MonoBehaviour
     {
         [SerializeField] private Image _filler;
         [SerializeField] private Color _fillerColor;

@@ -42,7 +42,7 @@ namespace Game.Model
                 public static readonly AttackCharachteristics AttackCharachteristics = new(_name, new PhysicalDamage(_baseDamage), _manaCost, _staminaCost, (int)AttackIDs.Slice, TargetType.Solo);
             }
 
-            public static  class FireBall
+            public static class FireBall
             {
                 private static readonly string _name = nameof(FireBall);
                 private static readonly int _baseDamage = 10;
@@ -50,6 +50,11 @@ namespace Game.Model
                 private static readonly int _staminaCost = 0;
 
                 public static readonly AttackCharachteristics AttackCharachteristics = new(_name, new MagicDamage(_baseDamage), _manaCost, _staminaCost, (int)AttackIDs.FireBall, TargetType.Solo);
+            }
+
+            public static class Magic
+            {
+                public static readonly int MaxElementsInSpell = 3;
             }
         }
 
