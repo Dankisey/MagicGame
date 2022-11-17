@@ -4,6 +4,6 @@
     {
         public Water() : base(ElementTypes.Water) { }
 
-        public override FirstTierSpell GetSpell() => new WaterSpell();
+        public override FirstTierEffect GetEffect() => new WaterEffect();
     }  
 }

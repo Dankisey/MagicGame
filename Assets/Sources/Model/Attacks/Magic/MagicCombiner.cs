@@ -5,49 +5,66 @@ namespace Game.Model
 {
     public class MagicCombiner
     {
-        private ICombineable[] _elements;
+        private MagicEffect[] _effects = new MagicEffect[0];
+        private Spell _currentSpell;
 
-        public Spell Combine(Element[] elements)
+        public void CreateSpell()
         {
-            ConvertToSpells(elements);
-
-            if(CheckForTriplet())
-                return GetTriplet();
-
-            return GetCombination();
+            _currentSpell = new Spell();
         }
 
-        private void ConvertToSpells(Element[] elements)
+        public Spell GetSpell()
         {
-            _elements = new ICombineable[elements.Length];
+            foreach (var effect in _effects)
+                _currentSpell.AddEffect(effect);
 
-            for (int i = 0; i < elements.Length; i++)         
-                _elements[i] = elements[i].GetSpell();           
+            return _currentSpell;
         }
 
-        private bool CheckForTriplet()
+        public bool TryAddElement(Element element)
         {
-            if (_elements.Length != Config.Attacks.Magic.MaxElementsInSpell)
+            if (_effects.Length == Config.Magic.MaxEffectsInSpell)
                 return false;
 
-            HashSet<ICombineable> elements = _elements.ToHashSet();
+            if (CheckMatchingRules(element) == false)
+                return false;
 
-            return elements.Count == 1;
+            AddElement(element);
+
+            return true;
         }
 
-        private Spell GetCombination()
+        private bool CheckMatchingRules(Element elementToCheck)
         {
-            ICombineable combination = _elements[0];
+            bool isMatching = true;
 
-            for (int i = 1; i < _elements.Length; i++)           
-                combination = combination.Combine(_elements[i]);            
+            foreach (var element in _effects)
+                isMatching &= element.CheckMatching(elementToCheck);
 
-            return combination as Spell;
+            return isMatching;
         }
 
-        private Spell GetTriplet()
+        private void AddElement(Element element)
         {
-            return (_elements[0] as ITripletReturner).GetTriplet();
+            FirstTierEffect effect = element.GetEffect();
+            _effects = GetEffectsCombo(effect);
+        }
+
+        private MagicEffect[] GetEffectsCombo(FirstTierEffect effect)
+        {
+            HashSet<MagicEffect> elements = new();
+
+            foreach (var item in _effects)
+            {
+                MagicEffect[] currentEffects = item.Combine(effect, out AugmentedStatus status);
+
+                for (int i = 0; i < currentEffects.Length; i++)
+                    elements.Add(currentEffects[i]);
+
+                _currentSpell.Augment((int)status);
+            }
+
+            return elements.ToArray();
         }
     }
 }

@@ -38,7 +38,6 @@ namespace Game.Model
         private void ResetAttackPerformer()
         {
             AttackPerformer.AddAttack<Slice>(new Slice());
-            AttackPerformer.AddAttack<FireBall>(new FireBall());
         }
 
         private void ResetCharacteristics()

@@ -4,6 +4,6 @@
     {
         public Earth() : base(ElementTypes.Earth) { }
 
-        public override FirstTierSpell GetSpell() => new EarthSpell();
+        public override FirstTierEffect GetEffect() => new EarthEffect();
     }  
 }

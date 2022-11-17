@@ -9,30 +9,15 @@ namespace Game.Model
 
         public ElementTypes Type { get; private set; }
 
-        public abstract FirstTierSpell GetSpell();
+        public abstract FirstTierEffect GetEffect();
     }
 
-    public struct SecondTierSpellCharacteristics
+    public enum ElementTypes
     {
-        public SecondTierSpellCharacteristics(SecondTierElementTypes type, bool isAugmented)
-        {
-            IsAugmented = isAugmented;
-            Type = type;
-        }
-
-        public SecondTierElementTypes Type;
-        public bool IsAugmented;
-    }
-
-    public struct ThirdTierSpellCharacteristics
-    {
-        public ThirdTierSpellCharacteristics(ThirdTierElementTypes type, bool isAugmented)
-        {
-            IsAugmented = isAugmented;
-            Type = type;
-        }
-
-        public ThirdTierElementTypes Type;
-        public bool IsAugmented;
+        Fire,
+        Water,
+        Earth,
+        Air,
+        Thunder
     }
 }

@@ -4,6 +4,6 @@
     {
         public Air() : base(ElementTypes.Air) { }
 
-        public override FirstTierSpell GetSpell() => new AirSpell();
+        public override FirstTierEffect GetEffect() => new AirEffect();
     }  
 }

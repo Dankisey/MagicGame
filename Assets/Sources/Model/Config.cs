@@ -30,6 +30,80 @@ namespace Game.Model
             }
         }
 
+        public class Magic
+        {
+            public static readonly int MaxEffectsInSpell = 3;
+
+            public static readonly float AugmentedMultiplier = 0.8f;
+
+            public class Effects
+            {
+                // 1st tier
+
+                public class Air
+                {
+                    public static readonly int TickCount = 0;
+                    public static readonly int Potency = 20;
+                }
+
+                public class Earth
+                {
+                    public static readonly int TickCount = 0;
+                    public static readonly int Potency = 20;
+                }
+
+                public class Fire
+                {
+                    public static readonly int TickCount = 3;
+                    public static readonly int Potency = 20;
+                }
+
+                public class Thunder
+                {
+                    public static readonly int TickCount = 3;
+                    public static readonly int Potency = 20;
+                }
+
+                public class Water
+                {
+                    public static readonly int TickCount = 3;
+                    public static readonly int Potency = 20;
+                }
+
+                // 2nd tier
+
+                public class Cold
+                {
+                    public static readonly int TickCount = 3;
+                    public static readonly int Potency = 40;
+                }
+
+                public class Dust
+                {
+                    public static readonly int TickCount = 3;
+                    public static readonly int Potency = 40;
+                }
+
+                public class Lava
+                {
+                    public static readonly int TickCount = 0;
+                    public static readonly int Potency = 40;
+                }
+
+                public class Mud
+                {
+                    public static readonly int TickCount = 3;
+                    public static readonly int Potency = 40;
+                }
+
+                public class Steam
+                {
+                    public static readonly int TickCount = 3;
+                    public static readonly int Potency = 40;
+                }
+            }
+        }
+
         public class Attacks
         {
             public static class Slice
@@ -42,20 +116,7 @@ namespace Game.Model
                 public static readonly AttackCharachteristics AttackCharachteristics = new(_name, new PhysicalDamage(_baseDamage), _manaCost, _staminaCost, (int)AttackIDs.Slice, TargetType.Solo);
             }
 
-            public static class FireBall
-            {
-                private static readonly string _name = nameof(FireBall);
-                private static readonly int _baseDamage = 10;
-                private static readonly int _manaCost = 10;
-                private static readonly int _staminaCost = 0;
-
-                public static readonly AttackCharachteristics AttackCharachteristics = new(_name, new MagicDamage(_baseDamage), _manaCost, _staminaCost, (int)AttackIDs.FireBall, TargetType.Solo);
-            }
-
-            public static class Magic
-            {
-                public static readonly int MaxElementsInSpell = 3;
-            }
+            
         }
 
         public class RestorePotions

@@ -4,6 +4,6 @@
     {
         public Fire() : base(ElementTypes.Fire) { }
 
-        public override FirstTierSpell GetSpell() => new FireSpell();
+        public override FirstTierEffect GetEffect() => new FireEffect();
     }   
 }
