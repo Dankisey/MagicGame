@@ -11,6 +11,8 @@
             _target = target;
         }
 
+        public abstract Attack GetAttack();
+
         public EnemyIDs ID { get; private set; }
         public string Name { get; private set; }
     }

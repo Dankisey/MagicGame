@@ -1,55 +1,31 @@
-using System.Data;
+using System.Collections.Generic;
 
 namespace Game.Model
 {
-    public abstract class Attack 
+    public struct Attack 
     {
-        public Attack(AttackCharachteristics charachteristics)
+        public Attack(Damage damage, TickDamage tickDamage, Debuff[] debuffs, TargetType targetType) 
         {
-            Name = charachteristics.Name;
-            Damage = charachteristics.Damage;
-            ManaCost = charachteristics.ManaCost;
-            StaminaCost = charachteristics.StaminaCost;
-            ID = charachteristics.ID;
-        }
-
-        public readonly TargetType Type;
-        public readonly Damage Damage;
-        public readonly int StaminaCost;
-        public readonly int ManaCost;
-        public readonly int ID;
-        public readonly string Name;
-    }
-
-    public struct AttackCharachteristics
-    {
-        public readonly TargetType Type;
-        public readonly Damage Damage;
-        public readonly int StaminaCost;
-        public readonly int ManaCost;
-        public readonly string Name;
-        public readonly int ID;
-        
-        public AttackCharachteristics(string name, Damage damage, int manaCost, int staminaCost, int id, TargetType type)
-        {
-            Name = name;
             Damage = damage;
-            ManaCost = manaCost;
-            StaminaCost = staminaCost;
-            ID = id;
-            Type = type;
+            TickDamage = tickDamage;
+            Debuffs = debuffs;
+            TargetType = targetType;
         }
+
+        //public Attack(Spell spell)
+        //{
+
+        //}
+
+        public readonly TickDamage TickDamage;
+        public readonly Damage Damage;
+        public readonly Debuff[] Debuffs;
+        public readonly TargetType TargetType;
     }
 
     public enum TargetType
     {
         Solo,
         Multi
-    }
-
-    public enum AttackIDs
-    {
-        Slice = 1,
-        FireBall
     }
 }

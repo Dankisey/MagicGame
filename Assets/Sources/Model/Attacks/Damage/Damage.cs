@@ -1,19 +1,35 @@
 ﻿namespace Game.Model
 {
-    public abstract class Damage : IDamageReturner
+    public abstract class Damage
     {
-        private readonly float _amount;
-
-        public Damage(float amount) => _amount = amount;
-
-        public virtual float GetDamage()
+        public Damage(float amount, DamageElements[] elements)
         {
-            return _amount;
+            Amount = amount;
+            Elements = elements;
+        }
+
+        public DamageElements[] Elements { get => GetElements(); private set => Elements = value; }
+        public float Amount { get; private set; }
+
+        public DamageElements[] GetElements()
+        {
+            DamageElements[] elements = new DamageElements[Elements.Length];
+
+            for (int i = 0; i < Elements.Length; i++)
+                elements[i] = Elements[i];
+            
+            return elements;
         }
     }
 
-    public interface IDamageReturner
+    public enum DamageElements
     {
-        public float GetDamage();
+        Pure = 0,
+        Physical,
+        Fire,
+        Water,
+        Air,
+        Earth,
+        Thunder
     }
 }

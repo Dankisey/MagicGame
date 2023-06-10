@@ -1,70 +1,166 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Game.Model
 {
     public class MagicCombiner
     {
-        private MagicEffect[] _effects = new MagicEffect[0];
-        private Spell _currentSpell;
+        //private MagicEffect[] _effects;
+        //private List<Element> _combo;
+        //private Spell _currentSpell;
+        //private bool _spellIsInProgress;
 
-        public void CreateSpell()
-        {
-            _currentSpell = new Spell();
-        }
+        //public event Action<MagicEffects[]> ComboChanged;
+        //public event Action<Attack> AttackCompleted;
 
-        public Spell GetSpell()
-        {
-            foreach (var effect in _effects)
-                _currentSpell.AddEffect(effect);
+        //public void EndAttack()
+        //{
+        //    if (TryGetAttack(out Attack attack))
+        //        AttackCompleted.Invoke(attack);
+        //}
 
-            return _currentSpell;
-        }
+        //private bool TryGetAttack(out Attack attack)
+        //{
+        //    Spell spell = GetSpell();
+        //    attack = new(spell);
 
-        public bool TryAddElement(Element element)
-        {
-            if (_effects.Length == Config.Magic.MaxEffectsInSpell)
-                return false;
+        //    if (_combo.Count == 0)
+        //        return false;
 
-            if (CheckMatchingRules(element) == false)
-                return false;
+        //    _spellIsInProgress = false;
 
-            AddElement(element);
+        //    return true;
+        //}
 
-            return true;
-        }
+        //public bool TryAddElement(Element element)
+        //{
+        //    if(_spellIsInProgress == false)
+        //        PrepareNewSpell();
 
-        private bool CheckMatchingRules(Element elementToCheck)
-        {
-            bool isMatching = true;
+        //    if (_effects.Length == Config.Magic.MaxEffectsInSpell)
+        //        return false;
 
-            foreach (var element in _effects)
-                isMatching &= element.CheckMatching(elementToCheck);
+        //    if (CheckMatchingRules(element) == false)
+        //        return false;
 
-            return isMatching;
-        }
+        //    AddElement(element);
 
-        private void AddElement(Element element)
-        {
-            FirstTierEffect effect = element.GetEffect();
-            _effects = GetEffectsCombo(effect);
-        }
+        //    return true;
+        //}
 
-        private MagicEffect[] GetEffectsCombo(FirstTierEffect effect)
-        {
-            HashSet<MagicEffect> elements = new();
+        //private void PrepareNewSpell()
+        //{
+        //    _effects = new MagicEffect[0];
+        //    _spellIsInProgress = true;
+        //    _currentSpell = new();
+        //    _combo = new();
+        //}
 
-            foreach (var item in _effects)
-            {
-                MagicEffect[] currentEffects = item.Combine(effect, out AugmentedStatus status);
+        //private Spell GetSpell()
+        //{
+        //    Spell spell = new();
 
-                for (int i = 0; i < currentEffects.Length; i++)
-                    elements.Add(currentEffects[i]);
+        //    if (IsTriplet())
+        //    {
+        //        spell = _combo[0].GetTriplet();
 
-                _currentSpell.Augment((int)status);
-            }
+        //        return spell;
+        //    }
 
-            return elements.ToArray();
-        }
+        //    foreach (var effect in _effects)
+        //        spell.AddEffect(effect);
+
+        //    return spell;
+        //}
+
+        //private bool CheckMatchingRules(Element elementToCheck)
+        //{
+        //    bool isMatching = true;
+
+        //    foreach (var element in _effects)
+        //        isMatching &= element.CheckMatching(elementToCheck);
+
+        //    return isMatching;
+        //}
+
+        //private void AddElement(Element element)
+        //{
+        //    FirstTierEffect effect = element.GetEffect();
+        //    _effects = GetEffects(effect);
+        //    _combo.Add(element);
+
+        //    InvokeComboChangedEvent();
+        //}
+
+        //private void InvokeComboChangedEvent()
+        //{
+        //    MagicEffects[] types = new MagicEffects[_effects.Length];
+
+        //    for (int i = 0; i < _effects.Length; i++)
+        //        types[i] = _effects[i].Effect;
+
+        //    ComboChanged?.Invoke(types);
+        //}
+
+        //private MagicEffect[] GetEffects(FirstTierEffect effect)
+        //{
+        //    HashSet<MagicEffect> elements = new();
+
+        //    foreach (var item in _effects)
+        //    {
+        //        MagicEffect[] currentEffects = item.Combine(effect, out AugmentedStatus status);
+
+        //        for (int i = 0; i < currentEffects.Length; i++)
+        //            elements.Add(currentEffects[i]);
+
+        //        _currentSpell.Augment((int)status);
+        //    }
+
+        //    return elements.ToArray();
+        //}
+
+        //private bool IsTriplet()
+        //{
+        //    if (_combo.Count != Config.Magic.MaxEffectsInSpell)
+        //        return false;
+
+        //    for (int i = 1; i < Config.Magic.MaxEffectsInSpell; i++)
+        //    {
+        //        if (_combo[i].Type != _combo[i-1].Type)
+        //            return false;
+        //    }
+
+        //    return true;
+        //}
+    }
+
+    public enum MagicEffects
+    {
+        //1st Tier
+
+        Air,
+        Earth,
+        Water,
+        Fire,
+        Thunder,
+
+        //2nd Tier
+
+        Steam,             //water + fire
+        Lava,              //earth + fire
+
+        Mud,               //earth + water
+        Cold,              //air + water
+
+        Dust,              //air + earth
+
+        //Triplets
+
+        AirTriplet,
+        EarthTriplet,
+        WaterTriplet,
+        FireTriplet,
+        ThunderTriplet,
     }
 }

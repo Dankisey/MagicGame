@@ -7,7 +7,6 @@ namespace Game.Model
         public static Player Instance => _instance.Value;
         private static readonly Lazy<Player> _instance = new(() => new Player());
 
-        public readonly AttackPerformer AttackPerformer;
         public readonly Inventory Inventory;
         public readonly Stamina Stamina;
         public readonly Mana Mana;
@@ -18,26 +17,18 @@ namespace Game.Model
         {
             Stamina = new(Config.Characters.Player.MaxStamina);
             Mana = new(Config.Characters.Player.MaxMana);
-            AttackPerformer = new(Mana, Stamina);
             Inventory = new();
         }
 
         public void Reset()
         {
-            ResetAttackPerformer();
             ResetCharacteristics();
         }
 
         public void EnterBattleMod(Battle battle)
         {
             _currentBattle = battle;
-            AttackPerformer.InitBattle(battle);
             _currentBattle.Ended += OnBattleEnded;
-        }
-
-        private void ResetAttackPerformer()
-        {
-            AttackPerformer.AddAttack<Slice>(new Slice());
         }
 
         private void ResetCharacteristics()

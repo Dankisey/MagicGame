@@ -1,13 +1,36 @@
-﻿namespace Game.Model
+﻿using System;
+
+namespace Game.Model
 {
-    public abstract class Effect 
+    public abstract class Effect
     {
-        public Effect(int tickCount) => TickCount = tickCount;
+        public Effect(DamageElements element, TargetType targetType)
+        {
+            TargetType = targetType;
+            Element = element;
+            SetDamages();
+            CheckForNulls();
+        }
 
-        public int TickCount { get; private set; }
+        public TargetType TargetType { get; private set; }
+        public DamageElements Element { get; private set; }
+        public TickDamage TickDamage { get; protected set; }
+        public Damage Damage { get; protected set; }
 
-        public virtual void Tick() => TickCount--;
+        protected abstract void SetDamages();
 
-        public abstract int Potency { get; }
+        private void CheckForNulls()
+        {
+            if (Damage == null)
+                throw new ArgumentNullException(nameof(Damage));
+
+            if (TickDamage == null)
+                throw new ArgumentNullException(nameof(TickDamage));
+        }
+    }
+
+    public interface IMagicEffect
+    {
+        public Attack GetTripplet();
     }
 }

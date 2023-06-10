@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 
 namespace Game.Model
 {
@@ -7,19 +7,23 @@ namespace Game.Model
     {
         private readonly Player _player;
         private readonly Enemy[] _enemies;
-        private int _defeatedEnemies = 0;
+        private readonly List<Enemy> _aliveEnemies;
         private int _targetID = 0;
+        private bool _isRecievingPlayerAttacks = true;
 
         public Battle(Player player, Enemy[] enemies)
         {
             _player = player;
-            _enemies = enemies;       
+            _enemies = enemies;
+            _aliveEnemies = new();
+
+            foreach (var enemy in _enemies)
+                _aliveEnemies.Add(enemy);
         }
 
         public event Action Ended;
 
-        public IDamageTaker Target => _enemies[_targetID]; 
-        public int EnemiesAmount => _enemies.Length;
+        public Enemy Target => _aliveEnemies[_targetID]; 
 
         public void Enter()
         {
@@ -28,17 +32,36 @@ namespace Game.Model
 
         public void SendPlayerAttack(Attack attack)
         {
-            switch (attack.Type)
+            if (_isRecievingPlayerAttacks == false)
+                return;
+
+            switch (attack.TargetType)
             {
                 case (TargetType.Solo):
-                    Target.TakeDamage(attack.Damage);
+                    Target.ApplyAttack(attack);
                     break;
 
                 case (TargetType.Multi):
                     foreach (var target in _enemies)
-                        target.TakeDamage(attack.Damage);
+                        target.ApplyAttack(attack);
                     break;
             }
+
+            _isRecievingPlayerAttacks = false;
+            PerformEnemiesAttack();
+        }
+
+        private void PerformEnemiesAttack()
+        {
+            foreach (var enemy in _aliveEnemies)
+                PerformEnemieAttack(enemy);    
+            
+            Tick();
+        }
+
+        private void PerformEnemieAttack(Enemy enemy)
+        {
+            _player.ApplyAttack(enemy.GetAttack());
         }
 
         public void ChangeTarget(Changer changer)
@@ -46,8 +69,8 @@ namespace Game.Model
             _targetID += (int)changer;
 
             if (_targetID < 0)
-                _targetID = _enemies.Length - 1;
-            else if (_targetID >= _enemies.Length)
+                _targetID = _aliveEnemies.Count - 1;
+            else if (_targetID >= _aliveEnemies.Count)
                 _targetID = 0;
         }
 
@@ -78,9 +101,9 @@ namespace Game.Model
         private void OnEnemieDeath(Character enemy)
         {
             enemy.Died -= OnEnemieDeath;
-            _defeatedEnemies++;
+            _aliveEnemies.Remove(enemy as Enemy);
 
-            if (_defeatedEnemies >= EnemiesAmount)
+            if (_aliveEnemies.Count <= 0)
             {
                 _player.Died -= OnPlayerDeath;
                 Ended?.Invoke();
@@ -91,10 +114,19 @@ namespace Game.Model
             SetNewTarget();
         }
 
+        private void Tick()
+        {
+            _player.Tick();
+
+            foreach (var enemy in _enemies)         
+                enemy.Tick();
+
+            _isRecievingPlayerAttacks = true;
+        }
+
         private void SetNewTarget()
         {
-            Character newTarget = _enemies.FirstOrDefault(character => character.IsAlive);
-            _targetID = Array.IndexOf(_enemies, newTarget);
+            _targetID = 0;
         }
     }
 

@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Game.Model
 {
-    public abstract class Character : IDamageTaker
+    public abstract class Character
     {
+        private List<Effect> _effects = new();
+
         public readonly Health Health;
         public readonly Armor PhysicalArmor;
         public readonly Armor MagicArmor;
@@ -20,7 +23,17 @@ namespace Game.Model
 
         public bool IsAlive => Health.IsAlive;
 
-        public void TakeDamage(Damage damage)
+        public void Tick()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ApplyAttack(Attack attack)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void TakeDamage(Damage damage)
         {
             TakeDamage((dynamic)damage);
         }
@@ -28,29 +41,26 @@ namespace Game.Model
         private void TakeDamage(PureDamage damage)
         {
             if (Health.IsAlive == false)
-                throw new NotImplementedException($"Trying {nameof(IDamageTaker.TakeDamage)} when {nameof(Health.IsAlive)} equals false");
+                throw new NotImplementedException($"Trying {nameof(TakeDamage)} when {nameof(Health.IsAlive)} equals false");
 
-            float damageAmount = damage.GetDamage();
-            ApplyDamage(damageAmount);
+            ApplyDamage(damage.Amount);
         }
 
         private void TakeDamage(PhysicalDamage damage)
         {
             if (Health.IsAlive == false)
-                throw new NotImplementedException($"Trying {nameof(IDamageTaker.TakeDamage)} when {nameof(Health.IsAlive)} equals false");
+                throw new NotImplementedException($"Trying {nameof(TakeDamage)} when {nameof(Health.IsAlive)} equals false");
 
-            float damageAmount = damage.GetDamage();
-            float modifiedDamage = PhysicalArmor.GetModifiedDamage(damageAmount);
+            float modifiedDamage = PhysicalArmor.GetModifiedDamage(damage.Amount);
             ApplyDamage(modifiedDamage);
         }
 
         private void TakeDamage(MagicDamage damage)
         {
             if (Health.IsAlive == false)
-                throw new NotImplementedException($"Trying {nameof(IDamageTaker.TakeDamage)} when {nameof(Health.IsAlive)} equals false");
+                throw new NotImplementedException($"Trying {nameof(TakeDamage)} when {nameof(Health.IsAlive)} equals false");
 
-            float damageAmount = damage.GetDamage();
-            float modifiedDamage = MagicArmor.GetModifiedDamage(damageAmount);
+            float modifiedDamage = MagicArmor.GetModifiedDamage(damage.Amount);
             ApplyDamage(modifiedDamage);
         }
 
@@ -64,21 +74,13 @@ namespace Game.Model
         }
 
         private bool TryDie()
-        {
+        {       
             Died?.Invoke(this);
             return true;
         }
     }
 
-    public interface IDamageTaker
-    {
-        public void TakeDamage(Damage damage)
-        {
-            TakeDamage((dynamic)damage);
-        }
-    }
-
-    public struct DamagableCharacteristics
+    public readonly struct DamagableCharacteristics
     {
         public readonly int MaxHealth;
         public readonly int PhysicalArmor;

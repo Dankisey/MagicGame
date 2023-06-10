@@ -2,6 +2,6 @@
 {
     public sealed class MagicDamage : Damage
     {
-        public MagicDamage(float amount) : base(amount) { }
+        public MagicDamage(float amount, DamageElements[] elements) : base(amount, elements) { }
     }
 }
