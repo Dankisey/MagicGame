@@ -1,10 +1,10 @@
 ﻿namespace Game.Model
 {
-    public sealed class Air : Effect, IMagicEffect
+    public sealed class Air : MagicEffect
     {
         public Air() : base(DamageElements.Air, Config.Magic.Air.TargetType) { }
 
-        public Attack GetTripplet()
+        public override Attack GetTriplet()
         {
             float damageAmount = Config.Magic.Air.Damage * Config.Magic.AugmentedMultiplier * Config.Magic.Air.Triplet.Multiplier;
             MagicDamage damage = new(damageAmount, new DamageElements[1] { DamageElements.Air });

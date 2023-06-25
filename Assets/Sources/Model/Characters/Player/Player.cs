@@ -6,6 +6,9 @@ namespace Game.Model
     {
         public static Player Instance => _instance.Value;
         private static readonly Lazy<Player> _instance = new(() => new Player());
+        private static readonly MagicCombiner _magicCombiner = new();
+        private static readonly PlayerAttackSender _playerAttackSender = new(_magicCombiner);
+        private static readonly PlayerAttackPerformer _playerAttackPerformer = new(_playerAttackSender);
 
         public readonly Inventory Inventory;
         public readonly Stamina Stamina;
@@ -13,7 +16,7 @@ namespace Game.Model
 
         private Battle _currentBattle;
 
-        private Player(): base (Config.Characters.Player.DamagableCharacteristics)
+        private Player(): base (Config.Characters.Player.DamagableCharacteristics, _playerAttackSender, _playerAttackPerformer)
         {
             Stamina = new(Config.Characters.Player.MaxStamina);
             Mana = new(Config.Characters.Player.MaxMana);

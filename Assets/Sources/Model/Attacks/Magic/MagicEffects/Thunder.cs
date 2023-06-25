@@ -1,10 +1,10 @@
 ﻿namespace Game.Model
 {
-    public sealed class Thunder : Effect, IMagicEffect
+    public sealed class Thunder : MagicEffect
     {
         public Thunder() : base(DamageElements.Thunder, Config.Magic.Thunder.TargetType) { }
 
-        public Attack GetTripplet()
+        public override Attack GetTriplet()
         {
             float damageAmount = Config.Magic.Thunder.Damage * Config.Magic.AugmentedMultiplier * Config.Magic.Thunder.Triplet.Multiplier;
             MagicDamage damage = new(damageAmount, new DamageElements[1] { DamageElements.Thunder });

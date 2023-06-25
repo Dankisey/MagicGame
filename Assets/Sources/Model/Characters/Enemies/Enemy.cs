@@ -4,7 +4,8 @@
     {
         private readonly Player _target;
 
-        public Enemy(Player target, string name, EnemyIDs id, DamagableCharacteristics characteristics) : base(characteristics) 
+        public Enemy(Player target, string name, EnemyIDs id, DamagableCharacteristics characteristics, AttackSender attackSender, AttackPerformer attackPerformer) 
+            : base(characteristics, attackSender, attackPerformer) 
         {
             Name = name;
             ID = id;

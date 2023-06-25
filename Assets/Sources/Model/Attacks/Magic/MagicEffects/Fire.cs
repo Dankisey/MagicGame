@@ -1,10 +1,10 @@
 ﻿namespace Game.Model
 {
-    public sealed class Fire : Effect, IMagicEffect
+    public sealed class Fire : MagicEffect
     {
         public Fire() : base(DamageElements.Fire, Config.Magic.Fire.TargetType) { }
 
-        public Attack GetTripplet()
+        public override Attack GetTriplet()
         {
             float damageAmount = Config.Magic.Fire.Damage * Config.Magic.AugmentedMultiplier * Config.Magic.Fire.Triplet.Multiplier;
             MagicDamage damage = new(damageAmount, new DamageElements[1] { DamageElements.Fire });

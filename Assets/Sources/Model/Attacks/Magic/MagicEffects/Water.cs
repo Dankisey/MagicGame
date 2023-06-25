@@ -1,10 +1,10 @@
 ﻿namespace Game.Model
 {
-    public sealed class Water : Effect, IMagicEffect
+    public sealed class Water : MagicEffect
     {
         public Water() : base(DamageElements.Water, Config.Magic.Water.TargetType) { }
 
-        public Attack GetTripplet()
+        public override Attack GetTriplet()
         {
             float damageAmount = Config.Magic.Water.Damage * Config.Magic.AugmentedMultiplier * Config.Magic.Water.Triplet.Multiplier;
             MagicDamage damage = new(damageAmount, new DamageElements[1] { DamageElements.Water });

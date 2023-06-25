@@ -28,9 +28,4 @@ namespace Game.Model
                 throw new ArgumentNullException(nameof(TickDamage));
         }
     }
-
-    public interface IMagicEffect
-    {
-        public Attack GetTripplet();
-    }
 }

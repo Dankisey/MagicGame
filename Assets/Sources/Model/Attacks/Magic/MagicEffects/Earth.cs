@@ -1,10 +1,10 @@
 ﻿namespace Game.Model
 {
-    public sealed class Earth : Effect, IMagicEffect
+    public sealed class Earth : MagicEffect
     {
         public Earth() : base(DamageElements.Earth, Config.Magic.Earth.TargetType) { }
 
-        public Attack GetTripplet()
+        public override Attack GetTriplet()
         {
             float damageAmount = Config.Magic.Earth.Damage * Config.Magic.AugmentedMultiplier * Config.Magic.Earth.Triplet.Multiplier;
             PhysicalDamage damage = new(damageAmount, new DamageElements[1] { DamageElements.Earth });

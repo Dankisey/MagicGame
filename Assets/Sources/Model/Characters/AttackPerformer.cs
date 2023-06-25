@@ -1,0 +1,34 @@
+﻿namespace Game.Model
+{
+    public abstract class AttackPerformer
+    {
+        private readonly AttackSender _attackSender;
+
+        public AttackPerformer(AttackSender attackSender, Character character) 
+        {
+            _attackSender = attackSender;
+            attackSender.AttackSent += OnAttackSent;
+            character.Died += OnCharacterDeath;
+        }
+
+        protected Battle Battle;
+
+        public void InitBattle(Battle battle)
+        {
+            Battle = battle;           
+        }
+
+        protected abstract bool TryAttack(Attack attack);
+
+        private void OnAttackSent(Attack attack)
+        {
+            TryAttack(attack);
+        }
+
+        private void OnCharacterDeath(Character character)
+        {
+            _attackSender.AttackSent -= OnAttackSent;
+            character.Died -= OnCharacterDeath;
+        }
+    }
+}

@@ -9,7 +9,6 @@ namespace Game.Model
         private readonly Enemy[] _enemies;
         private readonly List<Enemy> _aliveEnemies;
         private int _targetID = 0;
-        private bool _isRecievingPlayerAttacks = true;
 
         public Battle(Player player, Enemy[] enemies)
         {
@@ -19,7 +18,11 @@ namespace Game.Model
 
             foreach (var enemy in _enemies)
                 _aliveEnemies.Add(enemy);
+
+            PlayerTurn = true;
         }
+
+        public bool PlayerTurn {get; private set;}
 
         public event Action Ended;
 
@@ -32,7 +35,7 @@ namespace Game.Model
 
         public void SendPlayerAttack(Attack attack)
         {
-            if (_isRecievingPlayerAttacks == false)
+            if (PlayerTurn == false)
                 return;
 
             switch (attack.TargetType)
@@ -47,7 +50,7 @@ namespace Game.Model
                     break;
             }
 
-            _isRecievingPlayerAttacks = false;
+            PlayerTurn = false;
             PerformEnemiesAttack();
         }
 
@@ -121,7 +124,7 @@ namespace Game.Model
             foreach (var enemy in _enemies)         
                 enemy.Tick();
 
-            _isRecievingPlayerAttacks = true;
+            PlayerTurn = true;
         }
 
         private void SetNewTarget()

@@ -5,19 +5,19 @@ namespace Game.Model
 {
     public sealed class Spell
     {
-        private readonly List<Effect> _effects;
+        private readonly MagicEffect[] _effects;
 
-        public Spell(List<Effect> effects) 
+        public Spell(MagicEffect[] effects) 
         {
-            if (effects.Count > Config.Magic.MaxEffectsInSpell)
-                throw new ArgumentOutOfRangeException(nameof(effects.Count));
+            if (effects.Length > Config.Magic.MaxEffectsInSpell)
+                throw new ArgumentOutOfRangeException(nameof(effects.Length));
 
             _effects = effects;
         }  
 
-        public Spell(Effect effect) 
+        public Spell(MagicEffect effect) 
         {
-            _effects = new List<Effect> {effect};
+            _effects = new MagicEffect[] {effect};
         }
 
         public Attack ToAttack()
@@ -73,8 +73,8 @@ namespace Game.Model
                     break;
                 }
 
-                if (effect.TickDamage.TickCount > totalTickAmount)
-                    totalTickAmount = effect.TickDamage.TickCount;
+                if (effect.TickDamage.TickAmount > totalTickAmount)
+                    totalTickAmount = effect.TickDamage.TickAmount;
             }
 
             if (isPhysical)

@@ -1,27 +1,30 @@
 ﻿using System;
-using System.Xml.Linq;
 
 namespace Game.Model
 {
-    public sealed class TickDamage : Damage
+    public sealed class TickDamage : Damage, ITickable
     {
-        public TickDamage(float amount, DamageElements[] elements, int tickCount) : base(amount, elements)
+        public TickDamage(float amount, DamageElements[] elements, int tickAmount) : base(amount, elements)
         {
-            TickCount = tickCount;
+            TickAmount = tickAmount;
         }
 
-        public int TickCount { get; private set; }
+        public int TickAmount { get; private set; }
 
-        public event Action<TickDamage> Ended;
+        public event Action<ITickable> Ended;
 
-        public Damage Tick()
+        public void Tick()
         {
-            TickCount--;
+            TickAmount--;
 
-            if (TickCount <= 0)
+            if (TickAmount <= 0)
                 Ended?.Invoke(this);
+        }
 
-            return new PureDamage(Amount);
+        public void ForceEnd()
+        {
+            TickAmount = 0;
+            Ended?.Invoke(this);
         }
     }
 }

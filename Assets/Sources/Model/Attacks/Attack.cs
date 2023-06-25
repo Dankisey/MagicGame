@@ -12,14 +12,9 @@ namespace Game.Model
             TargetType = targetType;
         }
 
-        //public Attack(Spell spell)
-        //{
-
-        //}
-
         public readonly TickDamage TickDamage;
-        public readonly Damage Damage;
         public readonly Debuff[] Debuffs;
+        public readonly Damage Damage;
         public readonly TargetType TargetType;
     }
 

@@ -1,4 +1,6 @@
-﻿namespace Game.Model
+﻿using System;
+
+namespace Game.Model
 {
     public abstract class Damage
     {
@@ -6,6 +8,9 @@
         {
             Amount = amount;
             Elements = elements;
+
+            if (elements.Length == 0)
+                throw new ArgumentOutOfRangeException(nameof(elements));
         }
 
         public DamageElements[] Elements { get => GetElements(); private set => Elements = value; }
