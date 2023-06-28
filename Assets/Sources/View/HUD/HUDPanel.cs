@@ -1,23 +1,32 @@
 using UnityEngine;
 
-public class HUDPanel : MonoBehaviour
+namespace Game.View
 {
-    [SerializeField] private HUDPanel[] _toCloseOnOpen;
-    [SerializeField] private HUDPanel[] _toOpenOnClose;
-
-    public void TurnOn()
+    public class HUDPanel : MonoBehaviour
     {
-        foreach(var panel in _toCloseOnOpen)
-            panel.TurnOff();
+        [SerializeField] private HUDPanel[] _toCloseOnOpen;
+        [SerializeField] private HUDPanel[] _toOpenOnClose;
 
-        gameObject.SetActive(true);
-    }
+        public void Open()
+        {
+            gameObject.SetActive(true);
+        }
 
-    public void TurnOff()
-    {
-        foreach (var panel in _toOpenOnClose)
-            panel.TurnOn();
+        public void OpenOthers()
+        {
+            foreach (var panel in _toOpenOnClose)
+                panel.Open();
+        }
 
-        gameObject.SetActive(false);
+        public void Close()
+        {
+            gameObject.SetActive(false);
+        }
+
+        public void CloseOthers()
+        {
+            foreach (var panel in _toCloseOnOpen)
+                panel.Close();
+        }
     }
 }
