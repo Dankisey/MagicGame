@@ -1,4 +1,6 @@
-﻿namespace Game.Model
+﻿using System;
+
+namespace Game.Model
 {
     public abstract class MagicEffect : Effect
     {

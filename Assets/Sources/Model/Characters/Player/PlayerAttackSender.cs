@@ -2,7 +2,7 @@
 {
     public sealed class PlayerAttackSender : AttackSender
     {
-        private readonly MagicCombiner _magicCombiner;
+        private MagicCombiner _magicCombiner;
 
         public PlayerAttackSender(MagicCombiner magicCombiner)
         {

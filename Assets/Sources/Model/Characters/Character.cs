@@ -6,18 +6,14 @@ namespace Game.Model
     public abstract class Character
     {
         private readonly List<ITickable> _tickables = new();
-        private readonly AttackSender _attackSender;
 
-        public readonly AttackPerformer _attackPerformer;
         public readonly Health Health;
         public readonly Armor Armor;
 
-        public Character(DamagableCharacteristics characteristics, AttackSender attackSender, AttackPerformer attackPerformer)
+        public Character(DamagableCharacteristics characteristics)
         {
             Health = new(characteristics.MaxHealth);
             Armor = new(characteristics.ArmorCharacteristics);
-            _attackPerformer = attackPerformer;
-            _attackSender = attackSender;
         }
 
         public event Action<Character> Died;

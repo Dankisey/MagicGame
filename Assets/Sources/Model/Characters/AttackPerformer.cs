@@ -1,4 +1,6 @@
-﻿namespace Game.Model
+﻿using UnityEngine.TextCore.Text;
+
+namespace Game.Model
 {
     public abstract class AttackPerformer
     {

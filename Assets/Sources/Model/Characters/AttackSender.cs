@@ -2,7 +2,7 @@
 
 namespace Game.Model
 {
-    public class AttackSender
+    public abstract class AttackSender
     {
         public event Action<Attack> AttackSent;
 

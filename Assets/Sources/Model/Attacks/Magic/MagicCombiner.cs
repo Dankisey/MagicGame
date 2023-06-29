@@ -5,9 +5,18 @@ namespace Game.Model
 {
     public sealed class MagicCombiner
     {
+        private DamageElements[] _combo;
         private MagicEffect[] _effects;
-        private List<DamageElements> _combo;
         private bool _spellIsInProgress;
+        private int _currentPosition;
+
+        public MagicCombiner()
+        {
+            _combo = new DamageElements[Config.Magic.MaxEffectsInSpell];
+            _effects = new MagicEffect[Config.Magic.MaxEffectsInSpell];
+            _spellIsInProgress = true;
+            _currentPosition = 0;
+        }
 
         public event Action<IReadOnlyCollection<DamageElements>> ComboChanged;
         public event Action<Attack> AttackCompleted;
@@ -15,7 +24,10 @@ namespace Game.Model
         public void EndAttack()
         {
             if (TryGetAttack(out Attack attack))
+            {
                 AttackCompleted?.Invoke(attack);
+                PrepareNewSpell();
+            }
         }
 
         public bool TryAddEffect(MagicEffect effect)
@@ -35,7 +47,7 @@ namespace Game.Model
         {
             attack = new();
 
-            if (_combo.Count == 0)
+            if (_combo.Length == 0)
                 return false;
 
             if (TryGetTriplet(out attack))
@@ -51,9 +63,27 @@ namespace Game.Model
 
         private void PrepareNewSpell()
         {
-            _effects = new MagicEffect[0];
-            _combo = new();
+            ResetSpell();         
+            ComboChanged?.Invoke(_combo);
+        }
+
+        private void ResetSpell()
+        {
+            ResetEffects();
+            ResetCombo();
             _spellIsInProgress = true;
+        }
+
+        private void ResetEffects()
+        {
+            for (int i = 0; i < _effects.Length; i++)
+                _effects[i] = new None();
+        }
+
+        private void ResetCombo()
+        {
+            for (int i = 0; i < _combo.Length; i++)
+                _combo[i] = DamageElements.None;
         }
 
         private Spell GetSpell()
@@ -77,31 +107,22 @@ namespace Game.Model
 
         private void AddEffect(MagicEffect effect)
         {
-            MagicEffect[] effects = new MagicEffect[_effects.Length + 1];
-
-            for (int i = 0; i < _effects.Length; i++)
-                effects[i] = _effects[i];
-
-            effects[^1] = effect; 
-            _effects = effects;
-
+            _effects[_currentPosition] = effect;
             AddElementToCombo(effect.Element);         
+            _currentPosition++;
         }
 
         private void AddElementToCombo(DamageElements element)
         {
-            _combo.Add(element);
+            _combo[_currentPosition] = element;
             ComboChanged?.Invoke(_combo);
         }
 
         private bool IsTriplet()
         {
-            if (_combo.Count != Config.Magic.ElementsForTriplet)
-                return false;
-
             for (int i = 1; i < Config.Magic.ElementsForTriplet; i++)
             {
-                if (_combo[i] != _combo[i - 1])
+                if (_combo[i] != _combo[i - 1] || _combo[i] == DamageElements.None)
                     return false;
             }
 

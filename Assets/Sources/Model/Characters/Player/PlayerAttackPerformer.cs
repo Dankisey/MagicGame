@@ -4,7 +4,7 @@ namespace Game.Model
 {
     public sealed class PlayerAttackPerformer : AttackPerformer
     {
-        public PlayerAttackPerformer(AttackSender attackSender) : base(attackSender, Player.Instance) { }
+        public PlayerAttackPerformer(PlayerAttackSender attackSender, Character character) : base(attackSender, character) { }
 
         public event Action AttackCanceled;
 

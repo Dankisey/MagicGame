@@ -56,6 +56,22 @@ namespace Game.Model
             public static readonly int PhysicalTickDamage = 0;
             public static readonly int PhysicalTickCount = 0;
 
+            public class None
+            {
+                public static readonly int TickCount = 0;
+                public static readonly int TickDamage = 0;
+                public static readonly int Damage = 0;
+                public static readonly TargetType TargetType = TargetType.Solo;
+
+                public class Triplet
+                {
+                    public static readonly float Multiplier = 0;
+                    public static readonly int TickDamage = 0;
+                    public static readonly int TickCount = 0;
+                    public static readonly TargetType TargetType = TargetType.Solo;
+                }
+            }
+
             public class Air
             {
                 public static readonly int TickCount = 0;

@@ -32,12 +32,12 @@ namespace Game.Model
         {
             float modifiedDamage = 0;
 
-            if (damage.Elements.Length > 1)
+            if (damage.Elements.Count > 1)
             {
-                for (int i = 0; i < damage.Elements.Length; i++)
+                for (int i = 0; i < damage.Elements.Count; i++)
                     modifiedDamage += ModifyDamage(damage, damage.Elements[i]);
 
-                modifiedDamage /= damage.Elements.Length;
+                modifiedDamage /= damage.Elements.Count;
             }
             else
                modifiedDamage = ModifyDamage(damage, damage.Elements.FirstOrDefault());

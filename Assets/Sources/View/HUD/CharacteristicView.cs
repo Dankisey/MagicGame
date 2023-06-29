@@ -42,7 +42,8 @@ namespace Game.View
 
         private void OnDisable()
         {
-            _characteristic.ValueChanged -= OnValueChanged;
+            if (_characteristic != null)
+                _characteristic.ValueChanged -= OnValueChanged;
         }
     }
 }

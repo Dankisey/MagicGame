@@ -92,15 +92,13 @@ namespace Game.Model
 
         private TargetType CalculateTargetType()
         {
-            TargetType targetType = TargetType.Solo;
-
             foreach (var effect in _effects)
             {
                 if (effect.TargetType == TargetType.Multi)
-                    targetType = TargetType.Multi; 
+                    return TargetType.Multi; 
             }
 
-            return targetType;
+            return TargetType.Solo;
         }
     }
 }
