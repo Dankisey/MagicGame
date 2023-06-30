@@ -652,6 +652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _toCloseOnOpen:
   - {fileID: 1373707153}
+  - {fileID: 1465294614}
   _toOpenOnClose: []
 --- !u!1 &463874906
 GameObject:
@@ -1040,10 +1041,10 @@ RectTransform:
   m_Father: {fileID: 2011328106}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0015465512, y: 0.0043128235}
-  m_AnchorMax: {x: 0.16031985, y: 0.3461248}
-  m_AnchoredPosition: {x: -762.9599, y: -318.43253}
-  m_SizeDelta: {x: 288.42047, y: 334.22278}
+  m_AnchorMin: {x: 0, y: 0.0043128235}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.000015258789, y: -0.7917328}
+  m_SizeDelta: {x: -51.51, y: -37.93}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &525836592
 MonoBehaviour:
@@ -1065,7 +1066,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0bec000b094bb6444b1af4465d63a0ff, type: 3}
+  m_Sprite: {fileID: -133842126, guid: 956668d129b2ca14a9a6900bcc3dbd70, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2437,8 +2438,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _toCloseOnOpen:
   - {fileID: 342876923}
+  - {fileID: 1369531054}
   _toOpenOnClose:
   - {fileID: 342876923}
+  - {fileID: 1369531054}
 --- !u!114 &1373707154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2509,8 +2512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f270fe91a4a7e44bd6744b3eeb1b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _toCloseOnOpen:
-  - {fileID: 1369531054}
+  _toCloseOnOpen: []
   _toOpenOnClose:
   - {fileID: 1369531054}
 --- !u!225 &1465294615
@@ -3472,8 +3474,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -804.63, y: -351.42}
+  m_SizeDelta: {x: 302.9, y: 367.15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2059565788
 GameObject:

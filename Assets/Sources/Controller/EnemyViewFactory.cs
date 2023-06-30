@@ -6,8 +6,8 @@ namespace Game.View
 {
     public class EnemyViewFactory : MonoBehaviour
     {
-        [SerializeField] private List<Sprite> _sprites;
-        [SerializeField] private List<EnemyIDs> _ids;
+        [SerializeField] private Sprite[] _sprites;
+        [SerializeField] private EnemyIDs[] _ids;
         [SerializeField] private EnemyView _template;
         [SerializeField] private Transform _parent;
 
@@ -26,14 +26,14 @@ namespace Game.View
         {
             _enemies = new Dictionary<EnemyIDs, Sprite>();
 
-            for (int i = 0; i < _sprites.Count; i++)
+            for (int i = 0; i < _sprites.Length; i++)
                 _enemies.Add(_ids[i], _sprites[i]);
         }
 
         private void OnValidate()
         {
-            if (_sprites.Count != _ids.Count)           
-                Debug.LogWarning($"{nameof(_sprites)}.Count != {nameof(_ids)}.Count");   
+            if (_sprites.Length != _ids.Length)           
+                Debug.LogWarning($"{nameof(_sprites)}.Length != {nameof(_ids)}.Length");   
         }
 
         private void OnBattleInitiated(Battle battle)
