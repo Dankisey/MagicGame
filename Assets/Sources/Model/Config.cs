@@ -29,6 +29,8 @@ namespace Game.Model
 
             public class Enemies
             {
+                public static EnemyAttack[] TEST = new EnemyAttack[1] { new EnemyAttack(EnemyAttackRarity.First, new Attack()) };  ///////// ONLY FOR TESTS
+
                 public class Bat
                 {
                     private static readonly int _maxHealth = 20;

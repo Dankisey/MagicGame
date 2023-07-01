@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System;
 
 namespace Game.Model
@@ -18,7 +19,7 @@ namespace Game.Model
             _currentPosition = 0;
         }
 
-        public event Action<IReadOnlyCollection<DamageElements>> ComboChanged;
+        public event Action<List<DamageElements>> ComboChanged;
         public event Action<Attack> AttackCompleted;
 
         public void EndAttack()
@@ -64,7 +65,7 @@ namespace Game.Model
         private void PrepareNewSpell()
         {
             ResetSpell();         
-            ComboChanged?.Invoke(_combo);
+            ComboChanged?.Invoke(_combo.ToList());
         }
 
         private void ResetSpell()
@@ -115,7 +116,7 @@ namespace Game.Model
         private void AddElementToCombo(DamageElements element)
         {
             _combo[_currentPosition] = element;
-            ComboChanged?.Invoke(_combo);
+            ComboChanged?.Invoke(_combo.ToList());
         }
 
         private bool IsTriplet()

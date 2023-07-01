@@ -2,6 +2,6 @@
 {
     public sealed class BatAttackFactory : EnemyAttackFactory
     {
-        public BatAttackFactory() : base(null) { }
+        public BatAttackFactory() : base(Config.Characters.Enemies.TEST) { }
     }
 }
