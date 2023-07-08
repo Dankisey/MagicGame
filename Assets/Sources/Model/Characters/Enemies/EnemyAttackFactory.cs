@@ -6,11 +6,11 @@ namespace Game.Model
 {
     public abstract class EnemyAttackFactory
     {
+        private readonly Random _random;
+        private readonly int _maxRandomValue;
         private EnemyAttackRarity[] _rarities;
         private EnemyAttack[] _enemyAttacks;
         private int[] _borders;
-        private Random _random;
-        private int _maxRandomValue;
         private int _rarityLevelsAmount;
 
         public EnemyAttackFactory(EnemyAttack[] enemyAttacks)
@@ -112,7 +112,7 @@ namespace Game.Model
         }
     }
 
-    public struct EnemyAttack
+    public readonly struct EnemyAttack
     {
         public readonly EnemyAttackRarity Rarity;
         public readonly Attack Attack;

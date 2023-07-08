@@ -15,8 +15,7 @@ namespace Game.Model
         {
             _combo = new DamageElements[Config.Magic.MaxEffectsInSpell];
             _effects = new MagicEffect[Config.Magic.MaxEffectsInSpell];
-            _spellIsInProgress = true;
-            _currentPosition = 0;
+            PrepareNewSpell();
         }
 
         public event Action<List<DamageElements>> ComboChanged;
@@ -36,7 +35,7 @@ namespace Game.Model
             if (_spellIsInProgress == false)
                 PrepareNewSpell();
 
-            if (_effects.Length == Config.Magic.MaxEffectsInSpell)
+            if (_currentPosition == Config.Magic.MaxEffectsInSpell)
                 return false;
 
             AddEffect(effect);
@@ -73,6 +72,7 @@ namespace Game.Model
             ResetEffects();
             ResetCombo();
             _spellIsInProgress = true;
+            _currentPosition = 0;
         }
 
         private void ResetEffects()
@@ -111,6 +111,9 @@ namespace Game.Model
             _effects[_currentPosition] = effect;
             AddElementToCombo(effect.Element);         
             _currentPosition++;
+
+            if(_currentPosition == Config.Magic.MaxEffectsInSpell)
+                _spellIsInProgress = false;
         }
 
         private void AddElementToCombo(DamageElements element)

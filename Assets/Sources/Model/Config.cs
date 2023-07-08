@@ -29,7 +29,30 @@ namespace Game.Model
 
             public class Enemies
             {
-                public static EnemyAttack[] TEST = new EnemyAttack[1] { new EnemyAttack(EnemyAttackRarity.First, new Attack()) };  ///////// ONLY FOR TESTS
+                public static EnemyAttack[] TEST = new EnemyAttack[1] { Attacks.Bite };
+
+                public class Attacks
+                {
+                    public class BiteCharacteristics
+                    {
+                        private static readonly float _damageAmount = 5;
+                        private static readonly DamageElements[] _damageElements = new DamageElements[1] { DamageElements.Physical };
+                        private static readonly PhysicalDamage _damage = new(_damageAmount, _damageElements);
+
+                        private static readonly float _tickDamageAmount = 0;
+                        private static readonly DamageElements[] _tickDamageElements = new DamageElements[1] { DamageElements.None };
+                        private static readonly int _tickAmount = 0;
+                        private static readonly TickDamage _tickDamage = new(_tickDamageAmount, _tickDamageElements, _tickAmount);
+
+                        private static readonly Debuff[] _debuffs = new Debuff[0];
+
+                        private static readonly TargetType _targetType = TargetType.Solo;
+
+                        public static readonly Attack Attack = new(_damage, _tickDamage, _debuffs, _targetType);
+                    }             
+                    
+                    public static readonly EnemyAttack Bite = new(EnemyAttackRarity.First, BiteCharacteristics.Attack);
+                }
 
                 public class Bat
                 {
@@ -78,7 +101,7 @@ namespace Game.Model
             {
                 public static readonly int TickCount = 0;
                 public static readonly int TickDamage = 0;
-                public static readonly int Damage = 20;
+                public static readonly int Damage = 5;
                 public static readonly TargetType TargetType = TargetType.Solo;
                 
                 public class Triplet
@@ -94,7 +117,7 @@ namespace Game.Model
             {
                 public static readonly int TickCount = 0;
                 public static readonly int TickDamage = 0;
-                public static readonly int Damage = 20;
+                public static readonly int Damage = 5;
                 public static readonly TargetType TargetType = TargetType.Solo;
 
                 public class Triplet
@@ -110,7 +133,7 @@ namespace Game.Model
             {
                 public static readonly int TickCount = 3;
                 public static readonly int TickDamage = 5;
-                public static readonly int Damage = 20;
+                public static readonly int Damage = 5;
                 public static readonly TargetType TargetType = TargetType.Solo;
 
                 public class Triplet
@@ -126,7 +149,7 @@ namespace Game.Model
             {
                 public static readonly int TickCount = 3;
                 public static readonly int TickDamage = 5;
-                public static readonly int Damage = 20;
+                public static readonly int Damage = 5;
                 public static readonly TargetType TargetType = TargetType.Solo;
 
                 public class Triplet
@@ -142,7 +165,7 @@ namespace Game.Model
             {
                 public static readonly int TickCount = 3;
                 public static readonly int TickDamage = 0;
-                public static readonly int Damage = 20;
+                public static readonly int Damage = 5;
                 public static readonly TargetType TargetType = TargetType.Solo;
 
                 public class Triplet

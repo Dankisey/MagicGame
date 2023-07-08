@@ -22,10 +22,10 @@ namespace Game.Model
 
     public enum DamageElements
     {      
+        None,
         Pure,
         Physical,
-        None = 10,
-        Fire,
+        Fire = 10,
         Water,
         Air,
         Earth,

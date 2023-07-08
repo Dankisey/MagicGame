@@ -6,12 +6,15 @@ namespace Game.Model
     {
         private int _tickAmount;
 
-        public Debuff(int tickAmount)
+        public Debuff(int tickAmount, DebuffTypes type)
         {
             _tickAmount = tickAmount;
+            Type = type;
         }
 
-        public event Action<ITickable> Ended;
+        public DebuffTypes Type { get; private set; }
+
+        public event Action<Debuff> Ended;
 
         public void Tick()
         {
@@ -31,5 +34,10 @@ namespace Game.Model
             _tickAmount = 0;
             Ended?.Invoke(this);
         }
+    }
+
+    public enum DebuffTypes
+    {
+        None = 0,
     }
 }

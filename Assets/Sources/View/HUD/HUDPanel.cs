@@ -5,17 +5,13 @@ namespace Game.View
     public class HUDPanel : MonoBehaviour
     {
         [SerializeField] private HUDPanel[] _toCloseOnOpen;
-        [SerializeField] private HUDPanel[] _toOpenOnClose;
+        [SerializeField] private HUDPanel[] _openWithMe;
 
         public void Open()
         {
             gameObject.SetActive(true);
-        }
-
-        public void OpenOthers()
-        {
-            foreach (var panel in _toOpenOnClose)
-                panel.Open();
+            CloseOthers();
+            OpenWithMe();
         }
 
         public void Close()
@@ -23,10 +19,16 @@ namespace Game.View
             gameObject.SetActive(false);
         }
 
-        public void CloseOthers()
+        private void CloseOthers()
         {
             foreach (var panel in _toCloseOnOpen)
                 panel.Close();
+        }
+
+        private void OpenWithMe()
+        {
+            foreach (var panel in _openWithMe)
+                panel.Open();
         }
     }
 }

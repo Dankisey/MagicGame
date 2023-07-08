@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using Game.Model;
 
@@ -6,7 +6,8 @@ namespace Game.Controller
 {
     public sealed class MagicEffectsController : MonoBehaviour
     {
-        [SerializeField] private List<MagicEffectButton> _buttons;
+        [SerializeField] private MagicEffectButton[] _buttons;
+        [SerializeField] private Button _endAttackButton;
 
         private MagicCombiner _combiner;
 
@@ -19,6 +20,8 @@ namespace Game.Controller
         {
             foreach (var button in _buttons)
                 button.Clicked += OnMagicEffectButtonClick;
+
+            _endAttackButton.onClick.AddListener(OnAttackEnd);
         }
 
         private void OnMagicEffectButtonClick(MagicEffect effect)
@@ -26,10 +29,17 @@ namespace Game.Controller
             _combiner.TryAddEffect(effect);
         }
 
+        private void OnAttackEnd()
+        {
+            _combiner.EndAttack();
+        }
+
         private void OnDisable()
         {
             foreach (var button in _buttons)
                 button.Clicked -= OnMagicEffectButtonClick;
+
+            _endAttackButton.onClick.RemoveListener(OnAttackEnd);
         }
     }
 }

@@ -16,9 +16,9 @@ namespace Game.Model
             _enemies = enemies;
             _aliveEnemies = new();
 
-            foreach (var enemy in _enemies)
-                _aliveEnemies.Add(enemy);
-
+            foreach (var enemy in _enemies)          
+                _aliveEnemies.Add(enemy);           
+                
             PlayerTurn = true;
         }
 

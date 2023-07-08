@@ -37,6 +37,7 @@ namespace Game.Model
         {        
             _currentBattle = battle;
             _currentBattle.Ended += OnBattleEnded;
+            AttackPerformer.InitBattle(_currentBattle);
         }
 
         private void ResetCharacteristics()

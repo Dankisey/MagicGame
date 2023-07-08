@@ -2,20 +2,22 @@
 {
     public abstract class Enemy : Character
     {
-        private EnemyAttackFactory _attackFactory;
+        private readonly EnemyAttackFactory _attackFactory;
 
-        public Enemy(string name, EnemyIDs id, DamagableCharacteristics characteristics, EnemyAttackFactory attackFactory) 
+        public Enemy(string name, DamagableCharacteristics characteristics, EnemyAttackFactory attackFactory) 
             : base(characteristics) 
         {
             _attackFactory = attackFactory;
             Name = name;
-            ID = id;
+            Init();
         }
 
         public virtual Attack GetAttack() => _attackFactory.GetAttack();
 
-        public EnemyIDs ID { get; private set; }
+        public EnemyIDs ID { get; protected set; }
         public string Name { get; private set; }
+
+        protected abstract void Init();
     }
 
     public enum EnemyIDs

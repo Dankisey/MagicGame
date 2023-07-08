@@ -11,7 +11,7 @@ namespace Game.Model
 
         public int TickAmount { get; private set; }
 
-        public event Action<ITickable> Ended;
+        public event Action<TickDamage> Ended;
 
         public void Tick()
         {

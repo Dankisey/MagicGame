@@ -4,8 +4,9 @@ namespace Game.View
 {
     public sealed class ThunderView : ElementView
     {
-        protected override void Init()
+        public override void Init()
         {
+            base.Init();
             DamageElement = DamageElements.Thunder;
         }
     }

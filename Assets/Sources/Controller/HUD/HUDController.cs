@@ -6,15 +6,11 @@ namespace Game.Controller
 {
     public class HUDController : MonoBehaviour
     {
-        [SerializeField] List<HUDPanel> _mainPanels;
+        [SerializeField] HUDPanel _mainPanel;
 
         void Start()
         {
-            foreach (var panel in _mainPanels)
-            {
-                panel.Open();
-                panel.CloseOthers();
-            }
+            _mainPanel.Open();
         }
     }
 }

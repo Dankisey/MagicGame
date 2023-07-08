@@ -40,6 +40,12 @@ namespace Game.View
             }
         }
 
+        private void OnEnable()
+        {
+            if (_characteristic != null)
+                _characteristic.ValueChanged += OnValueChanged;
+        }
+
         private void OnDisable()
         {
             if (_characteristic != null)

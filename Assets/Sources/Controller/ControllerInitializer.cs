@@ -7,7 +7,7 @@ namespace Game.Controller
     public sealed class ControllerInitializer : MonoBehaviour
     {
         [SerializeField] private MagicEffectsController _magicEffectsController;
-        [SerializeField] private ComboViewController _comboViewController;
+        [SerializeField] private ComboController _comboViewController;
         [SerializeField] private List<ButtonInitializer> _buttonInitializers;
 
         private MagicCombiner _magicCombiner;
@@ -29,8 +29,7 @@ namespace Game.Controller
         {
             foreach (var buttonInitializer in _buttonInitializers)
             {
-                buttonInitializer.InitSelf();
-                buttonInitializer.InitButton();
+                buttonInitializer.Init();
             }
         }
     }

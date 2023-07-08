@@ -1,7 +1,7 @@
+using UnityEngine.UI;
+using UnityEngine;
 using Game.Model;
 using System;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game.Controller
 {
@@ -22,6 +22,11 @@ namespace Game.Controller
         private void OnClick()
         {
             Clicked?.Invoke(_magicEffect);
+        }
+
+        private void OnEnable()
+        {
+            _button?.onClick.AddListener(OnClick);
         }
 
         private void OnDisable()

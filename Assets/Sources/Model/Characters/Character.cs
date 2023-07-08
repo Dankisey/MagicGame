@@ -5,7 +5,9 @@ namespace Game.Model
 {
     public abstract class Character
     {
-        private readonly List<ITickable> _tickables = new();
+        private readonly List<ITickable> _tickables;
+        private readonly List<TickDamage> _tickDamages;
+        private readonly List<Debuff> _debuffs;
 
         public readonly Health Health;
         public readonly Armor Armor;
@@ -14,6 +16,8 @@ namespace Game.Model
         {
             Health = new(characteristics.MaxHealth);
             Armor = new(characteristics.ArmorCharacteristics);
+            _tickables= new();
+            _tickDamages= new();
         }
 
         public event Action<Character> Died;
@@ -23,42 +27,35 @@ namespace Game.Model
 
         public void Tick()
         {
-            foreach (var tickable in _tickables)
-            {
-                if (tickable is TickDamage)
-                    TakeDamage(tickable as TickDamage);
+            foreach (var tickDamage in _tickDamages)
+                TakeDamage(tickDamage);
 
-                tickable.Tick();
-            }
+            foreach (var tickable in _tickables)
+                tickable.Tick();    
         }
 
         public void ApplyAttack(Attack attack)
         {
             foreach (var debuff in attack.Debuffs)
             {
-                if (TryUpdateTickable(debuff) == false)               
+                if (TryUpdateDebuff(debuff) == false)               
                     AddTickable(debuff);              
             }
 
-            if (TryUpdateTickable(attack.TickDamage) == false)
-                AddTickable(attack.TickDamage);
-
+            AddTickable(attack.TickDamage);
             TakeDamage(attack.Damage);
         }
 
-        private bool TryUpdateTickable(ITickable newTickable)
-        {
-            if (newTickable is TickDamage)
-                return false;
-            
-            ITickable toUpdate = null;
+        private bool TryUpdateDebuff(Debuff newDebuff)
+        {         
+            Debuff toUpdate = null;
             bool exist = false;
 
-            foreach (var tickable in _tickables)
+            foreach (var debuff in _debuffs)
             {
-                if (tickable.GetType() == newTickable.GetType())
+                if (newDebuff.Type == debuff.Type)
                 {
-                    toUpdate = tickable;
+                    toUpdate = debuff;
                     exist = true;
                     break;
                 }
@@ -67,7 +64,7 @@ namespace Game.Model
             if (exist)
             {
                 toUpdate.ForceEnd();
-                AddTickable(newTickable);
+                AddTickable(newDebuff);
             }
 
             return exist;
@@ -94,16 +91,36 @@ namespace Game.Model
             return true;
         }
 
-        private void AddTickable(ITickable tickable) 
+        private void AddTickable(ITickable tickable)
         {
-            tickable.Ended += OnTickableEnded;
             _tickables.Add(tickable);
+            AddTickable((dynamic) tickable);
         }
 
-        private void OnTickableEnded(ITickable tickable)
+        private void AddTickable(Debuff debuff)
         {
-            tickable.Ended -= OnTickableEnded;
-            _tickables.Remove(tickable);
+            debuff.Ended += OnDebuffEnded;
+            _debuffs.Add(debuff);
+        }
+
+        private void AddTickable(TickDamage tickDamage)
+        {
+            tickDamage.Ended += OnTickDamageEnded;
+            _tickDamages.Add(tickDamage);
+        }
+
+        private void OnDebuffEnded(Debuff debuff)
+        {
+            debuff.Ended -= OnDebuffEnded;
+            _debuffs.Remove(debuff);
+            _tickables.Remove(debuff);
+        }
+
+        private void OnTickDamageEnded(TickDamage tickDamage)
+        {
+            tickDamage.Ended -= OnTickDamageEnded;
+            _tickDamages.Remove(tickDamage);
+            _tickables.Remove(tickDamage);
         }
     }
 

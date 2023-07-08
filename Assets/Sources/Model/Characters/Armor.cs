@@ -30,17 +30,29 @@ namespace Game.Model
 
         public float GetModifiedDamage(Damage damage) 
         {
+            int elementsCount = 0;
             float modifiedDamage = 0;
 
             if (damage.Elements.Count > 1)
             {
                 for (int i = 0; i < damage.Elements.Count; i++)
-                    modifiedDamage += ModifyDamage(damage, damage.Elements[i]);
+                {
+                    if (damage.Elements[i] == DamageElements.None)
+                        continue;
 
-                modifiedDamage /= damage.Elements.Count;
+                    modifiedDamage += ModifyDamage(damage, damage.Elements[i]);
+                    elementsCount++;
+                }                
+
+                modifiedDamage /= elementsCount;
             }
             else
-               modifiedDamage = ModifyDamage(damage, damage.Elements.FirstOrDefault());
+            {
+                if (damage.Elements[0] == DamageElements.None)
+                    return modifiedDamage;
+
+                modifiedDamage = ModifyDamage(damage, damage.Elements.FirstOrDefault());
+            }
 
             return modifiedDamage;
         }  
