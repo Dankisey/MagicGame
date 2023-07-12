@@ -24,8 +24,12 @@ namespace Game.Model
 
         public bool PlayerTurn {get; private set;}
 
+        public event Action<Enemy> EnemyAttacked;
+        public event Action AllEnemiesAttacked;
+        public event Action PlayerAttackRecieved;
         public event Action Ended;
 
+        public IReadOnlyCollection<Enemy> AliveEnemies => _aliveEnemies;
         public Enemy Target => _aliveEnemies[_targetID]; 
 
         public void Enter()
@@ -51,20 +55,21 @@ namespace Game.Model
             }
 
             PlayerTurn = false;
-            PerformEnemiesAttack();
+            PlayerAttackRecieved?.Invoke();
         }
 
-        private void PerformEnemiesAttack()
+        public void PerformEnemyAttack(Enemy enemy)
         {
-            foreach (var enemy in _aliveEnemies)
-                PerformEnemieAttack(enemy);    
-            
+            EnemyAttacked?.Invoke(enemy);
+            Attack attack = enemy.GetAttack();
+            _player.ApplyAttack(attack);         
+        }
+
+        public void EndEnemyTurn()
+        {
+            AllEnemiesAttacked?.Invoke();
             Tick();
-        }
-
-        private void PerformEnemieAttack(Enemy enemy)
-        {
-            _player.ApplyAttack(enemy.GetAttack());
+            PlayerTurn = true;
         }
 
         public void ChangeTarget(Changer changer)
@@ -79,7 +84,12 @@ namespace Game.Model
 
         public Enemy[] GetEnemies()
         {
-            return _enemies;
+            Enemy[] enemies = new Enemy[_enemies.Length];
+
+            for (int i = 0; i < enemies.Length; i++)
+                enemies[i] = _enemies[i];
+
+            return enemies;
         }
 
         private void PrepareForBattle()

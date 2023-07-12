@@ -8,21 +8,27 @@ namespace Game.Controller
     {
         [SerializeField] private MagicEffectsController _magicEffectsController;
         [SerializeField] private ComboController _comboViewController;
+        [SerializeField] private HUDController _hudController;
+        [SerializeField] private BattleController _battleController;
         [SerializeField] private List<ButtonInitializer> _buttonInitializers;
 
         private MagicCombiner _magicCombiner;
+        private World _world;
 
-        public void Init(MagicCombiner magicCombiner)
+        public void Init(MagicCombiner magicCombiner, World world)
         {
             _magicCombiner = magicCombiner;
+            _world = world;
             InitControllers();
         }
 
         private void InitControllers()
         {
-            InitButtons();
             _magicEffectsController.Init(_magicCombiner);
             _comboViewController.Init(_magicCombiner);
+            _hudController.Init(_world);
+            _battleController.Init(_world);
+            InitButtons();
         }
 
         private void InitButtons()

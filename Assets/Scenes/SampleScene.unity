@@ -2034,10 +2034,10 @@ RectTransform:
   m_Father: {fileID: 1465294613}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 137.16, y: -229.33}
-  m_SizeDelta: {x: 6.21, y: 2.29}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.16000366, y: -187.33}
+  m_SizeDelta: {x: 280.21, y: 86.29}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1313738963
 MonoBehaviour:
@@ -2082,19 +2082,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1313738964}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 342876923}
-        m_TargetAssemblyTypeName: Game.View.HUDPanel, Assembly-CSharp
-        m_MethodName: Open
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1313738964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2146,6 +2134,7 @@ GameObject:
   - component: {fileID: 1324387953}
   - component: {fileID: 1324387955}
   - component: {fileID: 1324387954}
+  - component: {fileID: 1324387956}
   m_Layer: 0
   m_Name: GameStartUp
   m_TagString: Untagged
@@ -2208,9 +2197,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8bfea56d43af754fbce492ddc17250e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sprites:
-  - {fileID: 21300000, guid: c0e433f969f1e5a4296e27a419f31cbd, type: 3}
-  _ids: 01000000
+  _enemyViewDatas:
+  - Sprite: {fileID: 21300000, guid: c0e433f969f1e5a4296e27a419f31cbd, type: 3}
+    ID: 1
   _template: {fileID: 6355211264731132514, guid: 44d2e5b34f2719342bdd8734fd92f075, type: 3}
   _parent: {fileID: 1621589431}
 --- !u!114 &1324387955
@@ -2227,12 +2216,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _magicEffectsController: {fileID: 1373707154}
   _comboViewController: {fileID: 1465294619}
+  _hudController: {fileID: 834241788}
+  _battleController: {fileID: 1324387956}
   _buttonInitializers:
   - {fileID: 608845218}
   - {fileID: 208673798}
   - {fileID: 1260568200}
   - {fileID: 1789898189}
   - {fileID: 1901503981}
+--- !u!114 &1324387956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1324387948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c486d05d173b14585cf5c5d421d464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _delay: 2
 --- !u!1 &1325566057
 GameObject:
   m_ObjectHideFlags: 0

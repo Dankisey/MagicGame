@@ -12,6 +12,8 @@ public class EnemyView : MonoBehaviour
 
     private Enemy _self;
 
+    public EnemyIDs ID => _self.ID;
+
     public void Init(Enemy enemy, Sprite sprite)
     {
         _self = enemy;

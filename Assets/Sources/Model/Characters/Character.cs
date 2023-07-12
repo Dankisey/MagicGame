@@ -86,27 +86,31 @@ namespace Game.Model
         }
 
         private bool TryDie()
-        {       
+        {
             Died?.Invoke(this);
             return true;
         }
 
         private void AddTickable(ITickable tickable)
         {
-            _tickables.Add(tickable);
             AddTickable((dynamic) tickable);
         }
 
         private void AddTickable(Debuff debuff)
         {
             debuff.Ended += OnDebuffEnded;
+            _tickables.Add(debuff);
             _debuffs.Add(debuff);
         }
 
         private void AddTickable(TickDamage tickDamage)
         {
+            if (tickDamage.Amount == 0)
+                return;
+
             tickDamage.Ended += OnTickDamageEnded;
             _tickDamages.Add(tickDamage);
+            _tickables.Add(tickDamage);
         }
 
         private void OnDebuffEnded(Debuff debuff)

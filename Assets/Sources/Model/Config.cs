@@ -35,7 +35,7 @@ namespace Game.Model
                 {
                     public class BiteCharacteristics
                     {
-                        private static readonly float _damageAmount = 5;
+                        private static readonly float _damageAmount = 10;
                         private static readonly DamageElements[] _damageElements = new DamageElements[1] { DamageElements.Physical };
                         private static readonly PhysicalDamage _damage = new(_damageAmount, _damageElements);
 
