@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5052277884579090219}
   - component: {fileID: 121067526913592922}
   - component: {fileID: 6066176001385568374}
+  - component: {fileID: 7027685460439411441}
   m_Layer: 0
   m_Name: Earth
   m_TagString: Untagged
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 11
-  m_Sprite: {fileID: 476795068, guid: e272b7948abf48a4f903fde1514be868, type: 3}
+  m_Sprite: {fileID: 1923071926, guid: c3ad243b7ff8df447b5be63259f265e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,3 +103,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 735f3a912776aba4685dad0908a8b270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &7027685460439411441
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2254836081615715764}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6af88e6e4ab014c4381ac9cf1106f642, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -56,7 +56,7 @@ namespace Game.Model
 
                 public class Bat
                 {
-                    private static readonly int _maxHealth = 20;
+                    private static readonly int _maxHealth = 200;
 
                     private static readonly int _physicalDefence = 0;
                     private static readonly int _airDefence = 0;

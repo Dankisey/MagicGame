@@ -6,8 +6,8 @@ namespace Game.Model
 {
     public sealed class MagicCombiner
     {
-        private DamageElements[] _combo;
-        private MagicEffect[] _effects;
+        private readonly DamageElements[] _combo;
+        private readonly MagicEffect[] _effects;
         private bool _spellIsInProgress;
         private int _currentPosition;
 

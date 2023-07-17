@@ -8,7 +8,7 @@
         {
             float damageAmount = Config.Magic.Thunder.Damage * Config.Magic.AugmentedMultiplier * Config.Magic.Thunder.Triplet.Multiplier;
             MagicDamage damage = new(damageAmount, new DamageElements[1] { DamageElements.Thunder });
-            TickDamage tickDamage = new(Config.Magic.Thunder.TickDamage, new DamageElements[1] { DamageElements.Thunder }, Config.Magic.Thunder.Triplet.TickCount);
+            TickDamage tickDamage = new(Config.Magic.Thunder.Triplet.TickDamage, new DamageElements[1] { DamageElements.Thunder }, Config.Magic.Thunder.Triplet.TickCount);
 
             return new Attack(damage, tickDamage, new Debuff[0], Config.Magic.Thunder.Triplet.TargetType);
         }

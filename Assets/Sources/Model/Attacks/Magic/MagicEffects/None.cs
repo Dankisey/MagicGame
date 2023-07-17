@@ -8,7 +8,7 @@
         {
             float damageAmount = 0;
             MagicDamage damage = new(damageAmount, new DamageElements[1] { DamageElements.None });
-            TickDamage tickDamage = new(Config.Magic.None.TickDamage, new DamageElements[1] { DamageElements.None }, Config.Magic.None.Triplet.TickCount);
+            TickDamage tickDamage = new(Config.Magic.None.Triplet.TickDamage, new DamageElements[1] { DamageElements.None }, Config.Magic.None.Triplet.TickCount);
 
             return new Attack(damage, tickDamage, new Debuff[0], Config.Magic.None.Triplet.TargetType);
         }

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Game.Model
 {
     public abstract class Character
     {
         private readonly List<ITickable> _tickables;
+        private readonly List<ITickable> _toDelete;
         private readonly List<TickDamage> _tickDamages;
         private readonly List<Debuff> _debuffs;
 
@@ -16,6 +18,8 @@ namespace Game.Model
         {
             Health = new(characteristics.MaxHealth);
             Armor = new(characteristics.ArmorCharacteristics);
+            _debuffs = new();
+            _toDelete = new();
             _tickables= new();
             _tickDamages= new();
         }
@@ -31,7 +35,12 @@ namespace Game.Model
                 TakeDamage(tickDamage);
 
             foreach (var tickable in _tickables)
-                tickable.Tick();    
+                tickable.Tick();
+
+            foreach (var tickable in _toDelete)          
+                _tickables.Remove(tickable);
+
+            _toDelete.Clear();
         }
 
         public void ApplyAttack(Attack attack)
@@ -39,10 +48,10 @@ namespace Game.Model
             foreach (var debuff in attack.Debuffs)
             {
                 if (TryUpdateDebuff(debuff) == false)               
-                    AddTickable(debuff);              
+                    AddDebuff(debuff);              
             }
 
-            AddTickable(attack.TickDamage);
+            AddTickDamage(attack.TickDamage);
             TakeDamage(attack.Damage);
         }
 
@@ -64,7 +73,7 @@ namespace Game.Model
             if (exist)
             {
                 toUpdate.ForceEnd();
-                AddTickable(newDebuff);
+                AddDebuff(newDebuff);
             }
 
             return exist;
@@ -91,21 +100,16 @@ namespace Game.Model
             return true;
         }
 
-        private void AddTickable(ITickable tickable)
-        {
-            AddTickable((dynamic) tickable);
-        }
-
-        private void AddTickable(Debuff debuff)
+        private void AddDebuff(Debuff debuff)
         {
             debuff.Ended += OnDebuffEnded;
             _tickables.Add(debuff);
             _debuffs.Add(debuff);
         }
 
-        private void AddTickable(TickDamage tickDamage)
+        private void AddTickDamage(TickDamage tickDamage)
         {
-            if (tickDamage.Amount == 0)
+            if (tickDamage.TickAmount == 0)
                 return;
 
             tickDamage.Ended += OnTickDamageEnded;
@@ -117,14 +121,14 @@ namespace Game.Model
         {
             debuff.Ended -= OnDebuffEnded;
             _debuffs.Remove(debuff);
-            _tickables.Remove(debuff);
+            _toDelete.Add(debuff);
         }
 
         private void OnTickDamageEnded(TickDamage tickDamage)
         {
             tickDamage.Ended -= OnTickDamageEnded;
             _tickDamages.Remove(tickDamage);
-            _tickables.Remove(tickDamage);
+            _toDelete.Add(tickDamage);
         }
     }
 

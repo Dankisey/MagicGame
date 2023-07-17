@@ -18,15 +18,10 @@ namespace Game.Model
 
         public void Tick()
         {
-            if (_tickAmount >= 1)
-            {
-                _tickAmount--;
-            }
-            else
-            {
-                _tickAmount = 0;
-                Ended?.Invoke(this);
-            }
+            _tickAmount--;
+
+            if (_tickAmount <= 0)          
+                Ended?.Invoke(this);               
         }
 
         public void ForceEnd()
