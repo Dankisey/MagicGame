@@ -47,7 +47,7 @@ namespace Game.Model
         {
             attack = new();
 
-            if (_combo.Length == 0)
+            if (_combo[0] == DamageElements.None)
                 return false;
 
             if (TryGetTriplet(out attack))
