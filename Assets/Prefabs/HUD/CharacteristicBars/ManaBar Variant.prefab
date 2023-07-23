@@ -41,8 +41,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2323523544796601476, guid: a7ff5c3c4ac827742a2407659238a60c, type: 3}
       propertyPath: m_Name
-      value: ManaBar
+      value: ManaBar Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2323523544796601478, guid: a7ff5c3c4ac827742a2407659238a60c, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 927490453d67add419e55ac4a0fd9037, type: 3}
     - target: {fileID: 2323523544796601479, guid: a7ff5c3c4ac827742a2407659238a60c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
