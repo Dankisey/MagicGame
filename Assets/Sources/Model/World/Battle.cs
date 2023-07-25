@@ -24,6 +24,7 @@ namespace Game.Model
 
         public bool PlayerTurn {get; private set;}
 
+        public event Action<bool> PlayerTurnChanged;
         public event Action<Enemy> EnemyAttacked;
         public event Action AllEnemiesAttacked;
         public event Action PlayerAttackRecieved;
@@ -54,7 +55,7 @@ namespace Game.Model
                     break;
             }
 
-            PlayerTurn = false;
+            ChangePlayerTurn(false);
             PlayerAttackRecieved?.Invoke();
         }
 
@@ -69,7 +70,7 @@ namespace Game.Model
         {
             AllEnemiesAttacked?.Invoke();
             Tick();
-            PlayerTurn = true;
+            ChangePlayerTurn(true);
         }
 
         public void ChangeTarget(Changer changer)
@@ -135,6 +136,12 @@ namespace Game.Model
                 enemy.Tick();
 
             PlayerTurn = true;
+        }
+
+        private void ChangePlayerTurn(bool value)
+        {
+            PlayerTurn = value;
+            PlayerTurnChanged?.Invoke(PlayerTurn);
         }
 
         private void SetNewTarget()

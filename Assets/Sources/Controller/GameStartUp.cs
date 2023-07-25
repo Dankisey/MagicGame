@@ -16,7 +16,7 @@ namespace Game.Controller
             _player = Player.Instance;
             _world = new(_player);
             _viewInitializer.Init(_world, _player);
-            _controllerInitializer.Init(_player.MagicCombiner, _world);
+            _controllerInitializer.Init(_player, _world);
             _player.Reset();
             _world.InitiateBattle();
         }

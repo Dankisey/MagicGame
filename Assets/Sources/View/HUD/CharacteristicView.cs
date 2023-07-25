@@ -8,7 +8,6 @@ namespace Game.View
     public class CharacteristicView : MonoBehaviour
     {
         [SerializeField] private Image _filler;
-        [SerializeField] private Color _fillerColor;
         [SerializeField] private float _maxChangingDelta;
         [SerializeField] private float _updatingTime;
 
@@ -19,7 +18,6 @@ namespace Game.View
         {
             _characteristic = characteristic;
             _characteristic.ValueChanged += OnValueChanged;
-            _filler.color = _fillerColor;
         }
 
         private void OnValueChanged(float value)
