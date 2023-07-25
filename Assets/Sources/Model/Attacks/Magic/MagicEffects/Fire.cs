@@ -2,7 +2,7 @@
 {
     public sealed class Fire : MagicEffect
     {
-        public Fire() : base(DamageElements.Fire, Config.Magic.Fire.TargetType) { }
+        public Fire() : base(DamageElements.Fire, Config.Magic.Fire.TargetType, Config.Magic.Fire.Cost) { }
 
         public override Attack GetTriplet()
         {

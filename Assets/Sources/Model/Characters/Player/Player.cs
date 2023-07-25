@@ -22,7 +22,7 @@ namespace Game.Model
         {
             Stamina = new(Config.Characters.Player.MaxStamina);
             Mana = new(Config.Characters.Player.MaxMana);
-            MagicCombiner = new();
+            MagicCombiner = new(Mana);
             Inventory = new();
             AttackSender = new(MagicCombiner);
             AttackPerformer = new(AttackSender, this);

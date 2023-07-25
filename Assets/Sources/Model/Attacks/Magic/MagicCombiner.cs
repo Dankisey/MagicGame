@@ -8,13 +8,17 @@ namespace Game.Model
     {
         private readonly DamageElements[] _combo;
         private readonly MagicEffect[] _effects;
+        private readonly Mana _mana;
         private bool _spellIsInProgress;
         private int _currentPosition;
+        private int _currentManaCost;
 
-        public MagicCombiner()
+        public MagicCombiner(Mana mana)
         {
             _combo = new DamageElements[Config.Magic.MaxEffectsInSpell];
             _effects = new MagicEffect[Config.Magic.MaxEffectsInSpell];
+            _currentManaCost = 0;
+            _mana = mana;
             PrepareNewSpell();
         }
 
@@ -26,6 +30,7 @@ namespace Game.Model
             if (TryGetAttack(out Attack attack))
             {
                 AttackCompleted?.Invoke(attack);
+                _currentManaCost = 0;
                 PrepareNewSpell();
             }
         }
@@ -37,6 +42,11 @@ namespace Game.Model
 
             if (_currentPosition == Config.Magic.MaxEffectsInSpell)
                 return false;
+
+            if(_mana.TrySpend(effect.ManaCost) == false)
+                return false;
+
+            _currentManaCost += effect.ManaCost;
 
             AddEffect(effect);
 
@@ -71,8 +81,15 @@ namespace Game.Model
         {
             ResetEffects();
             ResetCombo();
+            RestoreMana();
             _spellIsInProgress = true;
             _currentPosition = 0;
+        }
+
+        private void RestoreMana()
+        {
+            _mana.Regenerate(_currentManaCost);
+            _currentManaCost = 0;
         }
 
         private void ResetEffects()

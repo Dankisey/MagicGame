@@ -2,7 +2,7 @@
 {
     public sealed class Thunder : MagicEffect
     {
-        public Thunder() : base(DamageElements.Thunder, Config.Magic.Thunder.TargetType) { }
+        public Thunder() : base(DamageElements.Thunder, Config.Magic.Thunder.TargetType, Config.Magic.Thunder.Cost) { }
 
         public override Attack GetTriplet()
         {

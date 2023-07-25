@@ -2,7 +2,7 @@
 {
     public sealed class None : MagicEffect
     {
-        public None() : base(DamageElements.None, Config.Magic.None.TargetType) { }
+        public None() : base(DamageElements.None, Config.Magic.None.TargetType, Config.Magic.None.Cost) { }
 
         public override Attack GetTriplet()
         {

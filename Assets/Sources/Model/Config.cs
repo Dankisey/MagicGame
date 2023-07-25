@@ -83,6 +83,7 @@ namespace Game.Model
 
             public class None
             {
+                public static readonly int Cost = 0;
                 public static readonly int TickCount = 0;
                 public static readonly int TickDamage = 0;
                 public static readonly int Damage = 0;
@@ -99,6 +100,7 @@ namespace Game.Model
 
             public class Air
             {
+                public static readonly int Cost = 5;
                 public static readonly int TickCount = 0;
                 public static readonly int TickDamage = 0;
                 public static readonly int Damage = 5;
@@ -115,6 +117,7 @@ namespace Game.Model
 
             public class Earth
             {
+                public static readonly int Cost = 5;
                 public static readonly int TickCount = 0;
                 public static readonly int TickDamage = 0;
                 public static readonly int Damage = 5;
@@ -131,6 +134,7 @@ namespace Game.Model
 
             public class Fire
             {
+                public static readonly int Cost = 5;
                 public static readonly int TickCount = 3;
                 public static readonly int TickDamage = 5;
                 public static readonly int Damage = 5;
@@ -147,6 +151,7 @@ namespace Game.Model
 
             public class Thunder
             {
+                public static readonly int Cost = 5;
                 public static readonly int TickCount = 3;
                 public static readonly int TickDamage = 5;
                 public static readonly int Damage = 5;
@@ -163,6 +168,7 @@ namespace Game.Model
 
             public class Water
             {
+                public static readonly int Cost = 5;
                 public static readonly int TickCount = 3;
                 public static readonly int TickDamage = 0;
                 public static readonly int Damage = 5;

@@ -2,7 +2,7 @@
 {
     public sealed class Water : MagicEffect
     {
-        public Water() : base(DamageElements.Water, Config.Magic.Water.TargetType) { }
+        public Water() : base(DamageElements.Water, Config.Magic.Water.TargetType, Config.Magic.Water.Cost) { }
 
         public override Attack GetTriplet()
         {

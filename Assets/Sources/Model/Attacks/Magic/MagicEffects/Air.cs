@@ -2,7 +2,7 @@
 {
     public sealed class Air : MagicEffect
     {
-        public Air() : base(DamageElements.Air, Config.Magic.Air.TargetType) { }
+        public Air() : base(DamageElements.Air, Config.Magic.Air.TargetType, Config.Magic.Air.Cost) { }
 
         public override Attack GetTriplet()
         {

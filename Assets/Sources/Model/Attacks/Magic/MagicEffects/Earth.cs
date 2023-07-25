@@ -2,7 +2,7 @@
 {
     public sealed class Earth : MagicEffect
     {
-        public Earth() : base(DamageElements.Earth, Config.Magic.Earth.TargetType) { }
+        public Earth() : base(DamageElements.Earth, Config.Magic.Earth.TargetType, Config.Magic.Earth.Cost) { }
 
         public override Attack GetTriplet()
         {
