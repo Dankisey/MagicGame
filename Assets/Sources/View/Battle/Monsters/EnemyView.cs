@@ -1,24 +1,23 @@
-using UnityEngine.UI;
 using UnityEngine;
 using Game.Model;
-using Game.View;
 using TMPro;
 
-public class EnemyView : MonoBehaviour
+namespace Game.View
 {
-    [SerializeField] private CharacteristicView _healthView;
-    [SerializeField] private Image _illustration;
-    [SerializeField] private TMP_Text _name;
-
-    private Enemy _self;
-
-    public EnemyIDs ID => _self.ID;
-
-    public void Init(Enemy enemy, Sprite sprite)
+    public class EnemyView : MonoBehaviour
     {
-        _self = enemy;
-        _healthView.Init(_self.Health);
-        _illustration.sprite = sprite;
-        _name.text = _self.Name;
+        [SerializeField] private CharacteristicView _healthView;
+        [SerializeField] private TMP_Text _nameHolder;
+
+        private Enemy _self;
+
+        public EnemyIDs ID { get; protected set; }
+
+        public void Init(Enemy enemy)
+        {
+            _self = enemy;
+            _healthView.Init(_self.Health);
+            _nameHolder.text = _self.Name;
+        }
     }
 }

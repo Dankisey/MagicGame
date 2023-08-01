@@ -27,8 +27,6 @@ namespace Game.Model
         {
             _currentBattle.Ended -= OnBattleEnded;
             _currentBattle = null;
-
-            UnityEngine.Debug.Log("Battle ended");
         }
     }
 

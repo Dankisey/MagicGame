@@ -1,4 +1,6 @@
-﻿namespace Game.Model
+﻿using System;
+
+namespace Game.Model
 {
     public abstract class Enemy : Character
     {
@@ -12,7 +14,15 @@
             Init();
         }
 
-        public virtual Attack GetAttack() => _attackFactory.GetAttack();
+        public event Action Attacked;
+
+        public virtual Attack GetAttack()
+        {
+            Attack attack = _attackFactory.GetAttack();
+            Attacked?.Invoke();
+
+            return attack;
+        }
 
         public EnemyIDs ID { get; protected set; }
         public string Name { get; private set; }
@@ -22,6 +32,7 @@
 
     public enum EnemyIDs
     {
-        Bat = 1,
+        None = 0,
+        Bat
     }
 }

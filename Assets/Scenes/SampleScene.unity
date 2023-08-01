@@ -1240,10 +1240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8bfea56d43af754fbce492ddc17250e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyViewDatas:
-  - Sprite: {fileID: 21300000, guid: c0e433f969f1e5a4296e27a419f31cbd, type: 3}
-    ID: 1
-  _template: {fileID: 6355211264731132514, guid: 44d2e5b34f2719342bdd8734fd92f075, type: 3}
+  _enemies:
+  - {fileID: 8451244949947932057, guid: 44d2e5b34f2719342bdd8734fd92f075, type: 3}
   _parent: {fileID: 1621589431}
 --- !u!1 &1260568196
 GameObject:
@@ -2440,7 +2438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47636a78a35f13241854cfda0406ecf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _portraitAnimator: {fileID: 525836594}
+  Animator: {fileID: 525836594}
 --- !u!1 &2117335935
 GameObject:
   m_ObjectHideFlags: 0

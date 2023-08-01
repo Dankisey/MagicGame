@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -223,9 +223,11 @@ GameObject:
   - component: {fileID: 1895375238701706804}
   - component: {fileID: 185853295095120878}
   - component: {fileID: 2705766470792645007}
-  - component: {fileID: 6355211264731132514}
+  - component: {fileID: 176072423912152942}
+  - component: {fileID: -8022357650956070352}
+  - component: {fileID: 8451244949947932057}
   m_Layer: 5
-  m_Name: MonsterView
+  m_Name: BatView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,7 +294,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6355211264731132514
+--- !u!114 &176072423912152942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -305,8 +307,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthView: {fileID: 4842438875489556017}
-  _illustration: {fileID: 768484804044881523}
-  _name: {fileID: 3780814718951113424}
+  _nameHolder: {fileID: 3780814718951113424}
+--- !u!114 &-8022357650956070352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202796766366602318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4077534ee047e784a809c5b73a2d5c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 4396541008336717997}
+--- !u!114 &8451244949947932057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202796766366602318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f412c8689b56f2c46ac45ec68679d450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animationController: {fileID: -8022357650956070352}
+  _view: {fileID: 176072423912152942}
 --- !u!1 &8322857442610659227
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,6 +346,7 @@ GameObject:
   - component: {fileID: 7975287670593430247}
   - component: {fileID: 6729820894518650530}
   - component: {fileID: 768484804044881523}
+  - component: {fileID: 4396541008336717997}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -373,7 +402,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 1879360476, guid: 7fa8af0fc21d0ed4bbe77b2ee7b0da18, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -383,6 +412,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &4396541008336717997
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8322857442610659227}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 07210b4465abcc743a8e47688ecc34c0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &2195382471160265706
 PrefabInstance:
   m_ObjectHideFlags: 0
