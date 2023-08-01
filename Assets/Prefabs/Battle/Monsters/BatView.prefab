@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fc5b565f43d88c44a9670d1cd44085e1, type: 2}
+  m_sharedMaterial: {fileID: 3226886152431933170, guid: fc5b565f43d88c44a9670d1cd44085e1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -135,6 +135,42 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &2861088883632017687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2217227691971736225}
+  m_Layer: 5
+  m_Name: DamagePopupParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2217227691971736225
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2861088883632017687}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1895375238701706804}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 163.04, y: 138.87}
+  m_SizeDelta: {x: 34.863, y: 36.255}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4069109290038749537
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +262,7 @@ GameObject:
   - component: {fileID: 176072423912152942}
   - component: {fileID: -8022357650956070352}
   - component: {fileID: 8451244949947932057}
+  - component: {fileID: 5729389684161401691}
   m_Layer: 5
   m_Name: BatView
   m_TagString: Untagged
@@ -248,6 +285,7 @@ RectTransform:
   - {fileID: 4989629314574185856}
   - {fileID: 3550334843157288366}
   - {fileID: 7975287670593430247}
+  - {fileID: 2217227691971736225}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -334,7 +372,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animationController: {fileID: -8022357650956070352}
+  _damagePopupController: {fileID: 5729389684161401691}
   _view: {fileID: 176072423912152942}
+--- !u!114 &5729389684161401691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202796766366602318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc6e046536a39ce4cab52cb6b4f798c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 7750821048297216836, guid: 1025f6527d8a31644b8b4bb33d6d0192, type: 3}
+  _parent: {fileID: 2217227691971736225}
 --- !u!1 &8322857442610659227
 GameObject:
   m_ObjectHideFlags: 0

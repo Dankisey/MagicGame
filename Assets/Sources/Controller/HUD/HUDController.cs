@@ -1,11 +1,12 @@
 using UnityEngine;
 using Game.Model;
 
-namespace Game.Conroller
+namespace Game.Controller
 {
     public class HUDController : MonoBehaviour
     {
-        [SerializeField] private CanvasGroup _hudCanvasGroup;
+        [SerializeField] private CanvasGroup _playerCanvas;
+        [SerializeField] private CanvasGroup[] _battleCanvases;
         [SerializeField] private float _secondsBeforeHideHUD;
 
         private Battle _currentBattle;
@@ -23,38 +24,50 @@ namespace Game.Conroller
             _currentBattle = battle;
             _currentBattle.Ended += OnBattleEnded;
             _currentBattle.PlayerTurnChanged += OnPlayerTurnChanged;
-            ShowHUD();
+            ShowAll();
         }
 
         private void OnPlayerTurnChanged(bool value)
         {
-            ChangeHUDInteractable(value);
+            ChangeCanvasInteractable(_playerCanvas, value);
         }
 
         private void OnBattleEnded()
         {
             _currentBattle.Ended -= OnBattleEnded;
             _currentBattle.PlayerTurnChanged -= OnPlayerTurnChanged;
-            Invoke(nameof(HideHUD), _secondsBeforeHideHUD);
+            Invoke(nameof(HideAll), _secondsBeforeHideHUD);
         }
 
-        private void ChangeHUDInteractable(bool value) 
+        private void ChangeCanvasInteractable(CanvasGroup hud,bool value) 
         { 
-            _hudCanvasGroup.interactable = value;
+            hud.interactable = value;
         }
 
-        private void ShowHUD()
+        private void ShowAll()
         {
-            _hudCanvasGroup.alpha = 1;
-            _hudCanvasGroup.interactable = true;
-            _hudCanvasGroup.blocksRaycasts = true;
+            foreach (var hud in _battleCanvases)
+                ShowCanvas(hud);
         }
 
-        private void HideHUD()
+        private void HideAll()
         {
-            _hudCanvasGroup.alpha = 0;
-            _hudCanvasGroup.interactable = false;
-            _hudCanvasGroup.blocksRaycasts = false;
+            foreach (var hud in _battleCanvases)
+                HideCanvas(hud);
+        }
+
+        private void ShowCanvas(CanvasGroup hud)
+        {
+            hud.alpha = 1;
+            hud.interactable = true;
+            hud.blocksRaycasts = true;
+        }
+
+        private void HideCanvas(CanvasGroup hud)
+        {
+            hud.alpha = 0;
+            hud.interactable = false;
+            hud.blocksRaycasts = false;
         }
 
         private void Subscribe()

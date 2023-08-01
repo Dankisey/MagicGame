@@ -1,27 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System;
 
 namespace Game.Model
 {
     public abstract class Character
     {
-        private readonly List<ITickable> _tickables;
-        private readonly List<ITickable> _toDelete;
-        private readonly List<TickDamage> _tickDamages;
-        private readonly List<Debuff> _debuffs;
-
         public readonly Health Health;
         public readonly Armor Armor;
+
+        private readonly Dictionary<TickDamage, float> _tickDamages;
+        private readonly List<Debuff> _debuffs;
+        private readonly List<ITickable> _tickables;
+        private readonly List<ITickable> _toDelete;
+        private float _tickDamage;
 
         public Character(DamagableCharacteristics characteristics)
         {
             Health = new(characteristics.MaxHealth);
             Armor = new(characteristics.ArmorCharacteristics);
+            _tickDamages= new();
+            _tickables= new();
             _debuffs = new();
             _toDelete = new();
-            _tickables= new();
-            _tickDamages= new();
+            _tickDamage = 0;
         }
 
         public event Action<Character> Died;
@@ -31,8 +32,8 @@ namespace Game.Model
 
         public void Tick()
         {
-            foreach (var tickDamage in _tickDamages)
-                TakeDamage(tickDamage);
+            if (_tickDamage > 0)
+                ApplyDamage(_tickDamage);
 
             foreach (var tickable in _tickables)
                 tickable.Tick();
@@ -113,7 +114,9 @@ namespace Game.Model
                 return;
 
             tickDamage.Ended += OnTickDamageEnded;
-            _tickDamages.Add(tickDamage);
+            float damage = Armor.GetModifiedDamage(tickDamage);
+            _tickDamage += damage;
+            _tickDamages.Add(tickDamage, damage);
             _tickables.Add(tickDamage);
         }
 
@@ -127,7 +130,8 @@ namespace Game.Model
         private void OnTickDamageEnded(TickDamage tickDamage)
         {
             tickDamage.Ended -= OnTickDamageEnded;
-            _tickDamages.Remove(tickDamage);
+            _tickDamages.Remove(tickDamage, out float damage);
+            _tickDamage -= damage;
             _toDelete.Add(tickDamage);
         }
     }

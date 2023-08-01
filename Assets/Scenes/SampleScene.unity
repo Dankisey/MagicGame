@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 444669}
   - component: {fileID: 444668}
   - component: {fileID: 444667}
+  - component: {fileID: 444671}
   m_Layer: 5
   m_Name: BackgroundCanvas
   m_TagString: Untagged
@@ -224,6 +225,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &444671
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444666}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!224 &91602656 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3400993988565888580, guid: bf337de6a9e840c45a732ad25fb74814, type: 3}
@@ -856,7 +869,7 @@ GameObject:
   - component: {fileID: 834241786}
   - component: {fileID: 834241787}
   m_Layer: 5
-  m_Name: Hud
+  m_Name: PlayerHUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1139,6 +1152,7 @@ GameObject:
   - component: {fileID: 1197215157}
   - component: {fileID: 1197215156}
   - component: {fileID: 1197215159}
+  - component: {fileID: 1197215160}
   m_Layer: 5
   m_Name: EnemyCanvas
   m_TagString: Untagged
@@ -1243,6 +1257,18 @@ MonoBehaviour:
   _enemies:
   - {fileID: 8451244949947932057, guid: 44d2e5b34f2719342bdd8734fd92f075, type: 3}
   _parent: {fileID: 1621589431}
+--- !u!225 &1197215160
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197215154}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1260568196
 GameObject:
   m_ObjectHideFlags: 0
@@ -1605,7 +1631,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcdf3a025a49db46b9d08377adf74de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hudCanvasGroup: {fileID: 834241787}
+  _playerCanvas: {fileID: 834241787}
+  _battleCanvases:
+  - {fileID: 834241787}
+  - {fileID: 1197215160}
+  - {fileID: 444671}
   _secondsBeforeHideHUD: 2
 --- !u!1 &1369531049
 GameObject:

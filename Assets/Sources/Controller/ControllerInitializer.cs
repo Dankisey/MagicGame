@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Game.Model;
-using Game.Conroller;
 
 namespace Game.Controller
 {
