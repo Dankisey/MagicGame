@@ -18,7 +18,8 @@ namespace Game.Controller
             _viewInitializer.Init(_world, _player);
             _controllerInitializer.Init(_player, _world);
             _player.Reset();
-            _world.InitiateBattle();
+            _world.Start();
+            _world.EnterBattle(new(_player, new Enemy[1] { new Bat() }));
         }
     }
 }

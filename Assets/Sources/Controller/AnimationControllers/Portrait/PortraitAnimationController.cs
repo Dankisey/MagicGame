@@ -9,7 +9,7 @@ namespace Game.Controller
         private const string BattleEnded = nameof(BattleEnded);
 
         private MagicCombiner _magicCombiner;
-        private Battle _currentBattle;
+        private BattleState _currentBattle;
         private World _world;
         
         public void Init(Player player, World world)
@@ -39,7 +39,7 @@ namespace Game.Controller
             base.ResetAnimator();
         }
 
-        private void OnBattleInitiated(Battle battle)
+        private void OnBattleInitiated(BattleState battle)
         {
             _currentBattle = battle;
             _currentBattle.Ended += OnBattleEnded;

@@ -9,15 +9,15 @@ namespace Game.View
         [SerializeField] private CharacteristicView _healthView;
         [SerializeField] private TMP_Text _nameHolder;
 
-        private Enemy _self;
+        public Enemy Self { get; private set; }
 
         public EnemyIDs ID { get; protected set; }
 
         public void Init(Enemy enemy)
         {
-            _self = enemy;
-            _healthView.Init(_self.Health);
-            _nameHolder.text = _self.Name;
+            Self = enemy;
+            _healthView.Init(Self.Health);
+            _nameHolder.text = Self.Name;
         }
     }
 }

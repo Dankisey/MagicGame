@@ -1,7 +1,7 @@
 ﻿using System.Collections;
-using System;
 using UnityEngine;
 using Game.Model;
+using System;
 
 namespace Game.Controller
 {
@@ -9,7 +9,7 @@ namespace Game.Controller
     {
         [SerializeField][Range(0, 5)] private float _delay;
 
-        private Battle _currentBattle;
+        private BattleState _currentBattle;
         private World _world;
 
         public void Init(World world)
@@ -18,7 +18,7 @@ namespace Game.Controller
             _world.BattleInitiated += OnBattleInitiated;
         }
 
-        private void OnBattleInitiated(Battle battle)
+        private void OnBattleInitiated(BattleState battle)
         {
             _currentBattle = battle;
             _currentBattle.PlayerAttackRecieved += OnPlayerAttackRecieved;

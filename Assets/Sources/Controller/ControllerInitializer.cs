@@ -8,6 +8,7 @@ namespace Game.Controller
         [SerializeField] private MagicEffectsController _magicEffectsController;
         [SerializeField] private PortraitAnimationController _portraitAnimator;
         [SerializeField] private HUDController _hudController;
+        [SerializeField] private DamagePopupController _playerDamagePopupController;
         [SerializeField] private ComboController _comboViewController;
         [SerializeField] private BattleController _battleController;
 
@@ -25,6 +26,7 @@ namespace Game.Controller
 
         private void InitControllers()
         {
+            _playerDamagePopupController.Init(_player);
             _magicEffectsController.Init(_magicCombiner);
             _comboViewController.Init(_magicCombiner);
             _battleController.Init(_world);

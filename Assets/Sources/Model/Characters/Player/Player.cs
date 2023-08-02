@@ -15,7 +15,7 @@ namespace Game.Model
         public readonly Stamina Stamina;
         public readonly Mana Mana;
 
-        private Battle _currentBattle;
+        private BattleState _currentBattle;
 
         private Player() 
             : base (Config.Characters.Player.DamagableCharacteristics)
@@ -33,7 +33,7 @@ namespace Game.Model
             ResetCharacteristics();
         }
 
-        public void EnterBattleMod(Battle battle)
+        public void EnterBattle(BattleState battle)
         {        
             _currentBattle = battle;
             _currentBattle.Ended += OnBattleEnded;

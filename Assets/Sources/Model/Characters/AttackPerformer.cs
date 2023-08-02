@@ -13,9 +13,9 @@ namespace Game.Model
             character.Died += OnCharacterDeath;
         }
 
-        protected Battle Battle;
+        protected BattleState Battle;
 
-        public void InitBattle(Battle battle)
+        public void InitBattle(BattleState battle)
         {
             Battle = battle;           
         }

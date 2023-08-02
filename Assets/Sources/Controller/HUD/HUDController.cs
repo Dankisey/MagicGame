@@ -9,7 +9,7 @@ namespace Game.Controller
         [SerializeField] private CanvasGroup[] _battleCanvases;
         [SerializeField] private float _secondsBeforeHideHUD;
 
-        private Battle _currentBattle;
+        private BattleState _currentBattle;
         private World _world;
         private bool _subscribed = false;
 
@@ -19,7 +19,7 @@ namespace Game.Controller
             Subscribe();
         }
 
-        private void OnBattleInitiated(Battle battle)
+        private void OnBattleInitiated(BattleState battle)
         {
             _currentBattle = battle;
             _currentBattle.Ended += OnBattleEnded;

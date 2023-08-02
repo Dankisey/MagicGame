@@ -14,6 +14,9 @@ namespace Game.Model
             Init();
         }
 
+        public EnemyIDs ID { get; protected set; }
+        public string Name { get; private set; }
+
         public event Action Attacked;
 
         public virtual Attack GetAttack()
@@ -24,8 +27,7 @@ namespace Game.Model
             return attack;
         }
 
-        public EnemyIDs ID { get; protected set; }
-        public string Name { get; private set; }
+        public abstract Enemy GetNewInstance();
 
         protected abstract void Init();
     }

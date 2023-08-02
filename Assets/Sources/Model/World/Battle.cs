@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace Game.Model
 {
-    public sealed class Battle : IState
+    public sealed class BattleState : IState
     {
         private readonly Player _player;
         private readonly Enemy[] _enemies;
         private readonly List<Enemy> _aliveEnemies;
         private int _targetID = 0;
 
-        public Battle(Player player, Enemy[] enemies)
+        public BattleState(Player player, Enemy[] enemies)
         {
             _player = player;
             _enemies = enemies;
@@ -28,6 +28,7 @@ namespace Game.Model
         public event Action<Enemy> EnemyAttacked;
         public event Action AllEnemiesAttacked;
         public event Action PlayerAttackRecieved;
+        public event Action Entered;
         public event Action Ended;
 
         public IReadOnlyCollection<Enemy> AliveEnemies => _aliveEnemies;
@@ -36,6 +37,16 @@ namespace Game.Model
         public void Enter()
         {
             PrepareForBattle();
+            Entered?.Invoke();
+        }
+
+        public void Exit()
+        {
+            foreach (var enemy in _aliveEnemies)
+                enemy.Died -= OnEnemieDeath;
+
+            _player.Died -= OnPlayerDeath;
+            Ended?.Invoke();
         }
 
         public void SendPlayerAttack(Attack attack)
@@ -98,18 +109,12 @@ namespace Game.Model
             foreach (var enemy in _enemies)
                 enemy.Died += OnEnemieDeath;
 
-            _player.EnterBattleMod(this);
             _player.Died += OnPlayerDeath;
         }
 
         private void OnPlayerDeath(Character player)
         {
-            foreach (var enemy in _enemies)          
-                enemy.Died -= OnEnemieDeath;
-
-            _player.Died -= OnPlayerDeath;
-
-            Ended?.Invoke();
+            Exit();
         }
 
         private void OnEnemieDeath(Character enemy)
@@ -119,9 +124,7 @@ namespace Game.Model
 
             if (_aliveEnemies.Count <= 0)
             {
-                _player.Died -= OnPlayerDeath;
-                Ended?.Invoke();
-
+                Exit();
                 return;
             }
 

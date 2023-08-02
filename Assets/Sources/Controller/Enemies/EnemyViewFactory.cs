@@ -11,7 +11,7 @@ namespace Game.Controller
         [SerializeField] private EnemyInitializer[] _enemies;
         [SerializeField] private Transform _parent;
 
-        private Battle _currentBattle;
+        private BattleState _currentBattle;
         private World _world;
 
         public void Init(World world)
@@ -20,7 +20,7 @@ namespace Game.Controller
             _world.BattleInitiated += OnBattleInitiated;
         }
 
-        private void OnBattleInitiated(Battle battle)
+        private void OnBattleInitiated(BattleState battle)
         {
             _currentBattle = battle;
             SpawnEnemies();
