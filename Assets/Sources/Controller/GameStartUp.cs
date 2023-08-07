@@ -5,6 +5,7 @@ namespace Game.Controller
 {
     public sealed class GameStartUp : MonoBehaviour
     {
+        [SerializeField] private CanvasGroup[] _disableOnStart;
         [SerializeField] private ViewInitializer _viewInitializer;
         [SerializeField] private ControllerInitializer _controllerInitializer;
 
@@ -19,7 +20,18 @@ namespace Game.Controller
             _controllerInitializer.Init(_player, _world);
             _player.Reset();
             _world.Start();
-            _world.EnterBattle(new(_player, new Enemy[1] { new Bat() }));
+            //_world.EnterBattle(new(_player, new Enemy[1] { new Bat() }));
+            DisableCanvasGroups();
+        }
+
+        private void DisableCanvasGroups()
+        {
+            foreach (var canvasGroup in _disableOnStart)
+            {
+                canvasGroup.alpha = 0;
+                canvasGroup.interactable = false;
+                canvasGroup.blocksRaycasts = false;
+            }
         }
     }
 }

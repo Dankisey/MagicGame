@@ -11,6 +11,7 @@ namespace Game.Controller
         [SerializeField] private DamagePopupController _playerDamagePopupController;
         [SerializeField] private ComboController _comboViewController;
         [SerializeField] private BattleController _battleController;
+        [SerializeField] private BiomesController _biomesController;
 
         private MagicCombiner _magicCombiner;
         private Player _player;
@@ -32,6 +33,7 @@ namespace Game.Controller
             _battleController.Init(_world);
             _portraitAnimator.Init(_player, _world);
             _hudController.Init(_world);
+            _biomesController.Init(_world);
         }
     }
 }

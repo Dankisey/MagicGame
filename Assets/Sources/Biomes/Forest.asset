@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefabs:
   - {fileID: 176072423912152942, guid: 44d2e5b34f2719342bdd8734fd92f075, type: 3}
-  _battleChance: 10
+  _battleChance: 100
   _tickTime: 10
   _maxEnemiesInBattle: 1

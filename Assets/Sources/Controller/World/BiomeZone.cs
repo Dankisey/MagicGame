@@ -6,10 +6,16 @@ namespace Game.Controller
     {
         [SerializeField] private Biome _biome;
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.gameObject.TryGetComponent<PlayerBiomeHandler>(out PlayerBiomeHandler biomeHandler))
                 biomeHandler.EnterNewBiome(_biome);
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.gameObject.TryGetComponent<PlayerBiomeHandler>(out PlayerBiomeHandler biomeHandler))
+                biomeHandler.ExitBiome();
         }
     }
 }

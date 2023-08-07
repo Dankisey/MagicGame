@@ -5,23 +5,24 @@ namespace Game.Controller
 {
     public class BiomesController : MonoBehaviour
     {
+        [SerializeField] private PlayerBiomeHandler _playerBiomeHandler;
         [SerializeField] private Biome _default;
 
-        private PlayerBiomeHandler _playerBiomeHandler;
+        private readonly float _minChance = 0f;
+        private readonly float _maxChance = 100f;
+
+        private BattleState _currentBattle;
         private Biome _currentBiome;
         private World _world;
         private int _maxEnemiesInBattle;
         private float _battleChance;
         private float _timeElapsed;
         private float _tickTime;
-        private readonly float _minChance = 0f;
-        private readonly float _maxChance = 100f;
+        private bool _playerInBattle = false;
 
-        public void Init(PlayerBiomeHandler biomeHandler, World world)
+        public void Init(World world)
         {
-            _world = world;
-            _playerBiomeHandler = biomeHandler;
-            _playerBiomeHandler.NewBiomeEntered += OnNewBiomeEntered;          
+            _world = world;      
         }
 
         private void OnNewBiomeEntered(Biome biome)
@@ -33,33 +34,68 @@ namespace Game.Controller
             _timeElapsed = 0;
         }
 
+        private void OnBiomeExited()
+        {
+            _currentBiome = _default;
+            _maxEnemiesInBattle = _default.MaxEnemiesInBattle;
+            _battleChance = _default.BattleChance;
+            _tickTime = _default.TickTime;
+            _timeElapsed = 0;
+        }
+
+        private void OnBattleEnded()
+        {
+            _currentBattle.Ended -= OnBattleEnded;
+            _playerInBattle = false;
+            _timeElapsed = 0;
+        }
+
         private void InitBattle()
         {
             int enemiesAmount = Random.Range(0, _maxEnemiesInBattle + 1);
             Enemy[] enemies = _currentBiome.GetRandomEnemies(enemiesAmount);
-            BattleState battle = new(Player.Instance, enemies);
-            _world.EnterBattle(battle);
+            _currentBattle = new(Player.Instance, enemies);
+            _currentBattle.Ended += OnBattleEnded;
+            _playerInBattle = true;
+            _world.EnterBattle(_currentBattle);
         }
 
-        private void Start()
+        private bool TryInitBattle()
         {
-            _currentBiome = _default;
+            float randomValue = Random.Range(_minChance, _maxChance);
+            bool succeeded = randomValue < _battleChance;
+
+            if (succeeded)
+            {
+                InitBattle();
+                _timeElapsed = 0;
+            }
+
+            return succeeded;
         }
 
         private void Update() 
         {
-            _timeElapsed += Time.deltaTime;
-
-            if (_timeElapsed >= _tickTime)
+            if(_playerInBattle == false) 
             {
-                float randomValue = Random.Range(_minChance, _maxChance);
+                _timeElapsed += Time.deltaTime;
 
-                if (randomValue < _battleChance)
-                {
-                    InitBattle();
-                    _timeElapsed = 0;
-                }
-            }
+                if (_timeElapsed >= _tickTime)               
+                    TryInitBattle();                
+            }       
+        }
+
+        private void OnEnable()
+        {
+            _playerBiomeHandler.NewBiomeEntered += OnNewBiomeEntered;
+            _playerBiomeHandler.BiomeExited += OnBiomeExited;
+            _currentBiome = _default;
+        }
+
+        private void OnDisable()
+        {
+            _playerBiomeHandler.NewBiomeEntered -= OnNewBiomeEntered;
+            _playerBiomeHandler.BiomeExited -= OnBiomeExited;
         }
     }
 }

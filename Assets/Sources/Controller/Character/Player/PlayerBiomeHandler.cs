@@ -5,11 +5,17 @@ namespace Game.Controller
 {
     public class PlayerBiomeHandler : MonoBehaviour
     {
-        public Action<Biome> NewBiomeEntered;
+        public event Action<Biome> NewBiomeEntered;
+        public event Action BiomeExited;
 
         public void EnterNewBiome(Biome biome)
         {
             NewBiomeEntered?.Invoke(biome);
+        }
+
+        public void ExitBiome()
+        {
+            BiomeExited?.Invoke();
         }
     }
 }

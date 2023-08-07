@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefabs: []
   _battleChance: 0
-  _tickTime: 0
+  _tickTime: 1e+9
   _maxEnemiesInBattle: 0
