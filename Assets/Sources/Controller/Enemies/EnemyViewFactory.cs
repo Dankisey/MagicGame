@@ -1,58 +1,51 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Game.Model;
+using Game.View; 
 using System;
 
 namespace Game.Controller
 {
     public class EnemyViewFactory : MonoBehaviour
     {
-        [SerializeField] private EnemyInitializer[] _enemies;
-        [SerializeField] private Transform _parent;
+        [SerializeField] private EnemyViewInitializer[] _enemies;
+        [SerializeField] private Transform[] spawnPoints;
 
-        private BattleState _currentBattle;
-        private World _world;
+        private EnemyViewInitializer[] _spawned;
 
-        public void Init(World world)
+        public event Action<EnemyView[]> EnemiesSpawned;
+
+        public void DeleteEnemies()
         {
-            _world = world;
-            _world.BattleInitiated += OnBattleInitiated;
+            foreach (var enemy in _spawned)           
+                Destroy(enemy.gameObject);           
         }
 
-        private void OnBattleInitiated(BattleState battle)
+        public void SpawnEnemies(EnemyViewInitializer[] prefabs, out Enemy[] enemies)
         {
-            _currentBattle = battle;
-            SpawnEnemies();
-        }
+            _spawned = new EnemyViewInitializer[prefabs.Length];
+            enemies = new Enemy[prefabs.Length];
 
-        private void SpawnEnemies()
-        {
-            Enemy[] enemies = _currentBattle.GetEnemies();
-
-            foreach (Enemy enemy in enemies)
+            for (int i = 0; i < enemies.Length; i++)
             {
-                EnemyInitializer initializer = GetEnemy(enemy.ID);
-                initializer = Instantiate(initializer, _parent);
-                initializer.Init(enemy);
+                _spawned[i] = Instantiate(prefabs[i], spawnPoints[i]);
+                Enemy enemy = _spawned[i].GetTargetEnemyInstance();
+                _spawned[i].Init(enemy);
+                enemies[i] = enemy;
             }
+
+            EnemiesSpawned?.Invoke(GetCurrentViews());
         }
 
-        private EnemyInitializer GetEnemy(EnemyIDs id)
+        private EnemyView[] GetCurrentViews()
         {
-            IEnumerable<EnemyInitializer> enemies = _enemies.Where(enemy => enemy.ID == id);
-            EnemyInitializer enemy = enemies.FirstOrDefault();
+            EnemyView[] views = new EnemyView[_spawned.Length];
 
-            if (enemy == null)
-                throw new InvalidOperationException("EnemyView with id " + id + " not found");
-
-            return enemy;
-        }
-
-        private void OnDisable()
-        {
-            if (_world != null)
-                _world.BattleInitiated -= OnBattleInitiated;
+            for (int i = 0; i < _spawned.Length; i++)
+            {
+                views[i] = _spawned[i].View;
+            }
+            
+            return views;
         }
     }
 }

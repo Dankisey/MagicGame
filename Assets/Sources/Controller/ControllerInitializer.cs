@@ -5,8 +5,9 @@ namespace Game.Controller
 {
     public sealed class ControllerInitializer : MonoBehaviour
     {
-        [SerializeField] private MagicEffectsController _magicEffectsController;
+        [SerializeField] private CharacteristicViewFactory _characteristicViewFactory;
         [SerializeField] private PortraitAnimationController _portraitAnimator;
+        [SerializeField] private MagicEffectsController _magicEffectsController;
         [SerializeField] private HUDController _hudController;
         [SerializeField] private DamagePopupController _playerDamagePopupController;
         [SerializeField] private ComboController _comboViewController;
@@ -27,6 +28,7 @@ namespace Game.Controller
 
         private void InitControllers()
         {
+            _characteristicViewFactory.Init(_player);
             _playerDamagePopupController.Init(_player);
             _magicEffectsController.Init(_magicCombiner);
             _comboViewController.Init(_magicCombiner);

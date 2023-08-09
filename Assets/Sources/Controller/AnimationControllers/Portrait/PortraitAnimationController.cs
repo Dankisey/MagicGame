@@ -41,6 +41,7 @@ namespace Game.Controller
 
         private void OnBattleInitiated(BattleState battle)
         {
+            ResetAnimator();
             _currentBattle = battle;
             _currentBattle.Ended += OnBattleEnded;
         }

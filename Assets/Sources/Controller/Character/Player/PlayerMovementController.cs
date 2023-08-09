@@ -7,6 +7,11 @@ namespace Game.Controller
         private const string Horizontal = nameof(Horizontal);
         private const string Vertical = nameof(Vertical);
 
+        public void Init()
+        {
+
+        }
+
         protected override void SetAxises()
         {
             _horisontalMovementVector = Input.GetAxis(Horizontal);

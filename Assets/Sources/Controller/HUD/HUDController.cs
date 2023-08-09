@@ -36,7 +36,12 @@ namespace Game.Controller
         {
             _currentBattle.Ended -= OnBattleEnded;
             _currentBattle.PlayerTurnChanged -= OnPlayerTurnChanged;
-            Invoke(nameof(HideAll), _secondsBeforeHideHUD);
+            Invoke(nameof(OnBattleEnd), _secondsBeforeHideHUD);
+        }
+
+        private void OnBattleEnd()
+        {
+            HideAll();
         }
 
         private void ChangeCanvasInteractable(CanvasGroup hud,bool value) 

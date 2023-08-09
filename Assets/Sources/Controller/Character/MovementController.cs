@@ -11,7 +11,21 @@ namespace Game.Controller
         protected float _horisontalMovementVector = 0f;
         protected float _verticalMovementVector = 0f;
 
+        private bool _isMoving = true;
+
         public event Action<Vector2> DirectionChanged;
+
+        public void StopMoving()
+        {
+            _horisontalMovementVector = 0f;
+            _verticalMovementVector = 0f;
+            _isMoving = false;
+        }
+
+        public void ContinueMoving()
+        {
+            _isMoving = true;
+        }
 
         protected abstract void SetAxises();
 
@@ -46,7 +60,8 @@ namespace Game.Controller
 
         private void Update()
         {
-            SetAxises();
+            if (_isMoving)
+                SetAxises();          
         }
 
         private void FixedUpdate()

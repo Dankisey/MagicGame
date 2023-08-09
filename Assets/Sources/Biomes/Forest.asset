@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7803bbbada7e4d84f893533c05528292, type: 3}
   m_Name: Forest
   m_EditorClassIdentifier: 
-  _enemyPrefabs:
-  - {fileID: 176072423912152942, guid: 44d2e5b34f2719342bdd8734fd92f075, type: 3}
+  _maxEnemiesInBattle: 3
   _battleChance: 100
-  _tickTime: 10
-  _maxEnemiesInBattle: 1
+  _prefabs:
+  - {fileID: 8451244949947932057, guid: 44d2e5b34f2719342bdd8734fd92f075, type: 3}
+  _tickTime: 1

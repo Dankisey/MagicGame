@@ -1,14 +1,16 @@
+using UnityEngine;
 using Game.Model;
 using Game.View;
-using UnityEngine;
 
 namespace Game.Controller
 {
-    public abstract class EnemyInitializer : MonoBehaviour
+    public abstract class EnemyViewInitializer : MonoBehaviour
     {
         [SerializeField] private EnemyAnimationController _animationController;
         [SerializeField] private DamagePopupController _damagePopupController;
         [SerializeField] private EnemyView _view;
+
+        public EnemyView View => _view;
 
         public void Init(Enemy enemy)
         {
@@ -17,6 +19,6 @@ namespace Game.Controller
             _view.Init(enemy);
         }
 
-        public virtual EnemyIDs ID => EnemyIDs.None;
+        public abstract Enemy GetTargetEnemyInstance();
     }
 }

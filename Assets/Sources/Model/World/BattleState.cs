@@ -8,7 +8,6 @@ namespace Game.Model
         private readonly Player _player;
         private readonly Enemy[] _enemies;
         private readonly List<Enemy> _aliveEnemies;
-        private int _targetID = 0;
 
         public BattleState(Player player, Enemy[] enemies)
         {
@@ -25,6 +24,7 @@ namespace Game.Model
         public bool PlayerTurn {get; private set;}
 
         public event Action<bool> PlayerTurnChanged;
+        public event Action<Enemy> TargetChanged;
         public event Action<Enemy> EnemyAttacked;
         public event Action AllEnemiesAttacked;
         public event Action PlayerAttackRecieved;
@@ -32,12 +32,13 @@ namespace Game.Model
         public event Action Ended;
 
         public IReadOnlyCollection<Enemy> AliveEnemies => _aliveEnemies;
-        public Enemy Target => _aliveEnemies[_targetID]; 
+        public Enemy Target { get; private set;}
 
         public void Enter()
         {
             PrepareForBattle();
             Entered?.Invoke();
+            SetNewTarget();
         }
 
         public void Exit()
@@ -84,14 +85,12 @@ namespace Game.Model
             ChangePlayerTurn(true);
         }
 
-        public void ChangeTarget(Changer changer)
+        public bool TryChangeTarget(Enemy enemy)
         {
-            _targetID += (int)changer;
+            if (enemy.IsAlive)
+                Target = enemy;
 
-            if (_targetID < 0)
-                _targetID = _aliveEnemies.Count - 1;
-            else if (_targetID >= _aliveEnemies.Count)
-                _targetID = 0;
+            return enemy.IsAlive;
         }
 
         public Enemy[] GetEnemies()
@@ -149,7 +148,8 @@ namespace Game.Model
 
         private void SetNewTarget()
         {
-            _targetID = 0;
+            Target = _aliveEnemies[0];
+            TargetChanged?.Invoke(Target);
         }
     }
 

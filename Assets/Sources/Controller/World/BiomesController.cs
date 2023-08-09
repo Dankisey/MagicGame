@@ -6,6 +6,7 @@ namespace Game.Controller
     public class BiomesController : MonoBehaviour
     {
         [SerializeField] private PlayerBiomeHandler _playerBiomeHandler;
+        [SerializeField] private EnemyViewFactory _enemyViewFactory;
         [SerializeField] private Biome _default;
 
         private readonly float _minChance = 0f;
@@ -52,8 +53,9 @@ namespace Game.Controller
 
         private void InitBattle()
         {
-            int enemiesAmount = Random.Range(0, _maxEnemiesInBattle + 1);
-            Enemy[] enemies = _currentBiome.GetRandomEnemies(enemiesAmount);
+            int enemiesAmount = Random.Range(1, _maxEnemiesInBattle + 1);
+            EnemyViewInitializer[] initializers = _currentBiome.GetRandomEnemies(enemiesAmount);
+            _enemyViewFactory.SpawnEnemies(initializers, out Enemy[] enemies);
             _currentBattle = new(Player.Instance, enemies);
             _currentBattle.Ended += OnBattleEnded;
             _playerInBattle = true;

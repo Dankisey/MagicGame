@@ -11,10 +11,8 @@ namespace Game.Model
         {
             _attackFactory = attackFactory;
             Name = name;
-            Init();
         }
 
-        public EnemyIDs ID { get; protected set; }
         public string Name { get; private set; }
 
         public event Action Attacked;
@@ -26,15 +24,5 @@ namespace Game.Model
 
             return attack;
         }
-
-        public abstract Enemy GetNewInstance();
-
-        protected abstract void Init();
-    }
-
-    public enum EnemyIDs
-    {
-        None = 0,
-        Bat
     }
 }
