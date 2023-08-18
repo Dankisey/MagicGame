@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Game.Model;
 using Game.View;
-using System.Linq;
+using System;
 
 namespace Game.Controller
 {
@@ -16,6 +17,8 @@ namespace Game.Controller
 
         private MagicCombiner _magicCombiner;
         private ElementView[] _lastCombo;
+
+        public event Action<ElementView[]> ComboChanged;
 
         public void Init(MagicCombiner magicCombiner)
         {
@@ -73,6 +76,8 @@ namespace Game.Controller
                     views[i] = _lastCombo[i];
                 }        
             }
+
+            ComboChanged?.Invoke(views);
 
             return views;
         }

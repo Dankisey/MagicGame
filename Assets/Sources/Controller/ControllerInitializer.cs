@@ -8,6 +8,7 @@ namespace Game.Controller
         [SerializeField] private CharacteristicViewFactory _characteristicViewFactory;
         [SerializeField] private PortraitAnimationController _portraitAnimator;
         [SerializeField] private MagicEffectsController _magicEffectsController;
+        [SerializeField] private SpellParticlesFactory _spellParticlesFactory;
         [SerializeField] private HUDController _hudController;
         [SerializeField] private DamagePopupController _playerDamagePopupController;
         [SerializeField] private ComboController _comboViewController;
@@ -31,6 +32,7 @@ namespace Game.Controller
             _characteristicViewFactory.Init(_player);
             _playerDamagePopupController.Init(_player);
             _magicEffectsController.Init(_magicCombiner);
+            _spellParticlesFactory.Init(_magicCombiner);
             _comboViewController.Init(_magicCombiner);
             _battleController.Init(_world);
             _portraitAnimator.Init(_player, _world);

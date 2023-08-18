@@ -4,7 +4,7 @@ namespace Game.Model
 {
     public abstract class Effect
     {
-        public Effect(DamageElements element, TargetType targetType)
+        public Effect(DamageElements element, TargetTypes targetType)
         {
             TargetType = targetType;
             Element = element;
@@ -12,7 +12,7 @@ namespace Game.Model
             CheckForNulls();
         }
 
-        public TargetType TargetType { get; private set; }
+        public TargetTypes TargetType { get; private set; }
         public DamageElements Element { get; private set; }
         public TickDamage TickDamage { get; protected set; }
         public Damage Damage { get; protected set; }

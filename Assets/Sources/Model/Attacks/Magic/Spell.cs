@@ -25,7 +25,7 @@ namespace Game.Model
             TickDamage tickDamage = CalculateTickDamage();
             Damage damage = CalculateDamage();
             Debuff[] debuffs = CalculateDebuffs();
-            TargetType targetType = CalculateTargetType();
+            TargetTypes targetType = CalculateTargetType();
 
             return new Attack(damage, tickDamage, debuffs, targetType);
         }
@@ -90,15 +90,15 @@ namespace Game.Model
             return new Debuff[0];
         }
 
-        private TargetType CalculateTargetType()
+        private TargetTypes CalculateTargetType()
         {
             foreach (var effect in _effects)
             {
-                if (effect.TargetType == TargetType.Multi)
-                    return TargetType.Multi; 
+                if (effect.TargetType == TargetTypes.Multi)
+                    return TargetTypes.Multi; 
             }
 
-            return TargetType.Solo;
+            return TargetTypes.Solo;
         }
     }
 }

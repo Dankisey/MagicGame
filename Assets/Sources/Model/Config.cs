@@ -46,7 +46,7 @@ namespace Game.Model
 
                         private static readonly Debuff[] _debuffs = new Debuff[0];
 
-                        private static readonly TargetType _targetType = TargetType.Solo;
+                        private static readonly TargetTypes _targetType = TargetTypes.Solo;
 
                         public static readonly Attack Attack = new(_damage, _tickDamage, _debuffs, _targetType);
                     }             
@@ -87,14 +87,14 @@ namespace Game.Model
                 public static readonly int TickCount = 0;
                 public static readonly int TickDamage = 0;
                 public static readonly int Damage = 0;
-                public static readonly TargetType TargetType = TargetType.Solo;
+                public static readonly TargetTypes TargetType = TargetTypes.Solo;
 
                 public class Triplet
                 {
                     public static readonly float Multiplier = 0;
                     public static readonly int TickDamage = 0;
                     public static readonly int TickCount = 0;
-                    public static readonly TargetType TargetType = TargetType.Solo;
+                    public static readonly TargetTypes TargetType = TargetTypes.Solo;
                 }
             }
 
@@ -104,14 +104,14 @@ namespace Game.Model
                 public static readonly int TickCount = 0;
                 public static readonly int TickDamage = 0;
                 public static readonly int Damage = 5;
-                public static readonly TargetType TargetType = TargetType.Solo;
+                public static readonly TargetTypes TargetType = TargetTypes.Solo;
                 
                 public class Triplet
                 {
                     public static readonly float Multiplier = 3f;
                     public static readonly int TickDamage = 0;
                     public static readonly int TickCount = 0;
-                    public static readonly TargetType TargetType = TargetType.Solo;
+                    public static readonly TargetTypes TargetType = TargetTypes.Solo;
                 }
             }
 
@@ -121,14 +121,14 @@ namespace Game.Model
                 public static readonly int TickCount = 0;
                 public static readonly int TickDamage = 0;
                 public static readonly int Damage = 5;
-                public static readonly TargetType TargetType = TargetType.Solo;
+                public static readonly TargetTypes TargetType = TargetTypes.Solo;
 
                 public class Triplet
                 {
                     public static readonly float Multiplier = 3f;
                     public static readonly int TickDamage = 0;
                     public static readonly int TickCount = 0;
-                    public static readonly TargetType TargetType = TargetType.Solo;
+                    public static readonly TargetTypes TargetType = TargetTypes.Solo;
                 }
             }
 
@@ -138,14 +138,14 @@ namespace Game.Model
                 public static readonly int TickCount = 3;
                 public static readonly int TickDamage = 5;
                 public static readonly int Damage = 5;
-                public static readonly TargetType TargetType = TargetType.Solo;
+                public static readonly TargetTypes TargetType = TargetTypes.Solo;
 
                 public class Triplet
                 {
                     public static readonly float Multiplier = 3f;
                     public static readonly int TickDamage = 0;
                     public static readonly int TickCount = 0;
-                    public static readonly TargetType TargetType = TargetType.Solo;
+                    public static readonly TargetTypes TargetType = TargetTypes.Solo;
                 }
             }
 
@@ -155,14 +155,14 @@ namespace Game.Model
                 public static readonly int TickCount = 3;
                 public static readonly int TickDamage = 5;
                 public static readonly int Damage = 5;
-                public static readonly TargetType TargetType = TargetType.Solo;
+                public static readonly TargetTypes TargetType = TargetTypes.Solo;
 
                 public class Triplet
                 {
                     public static readonly float Multiplier = 3f;
                     public static readonly int TickDamage = 0;
                     public static readonly int TickCount = 0;
-                    public static readonly TargetType TargetType = TargetType.Solo;
+                    public static readonly TargetTypes TargetType = TargetTypes.Solo;
                 }
             }
 
@@ -172,14 +172,14 @@ namespace Game.Model
                 public static readonly int TickCount = 3;
                 public static readonly int TickDamage = 0;
                 public static readonly int Damage = 5;
-                public static readonly TargetType TargetType = TargetType.Solo;
+                public static readonly TargetTypes TargetType = TargetTypes.Solo;
 
                 public class Triplet
                 {
                     public static readonly float Multiplier = 3f;
                     public static readonly int TickDamage = 0;
                     public static readonly int TickCount = 0;
-                    public static readonly TargetType TargetType = TargetType.Solo;
+                    public static readonly TargetTypes TargetType = TargetTypes.Solo;
                 }
             }
         }

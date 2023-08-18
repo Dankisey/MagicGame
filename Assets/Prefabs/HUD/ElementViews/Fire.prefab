@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 717286271029740887}
   - component: {fileID: 2791050491040908600}
   - component: {fileID: -2539322063398234507}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 12
   m_Sprite: {fileID: 341163226, guid: 81ce44c2632efdf4abcf1b9cfed7b7ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafde39389850084788b73615cdffd9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particleSystemPrefab: {fileID: 9137400385163777393, guid: 758f8f63b66a6824691732f7194e056a, type: 3}
 --- !u!95 &-2539322063398234507
 Animator:
   serializedVersion: 4

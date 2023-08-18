@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2210224661472053845}
   - component: {fileID: -8494474899125112430}
   - component: {fileID: 8745169498853448574}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Air
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 12
   m_Sprite: {fileID: 879169591, guid: cc4f710e2ca37f146beac933bd9eba8f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b160978b268f414089a243dbd92c23d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particleSystemPrefab: {fileID: 5051416612027073577, guid: 65d05ca26b93ce14fba9b2663104a309, type: 3}
 --- !u!95 &8745169498853448574
 Animator:
   serializedVersion: 4

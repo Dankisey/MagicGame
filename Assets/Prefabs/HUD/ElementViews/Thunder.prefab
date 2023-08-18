@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2217687010319994359}
   - component: {fileID: -1936153431608280179}
   - component: {fileID: 4445620944252375923}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Thunder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 11
+  m_SortingOrder: 12
   m_Sprite: {fileID: -1519053174, guid: c82ed3c87aca0b64baff5f2edcb9ff07, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48b29293c3e588549a1071cfd3f09463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particleSystemPrefab: {fileID: 1458803091156772569, guid: ceb9c91026ced1c42a8cd5cb454ffa22, type: 3}
 --- !u!95 &4445620944252375923
 Animator:
   serializedVersion: 4

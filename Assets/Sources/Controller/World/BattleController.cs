@@ -18,6 +18,8 @@ namespace Game.Controller
         private BattleState _currentBattle;
         private World _world;
 
+        public event Action<EnemyView> NewTargetSetted;
+
         public void Init(World world)
         {
             _world = world;
@@ -97,6 +99,7 @@ namespace Game.Controller
         {
             EnemyView enemyView = _currentEnemies.Where(view => view.Self == enemy).FirstOrDefault();
             _pointerView.ChangePosition(enemyView.transform, enemyView.PointerPosition);
+            NewTargetSetted?.Invoke(enemyView);
         }
 
         private void OnEnable()

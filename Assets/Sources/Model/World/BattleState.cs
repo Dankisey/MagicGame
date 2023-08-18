@@ -57,11 +57,11 @@ namespace Game.Model
 
             switch (attack.TargetType)
             {
-                case (TargetType.Solo):
+                case (TargetTypes.Solo):
                     Target.ApplyAttack(attack);
                     break;
 
-                case (TargetType.Multi):
+                case (TargetTypes.Multi):
                     foreach (var target in _enemies)
                         target.ApplyAttack(attack);
                     break;

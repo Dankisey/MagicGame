@@ -2,7 +2,7 @@
 {
     public abstract class MagicEffect : Effect
     {
-        protected MagicEffect(DamageElements element, TargetType targetType, int manaCost) : base(element, targetType) 
+        protected MagicEffect(DamageElements element, TargetTypes targetType, int manaCost) : base(element, targetType) 
         {
             ManaCost = manaCost;
         }
