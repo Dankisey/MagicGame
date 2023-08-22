@@ -14,14 +14,11 @@ namespace Game.Controller
 
         public event Action<EnemyView[]> EnemiesSpawned;
 
-        public void DeleteEnemies()
-        {
-            foreach (var enemy in _spawned)           
-                Destroy(enemy.gameObject);           
-        }
-
         public void SpawnEnemies(EnemyViewInitializer[] prefabs, out Enemy[] enemies)
         {
+            if (_spawned != null)
+                DeleteEnemies();
+
             _spawned = new EnemyViewInitializer[prefabs.Length];
             enemies = new Enemy[prefabs.Length];
 
@@ -34,6 +31,12 @@ namespace Game.Controller
             }
 
             EnemiesSpawned?.Invoke(GetCurrentViews());
+        }
+
+        private void DeleteEnemies()
+        {
+            foreach (var enemy in _spawned)           
+                Destroy(enemy.gameObject);           
         }
 
         private EnemyView[] GetCurrentViews()

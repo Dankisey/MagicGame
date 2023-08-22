@@ -14,6 +14,7 @@ namespace Game.Controller
         [SerializeField] private ComboController _comboViewController;
         [SerializeField] private BattleController _battleController;
         [SerializeField] private BiomesController _biomesController;
+        [SerializeField] private DeathController _deathController;
 
         private MagicCombiner _magicCombiner;
         private Player _player;
@@ -29,15 +30,16 @@ namespace Game.Controller
 
         private void InitControllers()
         {
+            _spellParticlesFactory.Init(_magicCombiner);
+            _battleController.Init(_world);
             _characteristicViewFactory.Init(_player);
             _playerDamagePopupController.Init(_player);
             _magicEffectsController.Init(_magicCombiner);
-            _spellParticlesFactory.Init(_magicCombiner);
             _comboViewController.Init(_magicCombiner);
-            _battleController.Init(_world);
             _portraitAnimator.Init(_player, _world);
             _hudController.Init(_world);
             _biomesController.Init(_world);
+            _deathController.Init(_player);
         }
     }
 }

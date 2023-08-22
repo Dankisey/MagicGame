@@ -1,11 +1,13 @@
 using UnityEngine;
 using Game.Model;
+using UnityEngine.UI;
 
 namespace Game.Controller
 {
     public class HUDController : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _playerCanvas;
+        [SerializeField] private Button _playerAttackButton;
         [SerializeField] private CanvasGroup[] _battleCanvases;
         [SerializeField] private float _secondsBeforeHideHUD;
 
@@ -30,6 +32,7 @@ namespace Game.Controller
         private void OnPlayerTurnChanged(bool value)
         {
             ChangeCanvasInteractable(_playerCanvas, value);
+            _playerAttackButton.interactable = value;
         }
 
         private void OnBattleEnded()

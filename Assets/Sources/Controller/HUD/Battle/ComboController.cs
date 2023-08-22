@@ -8,7 +8,6 @@ using System;
 namespace Game.Controller
 {
     [RequireComponent(typeof(ComboView))]
-
     public sealed class ComboController : MonoBehaviour
     {
         [SerializeField] private ComboView _comboView;

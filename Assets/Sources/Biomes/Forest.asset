@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Forest
   m_EditorClassIdentifier: 
   _maxEnemiesInBattle: 3
-  _battleChance: 100
+  _battleChance: 50
   _prefabs:
   - {fileID: 8451244949947932057, guid: 44d2e5b34f2719342bdd8734fd92f075, type: 3}
-  _tickTime: 1
+  _tickTime: 10
