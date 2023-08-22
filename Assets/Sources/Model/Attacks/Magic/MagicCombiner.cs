@@ -55,11 +55,6 @@ namespace Game.Model
 
         private bool TryGetAttack(out Attack attack)
         {
-            attack = new();
-
-            if (_combo[0] == DamageElements.None)
-                return false;
-
             if (TryGetTriplet(out attack))
                 return true;
 
@@ -88,7 +83,7 @@ namespace Game.Model
 
         private void RestoreMana()
         {
-            _mana.Regenerate(_currentManaCost);
+            _mana.Restore(_currentManaCost);
             _currentManaCost = 0;
         }
 

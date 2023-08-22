@@ -28,12 +28,10 @@ namespace Game.Model
             }
 
             public class Enemies
-            {
-                public static EnemyAttack[] TEST = new EnemyAttack[1] { Attacks.Bite };
-
+            {             
                 public class Attacks
                 {
-                    public class BiteCharacteristics
+                    private class BiteCharacteristics
                     {
                         private static readonly float _damageAmount = 10;
                         private static readonly DamageElements[] _damageElements = new DamageElements[1] { DamageElements.Physical };
@@ -56,7 +54,7 @@ namespace Game.Model
 
                 public class Bat
                 {
-                    private static readonly int _maxHealth = 200;
+                    private static readonly int _maxHealth = 15;
 
                     private static readonly int _physicalDefence = 0;
                     private static readonly int _airDefence = 0;
@@ -69,6 +67,7 @@ namespace Game.Model
                         new(_physicalDefence, _airDefence, _earthDefence, _fireDefence, _thunderDefence, _waterDefence);
 
                     public static readonly DamagableCharacteristics DamagableCharacteristics = new(_maxHealth, _armor);
+                    public static EnemyAttack[] Attacks = new EnemyAttack[1] { Enemies.Attacks.Bite };
                 }
             }
         }

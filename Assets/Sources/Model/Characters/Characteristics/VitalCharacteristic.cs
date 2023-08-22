@@ -17,7 +17,7 @@ namespace Game.Model
         public int MaxValue { get; protected set; }
         public float Value { get; protected set; }
 
-        public void Regenerate(float amount)
+        public void Restore(float amount)
         {
             Value += amount;
 

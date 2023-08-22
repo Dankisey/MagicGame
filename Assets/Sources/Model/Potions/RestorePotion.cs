@@ -13,7 +13,7 @@ namespace Game.Model
 
         public void Use()
         {
-            _target.Regenerate(RestoreAmount);
+            _target.Restore(RestoreAmount);
         }
     }
 }

@@ -39,16 +39,16 @@ namespace Game.Controller
 
         private void OnBattleEnded()
         {
+            _pointerView.Disable();
+            _currentBattle.TargetChanged -= ChangePointerPosition;
             _currentBattle.PlayerAttackRecieved -= OnPlayerAttackRecieved;
             _currentBattle.AllEnemiesAttacked -= OnAllEnemiesAttacked;
             _currentBattle.EnemyAttacked -= OnEnemyAttacked;
             _currentBattle.Ended -= OnBattleEnded;
-            _currentBattle.TargetChanged -= ChangePointerPosition;
 
             foreach (var enemyView in _currentEnemies)
                 enemyView.Selected -= OnEnemySelected;
 
-            _enemyViewFactory.DeleteEnemies();
             _playerMovementController.ContinueMoving();
         }
 
