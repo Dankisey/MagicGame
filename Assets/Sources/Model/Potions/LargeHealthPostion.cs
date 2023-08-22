@@ -2,6 +2,6 @@
 {
     public class LargeHealthPostion : RestorePotion
     {
-        public LargeHealthPostion() : base(Config.RestorePotions.Large.RestoreAmount, Player.Instance.Health) { }
+        public LargeHealthPostion(Player target) : base(Config.RestorePotions.Large.RestoreAmount, target.Health) { }
     }
 }

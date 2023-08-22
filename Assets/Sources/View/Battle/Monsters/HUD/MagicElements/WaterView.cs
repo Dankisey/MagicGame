@@ -4,10 +4,6 @@ namespace Game.View
 {
     public sealed class WaterView : ElementView
     {
-        public override void Init()
-        {
-            base.Init();
-            DamageElement = DamageElements.Water;
-        }
+        public override DamageElements DamageElement => DamageElements.Water;
     }
 }

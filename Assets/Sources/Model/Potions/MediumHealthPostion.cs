@@ -2,6 +2,6 @@
 {
     public class MediumHealthPostion : RestorePotion
     {
-        public MediumHealthPostion() : base(Config.RestorePotions.Medium.RestoreAmount, Player.Instance.Health) { }
+        public MediumHealthPostion(Player target) : base(Config.RestorePotions.Medium.RestoreAmount, target.Health) { }
     }
 }

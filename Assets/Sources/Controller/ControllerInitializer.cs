@@ -16,6 +16,13 @@ namespace Game.Controller
         [SerializeField] private BiomesController _biomesController;
         [SerializeField] private DeathController _deathController;
 
+
+
+        [SerializeField] private TestNPCBubble _testNPC;
+
+
+
+
         private MagicCombiner _magicCombiner;
         private Player _player;
         private World _world;
@@ -31,15 +38,20 @@ namespace Game.Controller
         private void InitControllers()
         {
             _spellParticlesFactory.Init(_magicCombiner);
-            _battleController.Init(_world);
+            _battleController.Init(_world, _player);
             _characteristicViewFactory.Init(_player);
             _playerDamagePopupController.Init(_player);
             _magicEffectsController.Init(_magicCombiner);
             _comboViewController.Init(_magicCombiner);
             _portraitAnimator.Init(_player, _world);
             _hudController.Init(_world);
-            _biomesController.Init(_world);
+            _biomesController.Init(_world, _player);
             _deathController.Init(_player);
+
+
+
+
+            _testNPC.Init(_player);
         }
     }
 }

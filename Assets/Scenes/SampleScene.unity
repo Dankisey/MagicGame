@@ -52334,6 +52334,7 @@ MonoBehaviour:
   _battleController: {fileID: 1324387956}
   _biomesController: {fileID: 1324387958}
   _deathController: {fileID: 1324387961}
+  _testNPC: {fileID: 673251723}
 --- !u!114 &1324387956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52363,7 +52364,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerCanvas: {fileID: 834241787}
-  _playerAttackButton: {fileID: 1313738963}
   _battleCanvases:
   - {fileID: 834241787}
   - {fileID: 1197215160}

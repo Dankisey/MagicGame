@@ -9,6 +9,13 @@ namespace Game.Controller
         [SerializeField] private int AfterDialogeStartSlide;
         [SerializeField] private Button _restoreButton;
 
+        private Player _player;
+
+        public void Init(Player player)
+        {
+            _player = player;
+        }
+
         public override void Enable()
         {
             base.Enable();
@@ -46,9 +53,9 @@ namespace Game.Controller
 
         private void RestorePlayerCharacteristics()
         {
-            Player.Instance.Stamina.Restore(1000);
-            Player.Instance.Health.Restore(1000);
-            Player.Instance.Mana.Restore(1000);
+            _player.Stamina.Restore(1000);
+            _player.Health.Restore(1000);
+            _player.Mana.Restore(1000);
             _restoreButton.gameObject.SetActive(false);
         }
     }

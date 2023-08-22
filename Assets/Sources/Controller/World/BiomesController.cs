@@ -14,6 +14,7 @@ namespace Game.Controller
 
         private BattleState _currentBattle;
         private Biome _currentBiome;
+        private Player _player;
         private World _world;
         private int _maxEnemiesInBattle;
         private float _battleChance;
@@ -21,8 +22,9 @@ namespace Game.Controller
         private float _tickTime;
         private bool _playerInBattle = false;
 
-        public void Init(World world)
+        public void Init(World world, Player player)
         {
+            _player = player;
             _world = world;      
         }
 
@@ -56,7 +58,7 @@ namespace Game.Controller
             int enemiesAmount = Random.Range(1, _maxEnemiesInBattle + 1);
             EnemyViewInitializer[] initializers = _currentBiome.GetRandomEnemies(enemiesAmount);
             _enemyViewFactory.SpawnEnemies(initializers, out Enemy[] enemies);
-            _currentBattle = new(Player.Instance, enemies);
+            _currentBattle = new(_player, enemies);
             _currentBattle.Ended += OnBattleEnded;
             _playerInBattle = true;
             _world.EnterBattle(_currentBattle);

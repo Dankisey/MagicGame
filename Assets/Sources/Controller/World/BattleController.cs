@@ -16,15 +16,17 @@ namespace Game.Controller
 
         private EnemyView[] _currentEnemies;
         private BattleState _currentBattle;
+        private Player _player;
         private World _world;
 
         public event Action<EnemyView> NewTargetSetted;
 
-        public void Init(World world)
+        public void Init(World world, Player player)
         {
             if (_world != null)            
                 Unsubscribe();
 
+            _player = player;
             _world = world;
             Subscribe();
         }
@@ -77,6 +79,9 @@ namespace Game.Controller
                 yield return new WaitForSeconds(_delay);
 
                 _currentBattle.PerformEnemyAttack(enemy);
+
+                if (_player.IsAlive == false)
+                    StopCoroutine(nameof(PerformEnemiesAttack));
             }
 
             yield return new WaitForSeconds(_delay);

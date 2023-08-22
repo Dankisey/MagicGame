@@ -13,7 +13,7 @@ namespace Game.Controller
 
         private void OnEnable()
         {
-            _player = Player.Instance;
+            _player = new();
             _world = new(_player);
             _controllerInitializer.Init(_player, _world);
             _player.Reset();

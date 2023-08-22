@@ -1,13 +1,7 @@
-﻿using System;
-
-namespace Game.Model
+﻿namespace Game.Model
 {
     public sealed class Player : Character
-    {
-        public static Player Instance => _instance.Value;
-
-        private static readonly Lazy<Player> _instance = new(() => new Player());
-        
+    {    
         public readonly PlayerAttackPerformer AttackPerformer;
         public readonly PlayerAttackSender AttackSender;
         public readonly MagicCombiner MagicCombiner;
@@ -17,7 +11,7 @@ namespace Game.Model
 
         private BattleState _currentBattle;
 
-        private Player() 
+        public Player() 
             : base (Config.Characters.Player.DamagableCharacteristics)
         {
             Stamina = new(Config.Characters.Player.MaxStamina);

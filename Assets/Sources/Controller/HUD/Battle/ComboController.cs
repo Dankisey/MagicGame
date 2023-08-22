@@ -25,9 +25,8 @@ namespace Game.Controller
                 Unsubscribe();
             
             _magicCombiner = magicCombiner;
-            Subscribe();
-            PrepareViews();
             InitLastCombo();;
+            Subscribe();
         }
 
         private void InitLastCombo()
@@ -89,12 +88,6 @@ namespace Game.Controller
             ElementView view = Instantiate(views.FirstOrDefault(), _parent);
 
             return view;
-        }
-
-        private void PrepareViews()
-        {
-            foreach (var view in _viewPrefabs)
-                view.Init();
         }
 
         private void Subscribe()

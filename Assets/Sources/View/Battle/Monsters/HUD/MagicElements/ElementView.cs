@@ -8,13 +8,6 @@ namespace Game.View
         [SerializeField] private ParticleSystem _particleSystemPrefab;
 
         public ParticleSystem ParticleSystemPrefab => _particleSystemPrefab;
-        public DamageElements DamageElement { get; protected set; }
-
-        public virtual void Init() { }
-
-        private void OnEnable()
-        {
-            Init();
-        }
+        public abstract DamageElements DamageElement { get;}
     }
 }
