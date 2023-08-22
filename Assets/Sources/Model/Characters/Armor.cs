@@ -33,6 +33,9 @@ namespace Game.Model
             int elementsCount = 0;
             float modifiedDamage = 0;
 
+            if (damage.Elements[0] == DamageElements.None)
+                return 0;
+
             if (damage.Elements.Count > 1)
             {
                 for (int i = 0; i < damage.Elements.Count; i++)

@@ -52,9 +52,6 @@ namespace Game.Model
 
         public void SendPlayerAttack(Attack attack)
         {
-            if (PlayerTurn == false)
-                return;
-
             switch (attack.TargetType)
             {
                 case (TargetTypes.Solo):
@@ -126,8 +123,6 @@ namespace Game.Model
                 Exit();
                 return;
             }
-
-            SetNewTarget();
         }
 
         private void Tick()
@@ -137,7 +132,8 @@ namespace Game.Model
             foreach (var enemy in _enemies)         
                 enemy.Tick();
 
-            PlayerTurn = true;
+           PlayerTurn = true;
+           SetNewTarget();
         }
 
         private void ChangePlayerTurn(bool value)
@@ -148,14 +144,11 @@ namespace Game.Model
 
         private void SetNewTarget()
         {
+            if (_aliveEnemies.Contains(Target) || _aliveEnemies.Count == 0)            
+                return;
+
             Target = _aliveEnemies[0];
             TargetChanged?.Invoke(Target);
         }
-    }
-
-    public enum Changer
-    {
-        Down = -1,
-        Up = +1
     }
 }

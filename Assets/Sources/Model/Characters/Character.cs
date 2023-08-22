@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace Game.Model
 {
@@ -32,16 +33,16 @@ namespace Game.Model
 
         public void Tick()
         {
+            if (IsAlive == false)          
+                return;     
+
             if (_tickDamage > 0)
                 ApplyDamage(_tickDamage);
 
             foreach (var tickable in _tickables)
                 tickable.Tick();
 
-            foreach (var tickable in _toDelete)          
-                _tickables.Remove(tickable);
-
-            _toDelete.Clear();
+            RemoveExpireds();
         }
 
         public void ApplyAttack(Attack attack)
@@ -96,9 +97,30 @@ namespace Game.Model
         }
 
         private bool TryDie()
-        {
+        {        
+            ClearTickables();
+            RemoveExpireds();
             Died?.Invoke(this);
             return true;
+        }
+
+        private void ClearTickables()
+        {
+            TickDamage[] tickDamages = _tickDamages.Keys.ToArray();
+
+            foreach (var tickDamage in tickDamages)
+                tickDamage.ForceEnd();
+
+            foreach (var debuff in _debuffs)
+                debuff.ForceEnd();
+        }
+
+        private void RemoveExpireds()
+        {
+            foreach (var tickable in _toDelete)
+                _tickables.Remove(tickable);
+
+            _toDelete.Clear();
         }
 
         private void AddDebuff(Debuff debuff)
