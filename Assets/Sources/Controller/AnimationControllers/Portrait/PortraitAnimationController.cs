@@ -14,6 +14,9 @@ namespace Game.Controller
         
         public void Init(Player player, World world)
         {
+            if (_world != null)
+                Unsubscribe();
+
             _magicCombiner = player.MagicCombiner;
             _world = world;
             Init(player);
@@ -21,22 +24,16 @@ namespace Game.Controller
 
         protected override void Subscribe()
         {
+            base.Subscribe();
             _magicCombiner.AttackCompleted += OnAttackCompleted;
             _world.BattleInitiated += OnBattleInitiated;         
-            base.Subscribe();
         }
 
         protected override void Unsubscribe()
         {
+            base.Unsubscribe();
             _magicCombiner.AttackCompleted -= OnAttackCompleted;
             _world.BattleInitiated -= OnBattleInitiated;
-            base.Unsubscribe();
-        }
-
-        protected override void ResetAnimator()
-        {
-            Animator.SetBool(BattleEnded, false);
-            base.ResetAnimator();
         }
 
         private void OnBattleInitiated(BattleState battle)
@@ -48,7 +45,7 @@ namespace Game.Controller
 
         private void OnBattleEnded()
         {
-            Animator.SetBool(BattleEnded, true);
+            Animator.SetTrigger(BattleEnded);
             _currentBattle.Ended -= OnBattleEnded;
         }
 

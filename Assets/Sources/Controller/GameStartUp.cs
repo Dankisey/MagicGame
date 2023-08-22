@@ -11,7 +11,7 @@ namespace Game.Controller
         private Player _player;
         private World _world;
 
-        private void Awake()
+        private void OnEnable()
         {
             _player = Player.Instance;
             _world = new(_player);

@@ -10,8 +10,6 @@ namespace Game.Controller
         protected const string DamageTaken = nameof(DamageTaken);
         protected const string IsAlive = nameof(IsAlive);
 
-        protected bool Subscribed { get; private set; } = false;
-
         private Character _character;
 
         protected void Init(Character character)
@@ -24,14 +22,12 @@ namespace Game.Controller
         {
             _character.DamageTaken += OnDamageTaken;
             _character.Died += OnDied;
-            Subscribed = true;
         }
 
         protected virtual void Unsubscribe()
         {
             _character.DamageTaken -= OnDamageTaken;
             _character.Died -= OnDied;
-            Subscribed = false;
         }
 
         protected virtual void ResetAnimator()
@@ -51,18 +47,16 @@ namespace Game.Controller
 
         private void OnEnable()
         {
-            ResetAnimator();         
-
-            if (_character != null && Subscribed == false)
+            if (_character != null)
                 Subscribe();
+
+            ResetAnimator();         
         }
 
         private void OnDisable()
         {
-            if (_character != null && Subscribed == true)
-            {
+            if (_character != null)
                 Unsubscribe();
-            }
         }
     }
 }

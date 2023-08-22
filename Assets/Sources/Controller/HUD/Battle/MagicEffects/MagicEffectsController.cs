@@ -16,14 +16,6 @@ namespace Game.Controller
             _combiner = combiner;
         }
 
-        private void OnEnable()
-        {
-            foreach (var button in _buttons)
-                button.Clicked += OnMagicEffectButtonClick;
-
-            _endAttackButton.onClick.AddListener(OnAttackEnd);
-        }
-
         private void OnMagicEffectButtonClick(MagicEffect effect)
         {
             _combiner.TryAddEffect(effect);
@@ -34,12 +26,30 @@ namespace Game.Controller
             _combiner.EndAttack();
         }
 
-        private void OnDisable()
+        private void Subscribe()
+        {
+            foreach (var button in _buttons)
+                button.Clicked += OnMagicEffectButtonClick;
+
+            _endAttackButton.onClick.AddListener(OnAttackEnd);
+        }    
+
+        public void Unsubscribe()
         {
             foreach (var button in _buttons)
                 button.Clicked -= OnMagicEffectButtonClick;
 
             _endAttackButton.onClick.RemoveListener(OnAttackEnd);
+        }
+
+        private void OnEnable()
+        {
+            Subscribe();
+        }
+
+        private void OnDisable()
+        {
+            Unsubscribe();
         }
     }
 }

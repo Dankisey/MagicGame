@@ -21,11 +21,13 @@ namespace Game.Controller
 
         public void Init(MagicCombiner magicCombiner)
         {
+            if (_magicCombiner != null)
+                Unsubscribe();
+            
             _magicCombiner = magicCombiner;
-            _magicCombiner.ComboChanged += OnComboChanged;
-            _magicCombiner.AttackCompleted += OnAttackCompleted;
+            Subscribe();
             PrepareViews();
-            InitLastCombo();
+            InitLastCombo();;
         }
 
         private void InitLastCombo()
@@ -95,22 +97,28 @@ namespace Game.Controller
                 view.Init();
         }
 
+        private void Subscribe()
+        {
+            _magicCombiner.ComboChanged += OnComboChanged;
+            _magicCombiner.AttackCompleted += OnAttackCompleted;
+        }
+
+        private void Unsubscribe() 
+        {
+            _magicCombiner.ComboChanged -= OnComboChanged;
+            _magicCombiner.AttackCompleted -= OnAttackCompleted;
+        }
+
         private void OnEnable()
         {
-            if (_magicCombiner == null)
-                return;
-
-            _magicCombiner.ComboChanged += OnComboChanged;
-            _magicCombiner.AttackCompleted += OnAttackCompleted;         
+            if (_magicCombiner != null)
+                Subscribe();
         }
 
         private void OnDisable() 
         {
-            if (_magicCombiner == null)
-                return;
-
-            _magicCombiner.ComboChanged -= OnComboChanged;
-            _magicCombiner.AttackCompleted -= OnAttackCompleted;
+            if (_magicCombiner != null)
+                Unsubscribe();
         }
     }
 }

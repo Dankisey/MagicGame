@@ -14,9 +14,9 @@ namespace Game.Controller
 
         public void Init(Enemy enemy)
         {
+            _view.Init(enemy);
             _damagePopupController.Init(enemy);
             _animationController.Init(enemy);
-            _view.Init(enemy);
         }
 
         public abstract Enemy GetTargetEnemyInstance();

@@ -22,10 +22,13 @@ namespace Game.Controller
 
         public void Init(MagicCombiner magicCombiner)
         {
+            if (_magicCombiner != null)
+                Unsubscribe();
+
             _currentParticlesPrefabs = new();
             _currentEnemiesPositions = new();
             _magicCombiner = magicCombiner;
-            _magicCombiner.AttackCompleted += OnAttackCompleted;
+            Subscribe();        
         }
 
         private void OnComboChanged(ElementView[] views)
@@ -75,19 +78,32 @@ namespace Game.Controller
             _currentTargetPosition = enemyView.TargetPosition;
         }
 
-        private void OnEnable()
+        private void Subscribe()
         {
+            _magicCombiner.AttackCompleted += OnAttackCompleted;
             _comboController.ComboChanged += OnComboChanged;
             _enemyViewFactory.EnemiesSpawned += OnEnemiesSpawned;
             _battleController.NewTargetSetted += OnNewTargetSetted;
         }
 
-        private void OnDisable()
+        private void Unsubscribe() 
         {
             _magicCombiner.AttackCompleted -= OnAttackCompleted;
             _comboController.ComboChanged -= OnComboChanged;
             _enemyViewFactory.EnemiesSpawned -= OnEnemiesSpawned;
             _battleController.NewTargetSetted -= OnNewTargetSetted;
+        }
+
+        private void OnEnable()
+        {
+            if(_magicCombiner != null)
+                Subscribe();
+        }
+
+        private void OnDisable()
+        {
+            if(_magicCombiner != null)
+                Unsubscribe();
         }
     }
 }

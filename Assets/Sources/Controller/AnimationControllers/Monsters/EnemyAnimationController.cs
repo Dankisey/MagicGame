@@ -11,20 +11,23 @@ namespace Game.Controller
 
         public void Init(Enemy enemy)
         {
+            if (_enemy != null)
+                Unsubscribe();
+
             _enemy = enemy;
             base.Init(enemy);
         }
 
         protected override void Subscribe() 
         {
-            _enemy.Attacked += OnAttacked;
             base.Subscribe();
+            _enemy.Attacked += OnAttacked;
         }
 
         protected override void Unsubscribe()
         {
-            _enemy.Attacked -= OnAttacked;
             base.Unsubscribe();
+            _enemy.Attacked -= OnAttacked;
         }
    
         private void OnAttacked()

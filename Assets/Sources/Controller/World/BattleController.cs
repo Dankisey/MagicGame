@@ -22,8 +22,11 @@ namespace Game.Controller
 
         public void Init(World world)
         {
+            if (_world != null)            
+                Unsubscribe();
+
             _world = world;
-            _world.BattleInitiated += OnBattleInitiated;
+            Subscribe();
         }
 
         private void OnBattleInitiated(BattleState battle)
@@ -102,17 +105,28 @@ namespace Game.Controller
             NewTargetSetted?.Invoke(enemyView);
         }
 
+        private void Subscribe()
+        {
+            _world.BattleInitiated += OnBattleInitiated;
+            _enemyViewFactory.EnemiesSpawned += OnEnemiesSpawned;
+        }
+
+        private void Unsubscribe() 
+        {
+            _world.BattleInitiated -= OnBattleInitiated;
+            _enemyViewFactory.EnemiesSpawned -= OnEnemiesSpawned;
+        }
+
         private void OnEnable()
         {
-            _enemyViewFactory.EnemiesSpawned += OnEnemiesSpawned;
+            if (_world != null)
+                Subscribe();
         }
 
         private void OnDisable()
         {
             if (_world != null)
-                _world.BattleInitiated -= OnBattleInitiated;
-
-            _enemyViewFactory.EnemiesSpawned -= OnEnemiesSpawned;
+                Unsubscribe();         
         }
     }
 }

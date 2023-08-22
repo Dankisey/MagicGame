@@ -16,12 +16,17 @@ namespace Game.View
 
         public void Init(VitalCharacteristic characteristic)
         {
+            if (_characteristic != null)
+                Unsubscribe();
+            
             _characteristic = characteristic;
-            _characteristic.ValueChanged += OnValueChanged;
+            Subscribe();
         }
 
         private void OnValueChanged(float value)
         {
+            if (this == null)
+                return;
             _currentValue = value;
             StartCoroutine(ChangeBarValue());
         }
@@ -38,16 +43,31 @@ namespace Game.View
             }
         }
 
+        private void Subscribe()
+        {
+            _characteristic.ValueChanged += OnValueChanged;
+        }
+
+        private void Unsubscribe() 
+        {
+            _characteristic.ValueChanged -= OnValueChanged;
+        }
+
         private void OnEnable()
         {
             if (_characteristic != null)
-                _characteristic.ValueChanged += OnValueChanged;
+                Subscribe();
         }
 
         private void OnDisable()
         {
             if (_characteristic != null)
-                _characteristic.ValueChanged -= OnValueChanged;
+                Unsubscribe();
+        }
+
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
         }
     }
 }

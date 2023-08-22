@@ -7,16 +7,17 @@ namespace Game.Controller
     public class HUDController : MonoBehaviour
     {
         [SerializeField] private CanvasGroup _playerCanvas;
-        [SerializeField] private Button _playerAttackButton;
         [SerializeField] private CanvasGroup[] _battleCanvases;
         [SerializeField] private float _secondsBeforeHideHUD;
 
         private BattleState _currentBattle;
         private World _world;
-        private bool _subscribed = false;
 
         public void Init(World world)
         {
+            if (_world != null)
+                Unsubscribe();
+
             _world = world;
             Subscribe();
         }
@@ -32,7 +33,6 @@ namespace Game.Controller
         private void OnPlayerTurnChanged(bool value)
         {
             ChangeCanvasInteractable(_playerCanvas, value);
-            _playerAttackButton.interactable = value;
         }
 
         private void OnBattleEnded()
@@ -81,27 +81,23 @@ namespace Game.Controller
         private void Subscribe()
         {
             _world.BattleInitiated += OnBattleInitiated;
-            _subscribed = true;
         }
 
         private void Unsubscribe()
         {
             _world.BattleInitiated -= OnBattleInitiated;
-            _subscribed = false;
         }
 
         private void OnEnable()
         {
-            if (_world != null && _subscribed == false)
+            if (_world != null)
                 Subscribe();
         }
 
         private void OnDisable()
         {
-            if (_world != null && _subscribed == true)
-            {
-                Unsubscribe();
-            }
+            if (_world != null)
+                Unsubscribe();          
         }
     }
 }
