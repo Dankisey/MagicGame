@@ -14,6 +14,9 @@ namespace Game.Controller
 
         protected void Init(Character character)
         {
+            if (_character != null)
+                Unsubscribe();
+
             _character = character;
             Subscribe();
         }
@@ -47,9 +50,11 @@ namespace Game.Controller
 
         private void OnEnable()
         {
-            if (_character != null)
-                Subscribe();
+            if (_character == null)
+                return;
 
+            Unsubscribe();
+            Subscribe();
             ResetAnimator();         
         }
 

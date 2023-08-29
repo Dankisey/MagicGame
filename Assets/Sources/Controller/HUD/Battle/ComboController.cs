@@ -26,7 +26,6 @@ namespace Game.Controller
             
             _magicCombiner = magicCombiner;
             InitLastCombo();;
-            Subscribe();
         }
 
         private void InitLastCombo()
@@ -104,8 +103,11 @@ namespace Game.Controller
 
         private void OnEnable()
         {
-            if (_magicCombiner != null)
-                Subscribe();
+            if (_magicCombiner == null)
+                return;
+
+            Unsubscribe();
+            Subscribe();
         }
 
         private void OnDisable() 

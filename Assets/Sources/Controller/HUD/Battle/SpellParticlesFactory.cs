@@ -27,8 +27,7 @@ namespace Game.Controller
 
             _currentParticlesPrefabs = new();
             _currentEnemiesPositions = new();
-            _magicCombiner = magicCombiner;
-            Subscribe();        
+            _magicCombiner = magicCombiner;     
         }
 
         private void OnComboChanged(ElementView[] views)
@@ -96,7 +95,7 @@ namespace Game.Controller
 
         private void OnEnable()
         {
-            if(_magicCombiner != null)
+            if (_magicCombiner != null)
                 Subscribe();
         }
 

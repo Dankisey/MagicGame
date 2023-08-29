@@ -23,12 +23,11 @@ namespace Game.Controller
 
         public void Init(World world, Player player)
         {
-            if (_world != null)            
+            if (_world != null)
                 Unsubscribe();
 
             _player = player;
             _world = world;
-            Subscribe();
         }
 
         private void OnBattleInitiated(BattleState battle)
@@ -125,7 +124,7 @@ namespace Game.Controller
         private void OnEnable()
         {
             if (_world != null)
-                Subscribe();
+                Subscribe();     
         }
 
         private void OnDisable()

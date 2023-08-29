@@ -38,8 +38,11 @@ namespace Game.Controller
 
         private void OnEnable()
         {
-            if (_character != null)
-                Subscribe();
+            if (_character == null)
+                return;
+
+            Unsubscribe();
+            Subscribe();
         }
 
         private void OnDisable()

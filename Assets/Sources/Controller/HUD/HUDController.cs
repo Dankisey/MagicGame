@@ -19,7 +19,6 @@ namespace Game.Controller
                 Unsubscribe();
 
             _world = world;
-            Subscribe();
         }
 
         private void OnBattleInitiated(BattleState battle)

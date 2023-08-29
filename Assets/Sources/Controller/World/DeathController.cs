@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using UnityEngine;
 using Game.Model;
 using Game.View;
-using System;
 
 namespace Game.Controller
 {
@@ -22,7 +21,6 @@ namespace Game.Controller
                 Unsubscribe();
 
             _player = player;
-            Subscribe();
         }
 
         private void OnPlayerDeath(Character character)

@@ -25,11 +25,18 @@ namespace Game.View
             Self = enemy;
             _healthView.Init(Self.Health);
             _nameHolder.text = Self.Name;
+            Self.Died += OnDeath;
         }
 
         private void OnButtonClicked()
         {
             Selected?.Invoke(Self);
+        }
+
+
+        private void OnDeath(Character obj)
+        {
+            _healthView.gameObject.SetActive(false);
         }
 
         private void OnEnable()
@@ -40,6 +47,7 @@ namespace Game.View
         private void OnDisable()
         {
             _selectButton.onClick.RemoveListener(OnButtonClicked);
+            Self.Died -= OnDeath;
         }
     }
 }
