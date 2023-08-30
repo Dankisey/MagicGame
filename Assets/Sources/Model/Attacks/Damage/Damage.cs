@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Game.Model
+﻿namespace Game.Model
 {
     public abstract class Damage
     {
-        private readonly DamageElements[] _elements;
-
-        public Damage(float amount, DamageElements[] elements)
+        public Damage(float amount, DamageElements element)
         {
             Amount = amount;
-            _elements = elements;
-
-            if (elements.Length == 0)
-                throw new ArgumentOutOfRangeException(nameof(elements));
+            Element = element;
         }
 
-        public IReadOnlyList<DamageElements> Elements => _elements;
+        public DamageElements Element { get; private set; }
         public float Amount { get; private set; }
+
+        public void MultiplyDamage(float multiplier)
+        {
+            Amount += Amount * multiplier;
+
+            if (Amount < 0)
+                Amount = 0;
+        }
     }
 
     public enum DamageElements

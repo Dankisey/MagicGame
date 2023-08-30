@@ -2,6 +2,6 @@
 {
     public sealed class PureDamage : Damage
     {
-        public PureDamage(float amount) : base(amount, new DamageElements[1] { DamageElements.Pure }) { }
+        public PureDamage(float amount) : base(amount, DamageElements.Pure) { }
     }
 }

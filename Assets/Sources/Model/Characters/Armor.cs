@@ -1,5 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
+using System;
 
 namespace Game.Model
 {
@@ -30,41 +30,19 @@ namespace Game.Model
 
         public float GetModifiedDamage(Damage damage) 
         {
-            int elementsCount = 0;
             float modifiedDamage = 0;
 
-            if (damage.Elements[0] == DamageElements.None)
-                return 0;
+            if (damage.Element == DamageElements.None)
+                return modifiedDamage;
 
-            if (damage.Elements.Count > 1)
-            {
-                for (int i = 0; i < damage.Elements.Count; i++)
-                {
-                    if (damage.Elements[i] == DamageElements.None)
-                        continue;
-
-                    modifiedDamage += ModifyDamage(damage, damage.Elements[i]);
-                    elementsCount++;
-                }                
-
-                modifiedDamage /= elementsCount;
-            }
-            else
-            {
-                if (damage.Elements[0] == DamageElements.None)
-                    return modifiedDamage;
-
-                modifiedDamage = ModifyDamage(damage, damage.Elements.FirstOrDefault());
-            }
-
-            return modifiedDamage;
+            return ModifyDamage(damage);
         }  
 
-        private float ModifyDamage(Damage damage, DamageElements element) 
+        private float ModifyDamage(Damage damage) 
         {
             float modifiedDamage = 0;
 
-            Defence defence = _defences.Where(defence => defence.ModifyingElement == element).FirstOrDefault();
+            Defence defence = _defences.Where(defence => defence.ModifyingElement == damage.Element).FirstOrDefault();
             modifiedDamage = defence.ModifyDamage(damage);
 
             return modifiedDamage;

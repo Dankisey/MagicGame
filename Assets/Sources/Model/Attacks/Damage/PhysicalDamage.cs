@@ -2,6 +2,6 @@
 {
     public sealed class PhysicalDamage : Damage
     {
-        public PhysicalDamage(float amount, DamageElements[] elements) : base(amount, elements) { }    
+        public PhysicalDamage(float amount, DamageElements element) : base(amount, element) { }    
     }
 }

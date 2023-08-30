@@ -4,7 +4,7 @@ namespace Game.Model
 {
     public sealed class TickDamage : Damage, ITickable
     {
-        public TickDamage(float amount, DamageElements[] elements, int tickAmount) : base(amount, elements)
+        public TickDamage(float amount, DamageElements element, int tickAmount) : base(amount, element)
         {
             TickAmount = tickAmount;
         }

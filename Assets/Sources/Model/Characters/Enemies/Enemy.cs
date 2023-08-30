@@ -6,8 +6,8 @@ namespace Game.Model
     {
         private readonly EnemyAttackFactory _attackFactory;
 
-        public Enemy(string name, DamagableCharacteristics characteristics, EnemyAttackFactory attackFactory) 
-            : base(characteristics) 
+        public Enemy(string name, DamagableCharacteristics characteristics, Level level, EnemyAttackFactory attackFactory) 
+            : base(characteristics, level) 
         {
             _attackFactory = attackFactory;
             Name = name;
@@ -19,7 +19,7 @@ namespace Game.Model
 
         public virtual Attack GetAttack()
         {
-            Attack attack = _attackFactory.GetAttack();
+            Attack attack = DamageBuffsContainer.GetBuffedAttack(_attackFactory.GetAttack());
             Attacked?.Invoke();
 
             return attack;

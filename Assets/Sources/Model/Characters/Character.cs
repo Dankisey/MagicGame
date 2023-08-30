@@ -1,13 +1,15 @@
 ﻿using System.Collections.Generic;
-using System;
 using System.Linq;
+using System;
 
 namespace Game.Model
 {
     public abstract class Character
     {
+        public readonly DamageBuffsContainer DamageBuffsContainer;
         public readonly Health Health;
         public readonly Armor Armor;
+        public readonly Level Level;
 
         private readonly Dictionary<TickDamage, float> _tickDamages;
         private readonly List<Debuff> _debuffs;
@@ -15,12 +17,13 @@ namespace Game.Model
         private readonly List<ITickable> _toDelete;
         private float _tickDamage;
 
-        public Character(DamagableCharacteristics characteristics)
+        public Character(DamagableCharacteristics characteristics, Level level)
         {
             Health = new(characteristics.MaxHealth);
             Armor = new(characteristics.ArmorCharacteristics);
-            _tickDamages= new();
-            _tickables= new();
+            Level = level;
+            _tickDamages = new();
+            _tickables = new();
             _debuffs = new();
             _toDelete = new();
             _tickDamage = 0;
@@ -53,8 +56,8 @@ namespace Game.Model
                     AddDebuff(debuff);              
             }
 
-            AddTickDamage(attack.TickDamage);
-            TakeDamage(attack.Damage);
+            AddTickDamages(attack.TickDamages);
+            TakeDamage(attack.Damages);
         }
 
         private bool TryUpdateDebuff(Debuff newDebuff)
@@ -81,9 +84,13 @@ namespace Game.Model
             return exist;
         }
 
-        private void TakeDamage(Damage damage)
+        private void TakeDamage(Damage[] damages)
         {
-            float modifiedDamage = Armor.GetModifiedDamage(damage);
+            float modifiedDamage = 0;
+
+            foreach (Damage damage in damages)
+                modifiedDamage += Armor.GetModifiedDamage(damage);
+
             ApplyDamage(modifiedDamage);
         }
 
@@ -128,6 +135,12 @@ namespace Game.Model
             debuff.Ended += OnDebuffEnded;
             _tickables.Add(debuff);
             _debuffs.Add(debuff);
+        }
+
+        private void AddTickDamages(TickDamage[] tickDamages)
+        {
+            foreach (TickDamage tickDamage in tickDamages)
+                AddTickDamage(tickDamage);
         }
 
         private void AddTickDamage(TickDamage tickDamage)

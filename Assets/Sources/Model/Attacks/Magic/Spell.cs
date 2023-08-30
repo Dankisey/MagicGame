@@ -22,52 +22,38 @@ namespace Game.Model
 
         public Attack ToAttack()
         {
-            TickDamage tickDamage = CalculateTickDamage();
-            Damage damage = CalculateDamage();
+            TickDamage[] tickDamages = CalculateTickDamages();
+            Damage[] damages = CalculateDamages();
             Debuff[] debuffs = CalculateDebuffs();
             TargetTypes targetType = CalculateTargetType();
 
-            return new Attack(damage, tickDamage, debuffs, targetType);
+            return new Attack(damages, tickDamages, debuffs, targetType);
         }
 
-        private Damage CalculateDamage()
+        private Damage[] CalculateDamages()
         {
-            bool isPhysical = false;
-            float totalDamageAmount = 0;
-            Damage damage;
-            List<DamageElements> elements = new();
+            List<Damage> damages = new();
 
             foreach (var effect in _effects)
             {
-                totalDamageAmount += effect.Damage.Amount;
-                elements.Add(effect.Element);
+                if (effect.Element == DamageElements.None)
+                    break;
 
-                if (effect.Element == DamageElements.Earth)
-                    isPhysical = true;
+                damages.Add(effect.Damage);
             }
-
-            if (isPhysical)
-                damage = new PhysicalDamage(totalDamageAmount, new DamageElements[1] {DamageElements.Physical});
-            else
-                damage = new MagicDamage(totalDamageAmount, elements.ToArray());
-
-            return damage;
+            
+            return damages.ToArray();
         }
 
-        private TickDamage CalculateTickDamage()
+        private TickDamage[] CalculateTickDamages()
         {
-            bool isPhysical = false;
-            float totalDamageAmount = 0;
+            List<TickDamage> tickDamages = new();
             int totalTickAmount = 0;
-            TickDamage damage;
-            List<DamageElements> elements = new();
+            bool isPhysical = false;
 
             foreach (var effect in _effects)
             {
-                totalDamageAmount += effect.TickDamage.Amount;
-                elements.Add(effect.Element);
-
-                if (effect.Element == DamageElements.Earth)
+                if (effect.Damage is PhysicalDamage)
                 {
                     isPhysical = true;
                     break;
@@ -78,11 +64,19 @@ namespace Game.Model
             }
 
             if (isPhysical)
-                damage = new TickDamage(Config.Magic.PhysicalTickDamage, new DamageElements[1] { DamageElements.Physical }, Config.Magic.PhysicalTickCount);
-            else
-                damage = new TickDamage(totalDamageAmount, elements.ToArray(), totalTickAmount);
+                return new TickDamage[0];
 
-            return damage;
+            foreach (var effect in _effects)
+            {
+                DamageElements element = effect.Element;
+
+                if (element == DamageElements.None)
+                    break;
+                
+                tickDamages.Add(new TickDamage(effect.TickDamage.Amount, element, totalTickAmount));
+            }
+
+            return tickDamages.ToArray();
         }
 
         private Debuff[] CalculateDebuffs()

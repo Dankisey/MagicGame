@@ -2,21 +2,18 @@
 {
     public sealed class None : MagicEffect
     {
-        public None() : base(DamageElements.None, Config.Magic.None.TargetType, Config.Magic.None.Cost) { }
+        public None() :
+            base(new MagicDamage(Config.Magic.None.Damage, DamageElements.None),
+            new TickDamage(Config.Magic.None.TickDamage, DamageElements.None, Config.Magic.None.TickCount),
+            Config.Magic.None.TargetType, Config.Magic.None.Cost) { }
 
         public override Attack GetTriplet()
         {
             float damageAmount = 0;
-            MagicDamage damage = new(damageAmount, new DamageElements[1] { DamageElements.None });
-            TickDamage tickDamage = new(Config.Magic.None.Triplet.TickDamage, new DamageElements[1] { DamageElements.None }, Config.Magic.None.Triplet.TickCount);
+            MagicDamage damage = new(damageAmount, DamageElements.None);
+            TickDamage tickDamage = new(Config.Magic.None.Triplet.TickDamage, DamageElements.None, Config.Magic.None.Triplet.TickCount);
 
-            return new Attack(damage, tickDamage, new Debuff[0], Config.Magic.None.Triplet.TargetType);
-        }
-
-        protected override void SetDamages()
-        {
-            Damage = new MagicDamage(Config.Magic.None.Damage, new DamageElements[1] { DamageElements.None });
-            TickDamage = new TickDamage(Config.Magic.None.TickDamage, new DamageElements[1] { DamageElements.None }, Config.Magic.None.TickCount);
+            return new Attack(damage, tickDamage, new EmptyDebuff(), Config.Magic.Air.Triplet.TargetType);
         }
     }
 }

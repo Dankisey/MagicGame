@@ -35,4 +35,9 @@ namespace Game.Model
     {
         None = 0,
     }
+
+    public sealed class EmptyDebuff : Debuff
+    {
+        public EmptyDebuff() : base(0, DebuffTypes.None) { }
+    }
 }

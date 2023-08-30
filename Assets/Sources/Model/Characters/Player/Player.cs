@@ -12,13 +12,13 @@
         private BattleState _currentBattle;
 
         public Player() 
-            : base (Config.Characters.Player.DamagableCharacteristics)
+            : base (Config.Characters.Player.DamagableCharacteristics, new Level())
         {
             Stamina = new(Config.Characters.Player.MaxStamina);
             Mana = new(Config.Characters.Player.MaxMana);
             MagicCombiner = new(Mana);
             Inventory = new();
-            AttackSender = new(MagicCombiner);
+            AttackSender = new(MagicCombiner, DamageBuffsContainer);
             AttackPerformer = new(AttackSender, this);
         }
 

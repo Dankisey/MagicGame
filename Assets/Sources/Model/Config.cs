@@ -8,6 +8,13 @@ namespace Game.Model
             public static readonly int MinDefence = -MaxDefence;
             public static readonly int BasePureDefence = 0;
 
+            public class Level
+            {
+                public static readonly int MaxValue = 200;
+                public static readonly float MultiplierByLevel = 0.1f;
+                public static readonly int BaseLevelCost = 1000;
+            }
+
             public class Player
             {
                 public static readonly int MaxStamina = 100;
@@ -34,19 +41,15 @@ namespace Game.Model
                     private class BiteCharacteristics
                     {
                         private static readonly float _damageAmount = 10;
-                        private static readonly DamageElements[] _damageElements = new DamageElements[1] { DamageElements.Physical };
-                        private static readonly PhysicalDamage _damage = new(_damageAmount, _damageElements);
+                        private static readonly PhysicalDamage _damage = new(_damageAmount, DamageElements.Physical);
 
                         private static readonly float _tickDamageAmount = 0;
-                        private static readonly DamageElements[] _tickDamageElements = new DamageElements[1] { DamageElements.None };
                         private static readonly int _tickAmount = 0;
-                        private static readonly TickDamage _tickDamage = new(_tickDamageAmount, _tickDamageElements, _tickAmount);
-
-                        private static readonly Debuff[] _debuffs = new Debuff[0];
+                        private static readonly TickDamage _tickDamage = new(_tickDamageAmount, DamageElements.None, _tickAmount);
 
                         private static readonly TargetTypes _targetType = TargetTypes.Solo;
 
-                        public static readonly Attack Attack = new(_damage, _tickDamage, _debuffs, _targetType);
+                        public static readonly Attack Attack = new(_damage, _tickDamage, new EmptyDebuff(), _targetType);
                     }             
                     
                     public static readonly EnemyAttack Bite = new(EnemyAttackRarity.First, BiteCharacteristics.Attack);
@@ -77,8 +80,6 @@ namespace Game.Model
             public static readonly int ElementsForTriplet = 3;
             public static readonly int MaxEffectsInSpell = 3;
             public static readonly float AugmentedMultiplier = 0.8f;
-            public static readonly int PhysicalTickDamage = 0;
-            public static readonly int PhysicalTickCount = 0;
 
             public class None
             {
@@ -154,7 +155,7 @@ namespace Game.Model
                 public static readonly int TickCount = 3;
                 public static readonly int TickDamage = 5;
                 public static readonly int Damage = 5;
-                public static readonly TargetTypes TargetType = TargetTypes.Solo;
+                public static readonly TargetTypes TargetType = TargetTypes.Multi;
 
                 public class Triplet
                 {
