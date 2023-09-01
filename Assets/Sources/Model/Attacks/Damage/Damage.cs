@@ -1,6 +1,6 @@
 ﻿namespace Game.Model
 {
-    public abstract class Damage
+    public abstract class Damage : IClonable
     {
         public Damage(float amount, DamageElements element)
         {
@@ -10,6 +10,8 @@
 
         public DamageElements Element { get; private set; }
         public float Amount { get; private set; }
+
+        public abstract object GetCopy();
 
         public void MultiplyDamage(float multiplier)
         {

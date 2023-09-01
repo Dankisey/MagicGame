@@ -2,7 +2,7 @@
 
 namespace Game.Model
 {
-    public abstract class Debuff : ITickable
+    public abstract class Debuff : ITickable, IClonable
     {
         private int _tickAmount;
 
@@ -15,6 +15,8 @@ namespace Game.Model
         public DebuffTypes Type { get; private set; }
 
         public event Action<Debuff> Ended;
+
+        public abstract object GetCopy();
 
         public void Tick()
         {
@@ -39,5 +41,7 @@ namespace Game.Model
     public sealed class EmptyDebuff : Debuff
     {
         public EmptyDebuff() : base(0, DebuffTypes.None) { }
+
+        public override object GetCopy() => new EmptyDebuff();
     }
 }

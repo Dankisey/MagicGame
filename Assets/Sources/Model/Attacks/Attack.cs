@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Game.Model
 {
-    public struct Attack 
+    public readonly struct Attack : IClonable
     {
         public Attack(Damage damage, TickDamage tickDamage, Debuff debuff, TargetTypes targetType)
         {
@@ -37,6 +37,27 @@ namespace Game.Model
                 damage.MultiplyDamage(multiplier.Value);
 
             return this;
+        }
+
+        public object GetCopy()
+        {
+            Damage[] damages = GetCopies(Damages);
+            TickDamage[] tickDamages = GetCopies(TickDamages);
+            Debuff[] debuffs = GetCopies(Debuffs);
+            TargetTypes targetType = TargetType;
+
+            Attack copy = new(damages, tickDamages, debuffs, targetType);
+            return copy;
+        }
+
+        private T[] GetCopies<T>(T[] array) where T : IClonable
+        {
+            T[] newArray = new T[array.Length];
+
+            for (int i = 0; i < array.Length; i++)
+                newArray[i] = (T)array[i].GetCopy();
+
+            return newArray;
         }
 
         private Attack MultiplyDamage(DamageMultiplier multiplier)

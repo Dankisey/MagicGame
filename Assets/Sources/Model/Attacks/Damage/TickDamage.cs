@@ -13,6 +13,8 @@ namespace Game.Model
 
         public event Action<TickDamage> Ended;
 
+        public override object GetCopy() => new TickDamage(Amount, Element, TickAmount);
+
         public void Tick()
         {
             TickAmount--;
