@@ -10,7 +10,7 @@
                 return false;
 
             Value -= amount;
-            InvokeEvent();
+            InvokeValueChangedEvent();
 
             return true;
         }

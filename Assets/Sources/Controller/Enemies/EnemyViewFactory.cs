@@ -14,7 +14,7 @@ namespace Game.Controller
 
         public event Action<EnemyView[]> EnemiesSpawned;
 
-        public void SpawnEnemies(EnemyViewInitializer[] prefabs, out Enemy[] enemies)
+        public void SpawnEnemies(EnemyModelContainer[] prefabs, int minLevel, int maxLevel, out Enemy[] enemies)
         {
             if (_spawned != null)
                 DeleteEnemies();
@@ -24,8 +24,9 @@ namespace Game.Controller
 
             for (int i = 0; i < enemies.Length; i++)
             {
-                _spawned[i] = Instantiate(prefabs[i], spawnPoints[i]);
-                Enemy enemy = _spawned[i].GetTargetEnemyInstance();
+                _spawned[i] = Instantiate(prefabs[i].ViewInitializer, spawnPoints[i]);
+                int enemyLevel = UnityEngine.Random.Range(minLevel, maxLevel + 1);
+                Enemy enemy = prefabs[i].GetTargetEnemyInstance(enemyLevel);
                 _spawned[i].Init(enemy);
                 enemies[i] = enemy;
             }

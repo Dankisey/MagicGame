@@ -56,8 +56,8 @@ namespace Game.Controller
         private void InitBattle()
         {
             int enemiesAmount = Random.Range(1, _maxEnemiesInBattle + 1);
-            EnemyViewInitializer[] initializers = _currentBiome.GetRandomEnemies(enemiesAmount);
-            _enemyViewFactory.SpawnEnemies(initializers, out Enemy[] enemies);
+            EnemyModelContainer[] modelContainers = _currentBiome.GetRandomEnemies(enemiesAmount);
+            _enemyViewFactory.SpawnEnemies(modelContainers, _currentBiome.MinEnemyLevel, _currentBiome.MaxEnemyLevel, out Enemy[] enemies);
             _currentBattle = new(_player, enemies);
             _currentBattle.Ended += OnBattleEnded;
             _playerInBattle = true;

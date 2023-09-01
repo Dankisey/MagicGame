@@ -1,21 +1,11 @@
-using System;
-
-namespace Game.Model
+﻿namespace Game.Model
 {
-    public abstract class VitalCharacteristic
+    public abstract class VitalCharacteristic : ShowableCharacteristic
     {
-        private float NormalizedValue => Value / MaxValue;
-
-        public VitalCharacteristic(int maxValue)
+        protected VitalCharacteristic(int maxValue) : base(maxValue) 
         {
-            MaxValue = maxValue;
             Value = maxValue;
         }
-
-        public event Action<float> ValueChanged;
-
-        public int MaxValue { get; protected set; }
-        public float Value { get; protected set; }
 
         public void Restore(float amount)
         {
@@ -24,18 +14,13 @@ namespace Game.Model
             if (Value > MaxValue)
                 Value = MaxValue;
 
-            InvokeEvent();
+            InvokeValueChangedEvent();
         }
 
-        public void Reset()
+        public override void Reset()
         {
             Value = MaxValue;
-            InvokeEvent();
-        }
-
-        protected void InvokeEvent()
-        {
-            ValueChanged?.Invoke(NormalizedValue);
+            InvokeValueChangedEvent();
         }
     }
 }

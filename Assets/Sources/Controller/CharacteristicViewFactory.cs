@@ -6,15 +6,15 @@ namespace Game.Controller
 {
     public class CharacteristicViewFactory : MonoBehaviour
     {
-        [SerializeField] private CharacteristicView _staminaBar;
         [SerializeField] private CharacteristicView _healthBar;
         [SerializeField] private CharacteristicView _manaBar;
+        [SerializeField] private LevelView _levelBar;
 
         public void Init(Player player)
         {
-            _staminaBar.Init(player.Stamina);
             _healthBar.Init(player.Health);
             _manaBar.Init(player.Mana);
+            _levelBar.Init(player.Level);
         }
     }
 }

@@ -11,8 +11,9 @@ namespace Game.Model
             public class Level
             {
                 public static readonly int MaxValue = 200;
-                public static readonly float MultiplierByLevel = 0.1f;
                 public static readonly int BaseLevelCost = 1000;
+                public static readonly int PartRecievingByKill = 10;
+                public static readonly float MultiplierByLevel = 0.1f;
             }
 
             public class Player

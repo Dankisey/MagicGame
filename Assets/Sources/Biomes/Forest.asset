@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxEnemiesInBattle: 3
   _battleChance: 50
+  _minEnemyLevel: 0
+  _maxEnemyLevel: 5
   _prefabs:
-  - {fileID: 8451244949947932057, guid: 44d2e5b34f2719342bdd8734fd92f075, type: 3}
+  - {fileID: 5904194509284212287, guid: 44d2e5b34f2719342bdd8734fd92f075, type: 3}
   _tickTime: 10

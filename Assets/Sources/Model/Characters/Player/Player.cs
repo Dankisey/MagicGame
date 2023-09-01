@@ -6,7 +6,6 @@
         public readonly PlayerAttackSender AttackSender;
         public readonly MagicCombiner MagicCombiner;
         public readonly Inventory Inventory;
-        public readonly Stamina Stamina;
         public readonly Mana Mana;
 
         private BattleState _currentBattle;
@@ -14,7 +13,6 @@
         public Player() 
             : base (Config.Characters.Player.DamagableCharacteristics, new Level())
         {
-            Stamina = new(Config.Characters.Player.MaxStamina);
             Mana = new(Config.Characters.Player.MaxMana);
             MagicCombiner = new(Mana);
             Inventory = new();
@@ -36,7 +34,6 @@
 
         private void ResetCharacteristics()
         {
-            Stamina.Reset();
             Health.Reset();
             Mana.Reset();
         }

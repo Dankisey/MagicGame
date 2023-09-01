@@ -18,13 +18,14 @@ namespace Game.View
         public Transform TargetPosition => _targetPosition;
         public Enemy Self { get; private set; }
 
+        public event Action<EnemyView> ModelDied;
         public event Action<Enemy> Selected;
 
         public void Init(Enemy enemy)
         {
             Self = enemy;
             _healthView.Init(Self.Health);
-            _nameHolder.text = Self.Name;
+            _nameHolder.text = $"{Self.Name} Lvl.{Self.Level.Value}";
             Self.Died += OnDeath;
         }
 
@@ -33,10 +34,10 @@ namespace Game.View
             Selected?.Invoke(Self);
         }
 
-
         private void OnDeath(Character obj)
         {
             _healthView.gameObject.SetActive(false);
+            ModelDied?.Invoke(this);
         }
 
         private void OnEnable()

@@ -1,4 +1,6 @@
-﻿namespace Game.Model
+﻿using System;
+
+namespace Game.Model
 {
     public abstract class Defence
     {
@@ -15,7 +17,7 @@
         {
             float resultDamage = damage.Amount - (damage.Amount / Config.Characters.MaxDefence * Value);
 
-            return resultDamage;
+            return MathF.Round(resultDamage, 2);
         }
     }
 

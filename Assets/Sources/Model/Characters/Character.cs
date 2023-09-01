@@ -19,6 +19,7 @@ namespace Game.Model
 
         public Character(DamagableCharacteristics characteristics, Level level)
         {
+            DamageBuffsContainer = new DamageBuffsContainer(level);
             Health = new(characteristics.MaxHealth);
             Armor = new(characteristics.ArmorCharacteristics);
             Level = level;
@@ -118,8 +119,8 @@ namespace Game.Model
             foreach (var tickDamage in tickDamages)
                 tickDamage.ForceEnd();
 
-            foreach (var debuff in _debuffs)
-                debuff.ForceEnd();
+            for (int i = _debuffs.Count - 1; i > -1; i--)
+                _debuffs[i].ForceEnd();
         }
 
         private void RemoveExpireds()
@@ -143,10 +144,12 @@ namespace Game.Model
                 AddTickDamage(tickDamage);
         }
 
-        private void AddTickDamage(TickDamage tickDamage)
+        private void AddTickDamage(TickDamage toAdd)
         {
-            if (tickDamage.TickAmount == 0)
+            if (toAdd.TickAmount == 0)
                 return;
+
+            TickDamage tickDamage = (TickDamage)toAdd.GetCopy();
 
             tickDamage.Ended += OnTickDamageEnded;
             float damage = Armor.GetModifiedDamage(tickDamage);
@@ -158,7 +161,6 @@ namespace Game.Model
         private void OnDebuffEnded(Debuff debuff)
         {
             debuff.Ended -= OnDebuffEnded;
-            _debuffs.Remove(debuff);
             _toDelete.Add(debuff);
         }
 

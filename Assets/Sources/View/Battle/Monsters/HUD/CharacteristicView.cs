@@ -7,19 +7,19 @@ namespace Game.View
 {
     public class CharacteristicView : MonoBehaviour
     {
-        [SerializeField] private Image _filler;
         [SerializeField] private float _maxChangingDelta;
         [SerializeField] private float _updatingTime;
+        [SerializeField] private Image _filler;
 
-        private VitalCharacteristic _characteristic;
+        protected ShowableCharacteristic Characteristic;
         private float _currentValue;
 
-        public void Init(VitalCharacteristic characteristic)
+        public virtual void Init(ShowableCharacteristic characteristic)
         {
-            if (_characteristic != null)
+            if (Characteristic != null)
                 Unsubscribe();
             
-            _characteristic = characteristic;
+            Characteristic = characteristic;
             Subscribe();
         }
 
@@ -43,25 +43,25 @@ namespace Game.View
             }
         }
 
-        private void Subscribe()
+        protected virtual void Subscribe()
         {
-            _characteristic.ValueChanged += OnValueChanged;
+            Characteristic.ValueChanged += OnValueChanged;
         }
 
-        private void Unsubscribe() 
+        protected virtual void Unsubscribe() 
         {
-            _characteristic.ValueChanged -= OnValueChanged;
+            Characteristic.ValueChanged -= OnValueChanged;
         }
 
         private void OnEnable()
         {
-            if (_characteristic != null)
+            if (Characteristic != null)
                 Subscribe();
         }
 
         private void OnDisable()
         {
-            if (_characteristic != null)
+            if (Characteristic != null)
                 Unsubscribe();
         }
 

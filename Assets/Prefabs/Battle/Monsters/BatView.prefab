@@ -454,8 +454,9 @@ GameObject:
   - component: {fileID: 2705766470792645007}
   - component: {fileID: 176072423912152942}
   - component: {fileID: -8022357650956070352}
-  - component: {fileID: 8451244949947932057}
   - component: {fileID: 5729389684161401691}
+  - component: {fileID: 7373778270983124399}
+  - component: {fileID: 5904194509284212287}
   m_Layer: 5
   m_Name: BatView
   m_TagString: Untagged
@@ -558,21 +559,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 4396541008336717997}
---- !u!114 &8451244949947932057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7202796766366602318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f412c8689b56f2c46ac45ec68679d450, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animationController: {fileID: -8022357650956070352}
-  _damagePopupController: {fileID: 5729389684161401691}
-  _view: {fileID: 176072423912152942}
 --- !u!114 &5729389684161401691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,6 +573,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 7750821048297216836, guid: 1025f6527d8a31644b8b4bb33d6d0192, type: 3}
   _parent: {fileID: 2217227691971736225}
+--- !u!114 &7373778270983124399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202796766366602318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b1de23adb1fdd84497572656bbf4099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animationController: {fileID: -8022357650956070352}
+  _damagePopupController: {fileID: 5729389684161401691}
+  _view: {fileID: 176072423912152942}
+--- !u!114 &5904194509284212287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7202796766366602318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 344e654af36042648aace5f75c8fc675, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _viewInitializer: {fileID: 7373778270983124399}
 --- !u!1 &8322857442610659227
 GameObject:
   m_ObjectHideFlags: 0

@@ -117,6 +117,7 @@ namespace Game.Model
         {
             enemy.Died -= OnEnemieDeath;
             _aliveEnemies.Remove(enemy as Enemy);
+            _player.Level.AddExpirience(enemy.Level.GetRewardExperience());
 
             if (_aliveEnemies.Count <= 0)
             {

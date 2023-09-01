@@ -13,7 +13,7 @@ namespace Game.Model
             if (Value < 0)           
                 Value = 0;
 
-            InvokeEvent();
+            InvokeValueChangedEvent();
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Game.Model
 {
     public abstract class AttackSender
     {
-        private DamageBuffsContainer _damageBuffsContainer;
+        private readonly DamageBuffsContainer _damageBuffsContainer;
 
         public AttackSender(DamageBuffsContainer damageBuffsContainer)
         {

@@ -69,7 +69,16 @@ namespace Game.Controller
             _currentEnemiesPositions.Clear();
 
             foreach (var view in enemyViews)
+            {
                 _currentEnemiesPositions.Add(view.TargetPosition);
+                view.ModelDied += OnEnemyDeath;
+            }
+        }
+
+        private void OnEnemyDeath(EnemyView view)
+        {
+            view.ModelDied -= OnEnemyDeath;
+            _currentEnemiesPositions.Remove(view.TargetPosition);
         }
 
         private void OnNewTargetSetted(EnemyView enemyView)

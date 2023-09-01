@@ -53,7 +53,6 @@ namespace Game.Controller
 
         private void RestorePlayerCharacteristics()
         {
-            _player.Stamina.Restore(1000);
             _player.Health.Restore(1000);
             _player.Mana.Restore(1000);
             _restoreButton.gameObject.SetActive(false);

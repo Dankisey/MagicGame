@@ -82,7 +82,7 @@ namespace Game.Model
             int index = _random.Next(selectedAttacks.Length);
             Attack attack = selectedAttacks[index].Attack;
 
-            return attack;
+            return (Attack)attack.GetCopy();
         }
 
         private EnemyAttackRarity GetRarity()

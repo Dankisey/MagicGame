@@ -4,7 +4,7 @@ using Game.View;
 
 namespace Game.Controller
 {
-    public abstract class EnemyViewInitializer : MonoBehaviour
+    public sealed class EnemyViewInitializer : MonoBehaviour
     {
         [SerializeField] private EnemyAnimationController _animationController;
         [SerializeField] private DamagePopupController _damagePopupController;
@@ -18,7 +18,5 @@ namespace Game.Controller
             _damagePopupController.Init(enemy);
             _animationController.Init(enemy);
         }
-
-        public abstract Enemy GetTargetEnemyInstance();
     }
 }
